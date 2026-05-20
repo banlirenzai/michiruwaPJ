@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>新規児童 入所時アセスメント＋計画作成 — 音声×AI 一気通貫 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ステップインジケータ */
+  .step-flow {
+    display: flex;
+    align-items: stretch;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .step-cell {
+    flex: 1;
+    padding: 16px 14px;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+  }
+  .step-cell:last-child { border-right: none; }
+  .step-cell.done { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); }
+  .step-cell.current { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-bottom: 3px solid var(--warm); }
+  .step-cell.todo { opacity: 0.6; }
+  .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--border-strong);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-cell.done .step-num { background: var(--success); }
+  .step-cell.current .step-num { background: var(--warm); box-shadow: 0 0 0 4px rgba(249,115,22,0.2); }
+  .step-info .step-title { font-size: 12px; font-weight: 700; color: var(--navy); }
+  .step-info .step-meta { font-size: 10px; color: var(--text-2); margin-top: 2px; }
+
+  /* AI 整形結果カード */
+  .ai-structured {
+    background: linear-gradient(135deg, #f0f9ff 0%, #ecfeff 100%);
+    border: 1px solid #bae6fd;
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .ai-structured-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bae6fd;
+  }
+  .domain-tag {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    color: #fff;
+  }
+  .voice-quote {
+    background: rgba(255,255,255,0.7);
+    border-left: 3px solid #818cf8;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+  .voice-quote .speaker {
+    font-style: normal;
+    font-weight: 700;
+    color: #4338ca;
+    margin-right: 6px;
+  }
+
+  /* 音声波形（疑似） */
+  .waveform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 60px;
+    background: #faf5ff;
+    border-radius: 6px;
+    padding: 12px;
+  }
+  .waveform .bar {
+    width: 3px;
+    background: linear-gradient(180deg, #c084fc 0%, #a78bfa 100%);
+    border-radius: 2px;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+  @keyframes wave {
+    0%, 100% { height: 8px; }
+    50% { height: 40px; }
+  }
+  .waveform .bar:nth-child(1) { animation-delay: 0s; }
+  .waveform .bar:nth-child(2) { animation-delay: 0.1s; }
+  .waveform .bar:nth-child(3) { animation-delay: 0.2s; }
+  .waveform .bar:nth-child(4) { animation-delay: 0.3s; }
+  .waveform .bar:nth-child(5) { animation-delay: 0.4s; }
+  .waveform .bar:nth-child(6) { animation-delay: 0.5s; }
+  .waveform .bar:nth-child(7) { animation-delay: 0.4s; }
+  .waveform .bar:nth-child(8) { animation-delay: 0.3s; }
+  .waveform .bar:nth-child(9) { animation-delay: 0.2s; }
+  .waveform .bar:nth-child(10) { animation-delay: 0.1s; }
+  .waveform .bar:nth-child(11) { animation-delay: 0s; }
+  .waveform .bar:nth-child(12) { animation-delay: 0.1s; }
+  .waveform .bar:nth-child(13) { animation-delay: 0.2s; }
+  .waveform .bar:nth-child(14) { animation-delay: 0.3s; }
+  .waveform .bar:nth-child(15) { animation-delay: 0.4s; }
+
+  /* セクション見出し */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 14px;
+    padding: 12px 18px;
+    background: linear-gradient(90deg, var(--navy) 0%, #1e3a8a 100%);
+    color: #fff;
+    border-radius: var(--radius);
+  }
+  .section-heading .num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .section-heading h2 {
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+  }
+  .section-heading .sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+  }
+  .section-heading .req-tag {
+    margin-left: auto;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border-color: rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── サイドバー ─── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">対象児童</div>
+    <div class="value">山田 太郎（新規）DA 6歳</div>
+    <div class="value">入所時 初回 v1 作成中</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="02_child_detail.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="05_new_intake.html" class="nav-item active"><span class="icon">✨</span>新規児童 入所時<span class="nav-badge">1</span></a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="#" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="#" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="#" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="#" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">鈴</div>
+    <div class="user-info">
+      <div class="name">鈴木 美穂</div>
+      <div class="role">児発管 / みちるわ渋谷</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── メインコンテンツ ─── -->
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">新規児童 入所時アセスメント・個別支援計画作成</div>
+      <div class="topbar-breadcrumb">
+        <a href="01_dashboard.html">ダッシュボード</a> <span class="sep">›</span>
+        新規受付 <span class="sep">›</span>
+        山田 太郎さん（v1 初回作成）
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="badge badge-warning">⏰ 計画作成期限まで 28日</span>
+      <span class="badge">自動保存中</span>
+      <button class="btn btn-secondary">一時保存</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ─── 児童ヘッダー ─── -->
+    <div class="child-header">
+      <div class="child-avatar indigo">太</div>
+      <div class="child-header-body">
+        <div class="name">
+          山田 太郎
+          <span class="badge badge-info">DA 歯科助手領域</span>
+          <span class="badge badge-warning">新規 入所時</span>
+        </div>
+        <div class="meta">
+          <span>6歳（年長）</span>
+          <span class="sep">·</span>
+          <span>男児</span>
+          <span class="sep">·</span>
+          <span>契約日: 2026-06-01</span>
+          <span class="sep">·</span>
+          <span>サービス開始予定: 2026-06-15</span>
+          <span class="sep">·</span>
+          <span>受給者証: 2027-05-31 期限</span>
+          <span class="sep">·</span>
+          <span>担当児発管: 鈴木 美穂</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ステップ フロー ─── -->
+    <div class="step-flow">
+      <div class="step-cell done">
+        <div class="step-num">✓</div>
+        <div class="step-info">
+          <div class="step-title">① 基本情報登録</div>
+          <div class="step-meta">完了 / 5分</div>
+        </div>
+      </div>
+      <div class="step-cell current">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <div class="step-title">② 音声アセスメント面接</div>
+          <div class="step-meta">実施中 / 42分経過</div>
+        </div>
+      </div>
+      <div class="step-cell">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <div class="step-title">③ AI構造化 → 確認</div>
+          <div class="step-meta">音声完了後</div>
+        </div>
+      </div>
+      <div class="step-cell">
+        <div class="step-num">4</div>
+        <div class="step-info">
+          <div class="step-title">④ AI計画下書き</div>
+          <div class="step-meta">アセス確定後</div>
+        </div>
+      </div>
+      <div class="step-cell">
+        <div class="step-num">5</div>
+        <div class="step-info">
+          <div class="step-title">⑤ 承認・保護者同意</div>
+          <div class="step-meta">児発管→管理者→本部</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 将来要件リボン ─── -->
+    <div class="future-ribbon" style="margin-bottom:24px;">
+      <div class="ribbon-icon">✨</div>
+      <div class="ribbon-body">
+        <strong>本画面のフロー — D-12 音声入力 × D-09 AI整形 × P-12 AI計画下書き（いずれも将来要件 2027年〜）</strong>
+        <span>新規児童の入所時1名分のアセスメント＋計画書作成を、音声入力1回 → AI 構造化 → AI 計画下書き → 児発管加筆修正 → 承認 の流れで一気通貫サポート。従来の手書きベース 5〜8時間の業務を 1〜2時間に短縮する設計。⚠ 確認待ち（質問15: AI送信ポリシー）</span>
+      </div>
+    </div>
+
+    <!-- ─── ① 基本情報登録（完了） ─── -->
+    <div class="section-heading">
+      <div class="num">1</div>
+      <div>
+        <h2>基本情報登録</h2>
+        <div class="sub">児童・保護者・家族構成・受給者証情報を登録</div>
+      </div>
+      <span class="req-tag">A-01 / 完了</span>
+    </div>
+
+    <div class="card" style="margin-bottom:8px;">
+      <div class="card-body">
+        <div class="form-group-row" style="grid-template-columns:repeat(4,1fr);">
+          <div>
+            <div class="form-label">氏名（カナ）</div>
+            <input class="form-input" value="山田 太郎（ヤマダ タロウ）" readonly style="background:var(--surface-2);">
+          </div>
+          <div>
+            <div class="form-label">生年月日</div>
+            <input class="form-input" value="2019-08-22（6歳3ヶ月）" readonly style="background:var(--surface-2);">
+          </div>
+          <div>
+            <div class="form-label">利用ブランド</div>
+            <input class="form-input" value="DA（歯科助手）" readonly style="background:var(--surface-2);">
+          </div>
+          <div>
+            <div class="form-label">受給者証番号</div>
+            <input class="form-input" value="13000-XXXX-1234" readonly style="background:var(--surface-2);">
+          </div>
+        </div>
+        <div class="form-group-row" style="grid-template-columns:repeat(3,1fr);margin-top:14px;">
+          <div>
+            <div class="form-label">保護者氏名（続柄）</div>
+            <input class="form-input" value="山田 翔子（母）" readonly style="background:var(--surface-2);">
+          </div>
+          <div>
+            <div class="form-label">家族構成</div>
+            <input class="form-input" value="父・母・本人・姉（9歳）の4人家族" readonly style="background:var(--surface-2);">
+          </div>
+          <div>
+            <div class="form-label">紹介経路</div>
+            <input class="form-input" value="渋谷区子育て支援課 紹介" readonly style="background:var(--surface-2);">
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:14px;margin-bottom:0;">
+          <div class="form-label">利用希望理由</div>
+          <textarea class="form-textarea" readonly style="background:var(--surface-2);">来年度の小学校入学に向けて、集団生活への適応・コミュニケーション能力の向上を希望。診断: ASD（自閉スペクトラム症）。療育手帳 B2 取得済み。発語の遅れと感覚過敏（音）への対処を学ばせたい（母 談）。</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ② 音声アセスメント面接（実施中） ─── -->
+    <div class="section-heading">
+      <div class="num">2</div>
+      <div>
+        <h2>音声アセスメント面接 — 実施中</h2>
+        <div class="sub">面接の会話を録音 → AI が領域別に自動振り分け</div>
+      </div>
+      <span class="req-tag" style="background:rgba(192,132,252,0.3);border-color:rgba(192,132,252,0.5);">D-12 将来要件</span>
+    </div>
+
+    <div class="two-col lg">
+      <!-- 録音パネル -->
+      <div class="voice-panel" style="margin-bottom:0;">
+        <div class="voice-panel-header">
+          <div class="title">🎤 録音中 <span class="badge" style="background:#fee2e2;color:#991b1b;border:none;">● REC 42:18</span></div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-muted">同席: 児発管（鈴木）/ 保護者（山田 翔子）/ 本人（太郎くん）</span>
+          </div>
+        </div>
+
+        <div class="voice-mic" style="background:linear-gradient(135deg,#ef4444 0%,#dc2626 100%);box-shadow:0 0 0 8px rgba(239,68,68,0.15),0 0 0 16px rgba(239,68,68,0.08);">🎤</div>
+
+        <div class="waveform" style="margin:14px 0;">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+
+        <div class="voice-status">
+          <strong style="color:#7c3aed;">話者: 保護者（山田 翔子さん）</strong><br>
+          リアルタイム文字起こし中 — 一時停止は<button class="btn btn-secondary btn-sm" style="display:inline-flex;margin:0 4px;padding:2px 8px;">⏸</button>
+        </div>
+
+        <div class="voice-transcript" style="margin-top:14px;font-style:normal;text-align:left;">
+          <div style="color:#7c3aed;font-weight:700;font-size:11px;margin-bottom:4px;">▸ 直近の発言（自動文字起こし）</div>
+          「太郎は朝、ベッドから自分で出てこられない日が多くて...保育園でも、お友達と遊ぶより一人で電車のおもちゃで遊んでいることが多いみたいなんです。最近、大きな音、特に運動会のピストルの音がすごく苦手で、耳をふさいで泣いてしまって...」
+          <span style="color:var(--text-3);font-style:italic;font-size:11px;">（文字起こし継続中...）</span>
+        </div>
+
+        <div class="flex gap-2" style="margin-top:14px;">
+          <button class="btn btn-secondary btn-sm" style="flex:1;justify-content:center;">⏸ 一時停止</button>
+          <button class="btn btn-warm btn-sm" style="flex:1;justify-content:center;">■ 録音終了 → AI構造化へ</button>
+        </div>
+      </div>
+
+      <!-- 録音セッション情報 -->
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="card-header"><div class="card-title">面接セッション情報</div></div>
+          <div class="card-body">
+            <div class="form-group-row" style="grid-template-columns:1fr 1fr;">
+              <div>
+                <div class="form-label">実施日</div>
+                <div style="font-weight:600;">2026-06-05（金）</div>
+              </div>
+              <div>
+                <div class="form-label">経過時間</div>
+                <div style="font-weight:600;color:var(--danger);">42:18 / 推定 60分</div>
+              </div>
+              <div>
+                <div class="form-label">実施場所</div>
+                <div style="font-weight:600;">事業所内（みちるわ渋谷 面談室A）</div>
+              </div>
+              <div>
+                <div class="form-label">同席パターン</div>
+                <div style="font-weight:600;">保護者＋児童本人 ⚠ 質問1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">話者ラベル（自動検出）</div></div>
+          <div class="card-body">
+            <div class="flex items-center gap-3" style="padding:8px 0;border-bottom:1px solid var(--border);">
+              <div class="user-avatar" style="background:var(--teal);">鈴</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;">鈴木 美穂</div>
+                <div style="font-size:11px;color:var(--text-2);">児発管 / 発話 28回 / 12:34</div>
+              </div>
+              <span class="badge badge-success">識別済</span>
+            </div>
+            <div class="flex items-center gap-3" style="padding:8px 0;border-bottom:1px solid var(--border);">
+              <div class="user-avatar" style="background:#f472b6;">翔</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;">山田 翔子</div>
+                <div style="font-size:11px;color:var(--text-2);">保護者（母）/ 発話 45回 / 26:51</div>
+              </div>
+              <span class="badge badge-success">識別済</span>
+            </div>
+            <div class="flex items-center gap-3" style="padding:8px 0;">
+              <div class="user-avatar" style="background:#fb923c;">太</div>
+              <div style="flex:1;">
+                <div style="font-size:13px;font-weight:600;">山田 太郎</div>
+                <div style="font-size:11px;color:var(--text-2);">本人 / 発話 12回 / 2:53</div>
+              </div>
+              <span class="badge badge-success">識別済</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ③ AI構造化（プレビュー） ─── -->
+    <div class="section-heading">
+      <div class="num">3</div>
+      <div>
+        <h2>AI構造化 — 領域別 自動振り分け</h2>
+        <div class="sub">音声テキストを 5領域 × A-03 困りごと/希望/留意点 に AI が自動分類</div>
+      </div>
+      <span class="req-tag" style="background:rgba(192,132,252,0.3);border-color:rgba(192,132,252,0.5);">D-09 / A-02 / A-03 — 将来要件</span>
+    </div>
+
+    <div class="card">
+      <div class="card-header" style="background:linear-gradient(135deg,#f0f9ff 0%,#ecfeff 100%);">
+        <div class="card-title">
+          <span class="ai-icon" style="width:24px;height:24px;font-size:13px;">✨</span>
+          AI 構造化プレビュー（42分時点の中間結果）
+        </div>
+        <span class="badge badge-info">Azure OpenAI / 学習非利用</span>
+      </div>
+      <div class="card-body">
+        <p class="text-sm text-muted" style="margin-bottom:18px;">AI が現時点までの音声テキストを領域別に自動振り分けしました。録音終了後に最終確定し、児発管の確認画面へ遷移します。</p>
+
+        <!-- 健康・生活 -->
+        <div class="ai-structured">
+          <div class="ai-structured-header">
+            <span class="domain-tag" style="background:#ef4444;">健康・生活</span>
+            <span class="text-xs text-muted">3 発言抽出 / スコア提案: 3/5</span>
+          </div>
+          <div class="voice-quote">
+            <span class="speaker">山田 翔子（母）</span>「朝、ベッドから自分で出てこられない日が多い。保育園に行く前の準備に時間がかかる」
+          </div>
+          <div class="voice-quote">
+            <span class="speaker">山田 翔子（母）</span>「歯磨きは私が仕上げ磨きをしている。自分でやろうとはするが、まだうまくできない」
+          </div>
+        </div>
+
+        <!-- 運動・感覚 -->
+        <div class="ai-structured">
+          <div class="ai-structured-header">
+            <span class="domain-tag" style="background:#f59e0b;">運動・感覚</span>
+            <span class="text-xs text-muted">5 発言抽出 / スコア提案: 2/5（⚠ 重点領域）</span>
+          </div>
+          <div class="voice-quote">
+            <span class="speaker">山田 翔子（母）</span>「大きな音、特に運動会のピストルの音がすごく苦手で、耳をふさいで泣いてしまう」
+          </div>
+          <div class="voice-quote">
+            <span class="speaker">山田 太郎（本人）</span>「うんどうかい、いや。おとがこわい」
+          </div>
+          <div class="voice-quote">
+            <span class="speaker">鈴木 児発管</span>「（質問）他にも苦手な感覚はありますか？」<br>
+            <span class="speaker">山田 翔子（母）</span>「服のタグも気になるみたいで、よく裏返しに着てしまいます」
+          </div>
+        </div>
+
+        <!-- 言語・コミュニケーション -->
+        <div class="ai-structured">
+          <div class="ai-structured-header">
+            <span class="domain-tag" style="background:#6366f1;">言語・コミュニケーション</span>
+            <span class="text-xs text-muted">4 発言抽出 / スコア提案: 2/5（⚠ 重点領域）</span>
+          </div>
+          <div class="voice-quote">
+            <span class="speaker">山田 翔子（母）</span>「お友達と遊ぶより一人で電車のおもちゃで遊んでいることが多い」
+          </div>
+          <div class="voice-quote">
+            <span class="speaker">山田 翔子（母）</span>「気持ちを言葉で伝えるのが難しくて、嫌なことがあると泣いてしまうか、その場から離れてしまう」
+          </div>
+        </div>
+
+        <!-- A-03 困りごと・希望・留意点（自動抽出） -->
+        <div class="ai-structured" style="background:linear-gradient(135deg,#fef3c7 0%,#fef9c3 100%);border-color:#fde68a;">
+          <div class="ai-structured-header" style="border-bottom-color:#fde68a;">
+            <span class="domain-tag" style="background:var(--warm);">📌 困りごと・希望・留意点（A-03）</span>
+            <span class="text-xs text-muted">自動抽出</span>
+          </div>
+          <div style="font-size:12px;color:var(--text);line-height:1.7;">
+            <strong>👧 本人の困りごと:</strong> 大きな音が怖い／お友達との関わり方がわからない<br>
+            <strong>👪 保護者の希望:</strong> 来年度の小学校入学に向けて、集団生活への適応・コミュニケーション能力の向上／感覚過敏への対処を学ばせたい<br>
+            <strong>🧑‍⚕️ 支援上の留意点:</strong> ASD診断あり、療育手帳B2／感覚過敏（音・触覚）／一人遊び傾向あり／発語の遅れ
+          </div>
+        </div>
+
+        <div class="flex gap-2" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+          <span class="text-xs text-muted" style="margin-right:auto;align-self:center;">録音継続中。終了後に最終結果を確認できます。</span>
+          <button class="btn btn-secondary btn-sm">👁️ 全文プレビュー</button>
+          <button class="btn btn-primary btn-sm" disabled style="opacity:0.6;cursor:not-allowed;">録音終了後に確認 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ④ AI個別支援計画 下書き（プレビュー） ─── -->
+    <div class="section-heading">
+      <div class="num">4</div>
+      <div>
+        <h2>AI個別支援計画 v1 下書き — プレビュー</h2>
+        <div class="sub">アセスメント結果を根拠に AI が新規計画書 v1 を自動生成（録音終了 + アセス確定後に有効化）</div>
+      </div>
+      <span class="req-tag" style="background:rgba(192,132,252,0.3);border-color:rgba(192,132,252,0.5);">P-01 / P-02 / P-05 / P-12 — 将来要件</span>
+    </div>
+
+    <div class="card" style="opacity:0.85;">
+      <div class="card-header" style="background:linear-gradient(135deg,#f0f9ff 0%,#ecfeff 100%);">
+        <div class="card-title">
+          <span class="ai-icon" style="width:24px;height:24px;font-size:13px;">✨</span>
+          AI 計画下書き（途中生成版）
+        </div>
+        <span class="badge badge-warning">録音終了で確定</span>
+      </div>
+      <div class="card-body">
+
+        <div class="ai-source" style="margin-bottom:14px;">
+          <strong>📚 AI が参照する根拠（新規児童 = 過去データなし）:</strong><br>
+          ・本面接の音声アセスメント結果（A-01〜A-03 / A-10）<br>
+          ・FC本部統一テンプレート（P-04 / 質問2: ⚠確認待ち）<br>
+          ・令和6年度報酬改定 5領域必須化（P-05）<br>
+          ・診断情報: ASD / 療育手帳 B2 / 6歳DA
+        </div>
+
+        <h4 style="font-size:13px;color:#1e40af;font-weight:700;margin-bottom:8px;">💡 計画 v1 の構成案</h4>
+
+        <div class="form-group" style="margin-bottom:14px;">
+          <div class="form-label">本人・保護者の意向（AI下書き）</div>
+          <div style="padding:10px 12px;background:rgba(255,255,255,0.7);border-radius:6px;font-size:12px;line-height:1.7;border-left:3px solid #818cf8;">
+            「電車のおもちゃが好き。お友達と一緒に遊びたい（本人）」「来年度の小学校入学に向けて、集団生活への適応とお友達とのコミュニケーション能力を伸ばしてほしい。感覚過敏（音）への対処方法を学ばせたい（保護者）」
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom:14px;">
+          <div class="form-label">総合的支援方針（AI下書き）</div>
+          <div style="padding:10px 12px;background:rgba(255,255,255,0.7);border-radius:6px;font-size:12px;line-height:1.7;border-left:3px solid #818cf8;">
+            小学校就学を見据え、本期は「コミュニケーション基礎スキル」と「感覚過敏への自己対処」を重点目標とする。本児童の興味（電車）を活用した小集団活動を導入し、自然な対人関わりを促進する。並行して、感覚過敏への自己対処方法（耳栓・個別ブース）を段階的に習得する。
+          </div>
+        </div>
+
+        <h4 style="font-size:13px;color:#1e40af;font-weight:700;margin:18px 0 10px;">💡 5領域別 短期目標 案</h4>
+        <table class="table" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;font-size:12px;">
+          <thead>
+            <tr><th style="width:120px;">5領域</th><th>AI下書き短期目標案</th><th style="width:120px;">提案頻度</th><th style="width:120px;">提案担当</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="badge" style="background:#fee2e2;color:#991b1b;border:none;">健康・生活</span></td><td>朝の身支度（着替え・顔洗い）を視覚スケジュールを使って週3回自分でできる</td><td>毎日</td><td>主担当（未定）</td></tr>
+            <tr style="background:#fef9c3;"><td><span class="badge" style="background:#fef3c7;color:#92400e;border:none;">運動・感覚 ⚠️</span></td><td>大きな音への対処として「耳栓を取りに行く」を声かけで実行できる</td><td>毎回</td><td>主担当</td></tr>
+            <tr><td><span class="badge badge-teal">認知・行動</span></td><td>絵カードによる予測活動で、活動の流れを理解して取り組める</td><td>毎日</td><td>主担当</td></tr>
+            <tr style="background:#fef9c3;"><td><span class="badge" style="background:#e0e7ff;color:#3730a3;border:none;">言語・コミュ ⚠️</span></td><td>「ありがとう」「かして」「いっしょに」の3語を場面に応じて使える</td><td>毎日</td><td>主担当・副担当</td></tr>
+            <tr><td><span class="badge" style="background:#fce7f3;color:#9d174d;border:none;">人間関係</span></td><td>2人組での活動（電車テーマ）に5分以上参加できる</td><td>週2回</td><td>主担当</td></tr>
+          </tbody>
+        </table>
+
+        <div class="note-callout" style="margin-top:16px;background:#dbeafe;border-left-color:#3b82f6;color:#1e3a8a;">
+          <strong>AI 下書きの設計方針:</strong>
+          本児童の<strong>興味（電車）を支援目標に組み込む</strong>こと、<strong>新一年生としての小学校就学準備</strong>を意識したスキル選定、<strong>感覚過敏への自己対処</strong>を最優先することを AI が音声アセスメントから自動判断しました。
+          児発管の方は次のステップで全項目を確認・加筆修正してください。
+        </div>
+
+        <div class="flex gap-2" style="margin-top:18px;">
+          <button class="btn btn-secondary" disabled style="opacity:0.6;cursor:not-allowed;flex:1;justify-content:center;">📝 編集画面で開く（録音終了後）</button>
+          <button class="btn btn-secondary" disabled style="opacity:0.6;cursor:not-allowed;">🔄 再生成</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ⑤ 承認フロー ─── -->
+    <div class="section-heading">
+      <div class="num">5</div>
+      <div>
+        <h2>承認フロー → 保護者文書同意</h2>
+        <div class="sub">児発管 確定 → 管理者 承認 → 本部 承認 → 保護者 文書同意（電子サインオプション）</div>
+      </div>
+      <span class="req-tag" style="background:rgba(255,255,255,0.15);">P-08 / 質問12</span>
+    </div>
+
+    <div class="approval-flow" style="margin-bottom:24px;background:var(--surface);">
+      <span style="font-size:11px;color:var(--text-2);font-weight:700;letter-spacing:0.5px;margin-right:8px;">予定フロー</span>
+      <div class="approval-step">
+        <div class="approval-circle">1</div>
+        <div class="label">児発管 確定（鈴木）</div>
+      </div>
+      <div class="approval-arrow">›</div>
+      <div class="approval-step">
+        <div class="approval-circle">2</div>
+        <div class="label">管理者 承認（田中）</div>
+      </div>
+      <div class="approval-arrow">›</div>
+      <div class="approval-step">
+        <div class="approval-circle">3</div>
+        <div class="label">本部 承認（坂梨）</div>
+      </div>
+      <div class="approval-arrow">›</div>
+      <div class="approval-step">
+        <div class="approval-circle">4</div>
+        <div class="label">保護者 文書同意</div>
+      </div>
+      <div class="approval-arrow">›</div>
+      <div class="approval-step">
+        <div class="approval-circle">5</div>
+        <div class="label">サービス提供開始</div>
+      </div>
+    </div>
+
+    <!-- ─── 想定タイムライン ─── -->
+    <div class="card" style="background:linear-gradient(135deg,#fff 0%,#ecfdf5 100%);border-color:#a7f3d0;margin-bottom:24px;">
+      <div class="card-body">
+        <h4 style="font-size:14px;font-weight:700;color:#065f46;margin-bottom:14px;">📅 想定タイムライン（新規児童 入所〜サービス開始）</h4>
+        <table class="table" style="font-size:12px;">
+          <thead><tr><th>日付</th><th>ステップ</th><th>担当</th><th>想定所要時間</th></tr></thead>
+          <tbody>
+            <tr><td><strong>2026-06-01</strong></td><td>契約・基本情報登録（① 完了）</td><td>事務</td><td>5分（CSV取込時）</td></tr>
+            <tr style="background:#fef9c3;"><td><strong>2026-06-05</strong></td><td>音声アセスメント面接（② 実施中）</td><td>鈴木 児発管</td><td>60〜90分</td></tr>
+            <tr><td>2026-06-05</td><td>AI構造化結果 確認・修正（③）</td><td>鈴木 児発管</td><td>15〜20分 ← 従来1〜2時間</td></tr>
+            <tr><td>2026-06-06</td><td>AI計画下書き 加筆修正・確定（④）</td><td>鈴木 児発管</td><td>30〜45分 ← 従来3〜5時間</td></tr>
+            <tr><td>2026-06-08</td><td>管理者・本部 承認（⑤）</td><td>田中 → 坂梨</td><td>各 10分</td></tr>
+            <tr><td>2026-06-12</td><td>保護者 文書同意（電子サイン or 紙）</td><td>鈴木 / 保護者</td><td>15分</td></tr>
+            <tr style="background:#d1fae5;"><td><strong>2026-06-15</strong></td><td><strong>サービス提供開始</strong></td><td>主担当・副担当</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <div class="note-callout" style="margin-top:14px;background:rgba(255,255,255,0.5);">
+          <strong>業務効率化の試算（業務調査メモ §2-A 参照）:</strong>
+          従来の児発管の<strong>新規アセスメント＋計画作成 = 約5〜8時間</strong>が、
+          音声入力＋AI下書きにより<strong>約1.5〜2.5時間</strong>に短縮（約 1/3）。
+          1名あたり 5〜6時間の児発管時間が直接支援業務に振り向けられる試算です。
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── UX 価値の総括 ─── -->
+    <div class="note-callout">
+      <strong>本画面で実証する UX 価値:</strong><br>
+      ・<strong>新規児童の入所時1名分</strong>を「音声入力 → AI構造化 → AI計画下書き → 加筆修正 → 承認」と 1画面・1セッションで完結（D-12 / D-09 / P-12 連動）<br>
+      ・面接の<strong>同席パターン（児発管+保護者+本人）を話者ラベルとして自動識別</strong>し、誰の発言かが構造化結果に保持される（⚠ 質問1 同席パターン確認後に最終設計）<br>
+      ・新規児童は<strong>過去データがない</strong>ため、AI下書きの根拠は「本面接 + FC本部統一テンプレート + 法令要件（5領域）+ 診断情報」の組合せで生成（P-04 / P-05 / 質問2）<br>
+      ・<strong>児発管の専門判断による加筆修正は必須プロセス</strong>。AI下書きはあくまで「下書き」であり、最終確定権限・責任は児発管にある（法令要件: 個別支援計画作成権限は児発管のみ）<br>
+      ・全機能は <strong>Azure OpenAI Service の学習非利用テナント</strong>で実装。音声情報は即時破棄、テキスト化後のみ保存（⚠ 質問15 AI送信ポリシー）<br>
+      ・新規児童1名あたり<strong>児発管の作業時間 5〜8時間 → 1.5〜2.5時間に短縮</strong>（業務調査メモ §2-A の現場実態から試算）
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

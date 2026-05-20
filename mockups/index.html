@@ -10,7 +10,7 @@
   <h1>記録ソフト UXモック</h1>
   <p class="sub">
     児童発達支援・放課後等デイサービス向け 記録ソフト ご提案書（2026-05-20 ドラフト）の UX 可視化。
-    主要4画面を HTML/CSS 静的モックで実装しています。RFI 要件IDと連動。
+    主要5画面を HTML/CSS 静的モックで実装しています。RFI 要件IDと連動。
   </p>
 
   <div class="mock-grid">
@@ -55,14 +55,35 @@
 
     <a href="04_assessment.html" class="mock-card">
       <div class="num">SCREEN 04</div>
-      <h2>アセスメント入力</h2>
-      <p>児発管が5領域別に構造化入力＋自由記述。音声入力は将来要件（2027年〜）バッジ付きで可視化。</p>
+      <h2>アセスメント入力（再アセスメント版）</h2>
+      <p>2回目以降の差分更新フォーム。児発管が5領域別に構造化入力＋自由記述。前回からの差分のみ更新可。</p>
       <div class="reqs">
         <span class="req-tag">A-01</span>
         <span class="req-tag">A-02</span>
         <span class="req-tag">A-03</span>
+        <span class="req-tag">A-07</span>
         <span class="req-tag">A-10</span>
+      </div>
+    </a>
+
+    <a href="05_new_intake.html" class="mock-card" style="grid-column:span 2;background:linear-gradient(135deg,#fff 0%,#f5f3ff 100%);border-color:#c084fc;">
+      <div class="num" style="color:#7c3aed;">SCREEN 05 — NEW</div>
+      <h2>新規児童 入所時アセスメント＋計画作成 — 音声×AI 一気通貫</h2>
+      <p>
+        新規児童1名分を、音声入力 → AI構造化 → AI計画下書き → 加筆修正 → 承認 まで <strong>1画面・1セッション</strong>で完結。
+        従来の児発管作業時間 5〜8時間を 1.5〜2.5時間に短縮する設計を可視化。話者自動識別・5領域自動振り分け・新規児童向けAI下書き生成の流れがわかります。
+      </p>
+      <div class="reqs">
+        <span class="req-tag">A-01</span>
+        <span class="req-tag">A-02</span>
+        <span class="req-tag">A-03</span>
+        <span class="req-tag">P-01</span>
+        <span class="req-tag">P-02</span>
+        <span class="req-tag">P-05</span>
+        <span class="req-tag">P-08</span>
         <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">D-12 将来</span>
+        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">D-09 将来</span>
+        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">P-12 将来</span>
       </div>
     </a>
   </div>

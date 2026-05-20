@@ -2,7 +2,7 @@
 
 児童発達支援・放課後等デイサービス向け 記録ソフトの UX 可視化用 静的モックアップです。
 
-クライアント（ミチルワグループ FC本部 情報システム部）への提案書ドラフトに対応する4画面を、HTML + CSS のみで構築しています。
+クライアント（ミチルワグループ FC本部 情報システム部）への提案書ドラフトに対応する5画面を、HTML + CSS のみで構築しています。
 
 ---
 
@@ -27,8 +27,9 @@ open michiruwa/mockups/index.html
 |---|---|---|---|
 | 01 | 管理者ダッシュボード | [`mockups/01_dashboard.html`](mockups/01_dashboard.html) | D-08 / P-10 / P-11 / D-07 / FT-10 |
 | 02 | 児童詳細・同一画面集約 | [`mockups/02_child_detail.html`](mockups/02_child_detail.html) | UI-03 / A-01 / P-02 / D-01 / P-11 |
-| 03 | 個別支援計画作成（AI下書き起点） | [`mockups/03_support_plan.html`](mockups/03_support_plan.html) | P-01 / P-02 / P-05 / P-08 / P-12（将来） |
-| 04 | アセスメント入力 | [`mockups/04_assessment.html`](mockups/04_assessment.html) | A-01 / A-02 / A-03 / A-10 / D-12（将来） |
+| 03 | 個別支援計画作成（既存児童 v3 改訂） | [`mockups/03_support_plan.html`](mockups/03_support_plan.html) | P-01 / P-02 / P-05 / P-08 / P-12（将来） |
+| 04 | アセスメント入力（再アセス・差分更新） | [`mockups/04_assessment.html`](mockups/04_assessment.html) | A-01 / A-02 / A-03 / A-07 / A-10 |
+| 05 | **新規児童 入所時アセス＋計画作成 — 音声×AI 一気通貫** | [`mockups/05_new_intake.html`](mockups/05_new_intake.html) | A-01〜A-03 / P-01 / P-02 / P-05 / P-08 / D-09・D-12・P-12（将来） |
 
 ---
 
@@ -51,11 +52,12 @@ open michiruwa/mockups/index.html
 michiruwa/
 ├── README.md           # 本ファイル
 └── mockups/
-    ├── index.html              # エントリポイント（4画面ナビゲーション）
+    ├── index.html              # エントリポイント（5画面ナビゲーション）
     ├── 01_dashboard.html
     ├── 02_child_detail.html
-    ├── 03_support_plan.html
-    ├── 04_assessment.html
+    ├── 03_support_plan.html    # 既存児童の計画 v3 改訂
+    ├── 04_assessment.html      # 再アセス・差分更新
+    ├── 05_new_intake.html      # 新規児童 入所時 音声×AI 一気通貫フロー
     └── style.css               # 共通スタイル
 ```
 
