@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>個別支援計画作成 — AI下書き起点 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── サイドバー ─── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">対象児童</div>
+    <div class="value">田中 結菜（DH 8歳）</div>
+    <div class="value">計画 v3 改訂中</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="02_child_detail.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="03_support_plan.html" class="nav-item active"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="#" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="#" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="#" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="#" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">鈴</div>
+    <div class="user-info">
+      <div class="name">鈴木 美穂</div>
+      <div class="role">児発管 / みちるわ渋谷</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── メインコンテンツ ─── -->
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">個別支援計画 — 第3版 作成</div>
+      <div class="topbar-breadcrumb">
+        <a href="02_child_detail.html">田中 結菜さん</a> <span class="sep">›</span> 計画作成 v3
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="badge badge-warning">⏰ 期限超過 5日</span>
+      <span class="badge">最終保存: 1分前 (自動保存)</span>
+      <button class="btn btn-secondary">下書き保存</button>
+      <button class="btn btn-primary">承認フローへ送信 →</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ─── 将来要件リボン（AI機能） ─── -->
+    <div class="future-ribbon" style="margin-bottom:20px;">
+      <div class="ribbon-icon">✨</div>
+      <div class="ribbon-body">
+        <strong>P-12 AI下書き機能 — 将来要件（2027年以降提供予定）</strong>
+        <span>本提案では P-12 を△ロードマップとしてご提示。本画面のAIパネルは Azure OpenAI Service（学習非利用テナント）でのご提供を想定したUXデモです。⚠ 確認待ち（質問15: AI送信ポリシー）</span>
+      </div>
+    </div>
+
+    <!-- ─── 承認フローインジケータ ─── -->
+    <div class="approval-flow" style="margin-bottom:20px;">
+      <span style="font-size:11px;color:var(--text-2);font-weight:700;letter-spacing:0.5px;margin-right:8px;">承認フロー <span class="req-tag">P-08 / 質問12</span></span>
+      <div class="approval-step current">
+        <div class="approval-circle">1</div>
+        <div class="label">児発管 作成（鈴木）</div>
+      </div>
+      <div class="approval-arrow">›</div>
+      <div class="approval-step">
+        <div class="approval-circle">2</div>
+        <div class="label">管理者 承認（田中）</div>
+      </div>
+      <div class="approval-arrow">›</div>
+      <div class="approval-step">
+        <div class="approval-circle">3</div>
+        <div class="label">本部 承認（坂梨）</div>
+      </div>
+      <div class="approval-arrow">›</div>
+      <div class="approval-step">
+        <div class="approval-circle">4</div>
+        <div class="label">保護者 文書同意</div>
+      </div>
+    </div>
+
+    <!-- ─── 2カラム：AIパネル + 編集エリア ─── -->
+    <div class="two-col">
+
+      <!-- 左: AIパネル -->
+      <div class="card" style="position:sticky;top:80px;align-self:flex-start;">
+        <div class="card-header" style="background:linear-gradient(135deg,#f0f9ff 0%,#ecfeff 100%);border-bottom-color:#bae6fd;">
+          <div class="card-title" style="color:#1e40af;">
+            <span class="ai-icon" style="width:24px;height:24px;font-size:13px;">✨</span>
+            AI 下書きアシスタント
+            <span class="req-id" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">P-12 将来</span>
+          </div>
+          <span class="badge" style="background:#fff;color:#1e40af;border-color:#bae6fd;">Azure OpenAI</span>
+        </div>
+        <div class="card-body">
+
+          <div class="ai-source">
+            <strong>📚 参照根拠:</strong><br>
+            ・前回アセスメント (2026-03-15) — A-02 / A-03<br>
+            ・前回計画 v2 — P-02 / P-05<br>
+            ・直近6ヶ月の日々の支援記録 142件 — D-01 / D-02<br>
+            ・モニタリング評価 — P-11
+          </div>
+
+          <h4 style="font-size:12px;color:#1e40af;font-weight:700;margin:14px 0 8px;">💡 AI による5領域別 短期目標案</h4>
+
+          <div class="ai-suggestion">
+            <strong><span class="dot dot-1" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>健康・生活</strong><br>
+            朝の身支度を週5回自分で完了できる（現在75% → 90%目標）
+          </div>
+          <div class="ai-suggestion">
+            <strong><span class="dot dot-2" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>運動・感覚</strong><br>
+            音への過敏性対処を1日複数回、自発的に行える（個別ブース or 耳栓利用）
+          </div>
+          <div class="ai-suggestion" style="border-left-color:#10b981;">
+            <strong><span class="dot dot-3" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>認知・行動</strong><br>
+            <span style="background:#fef9c3;padding:1px 4px;border-radius:3px;">v2 から改善傾向（+1pt）</span> 順番待ちを1日3回以上、衝動を抑えて実施できる
+          </div>
+          <div class="ai-suggestion" style="border-left-color:#ef4444;">
+            <strong><span class="dot dot-4" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>言語・コミュ ⚠️ 重点強化</strong><br>
+            <span style="background:#fee2e2;padding:1px 4px;border-radius:3px;">前期低下傾向</span><br>
+            感情カード4種（楽しい/悲しい/怒り/不安）を自発的に選択して表現できる
+          </div>
+          <div class="ai-suggestion">
+            <strong><span class="dot dot-5" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>人間関係</strong><br>
+            小集団活動（2〜3人）に5分以上継続参加できる
+          </div>
+
+          <div class="ai-actions" style="margin-top:14px;">
+            <button class="btn btn-primary btn-sm" style="flex:1;justify-content:center;">✨ 全領域を反映</button>
+            <button class="btn btn-secondary btn-sm">🔄 再生成</button>
+          </div>
+
+          <div style="margin-top:14px;padding:10px 12px;background:rgba(255,255,255,0.6);border-radius:6px;font-size:11px;color:var(--text-2);line-height:1.6;border:1px solid #bae6fd;">
+            💬 児発管からの追加指示があれば AI に伝えてください。<br>
+            <div style="margin-top:6px;padding:6px 8px;background:#fff;border:1px solid var(--border);border-radius:4px;color:var(--text-3);font-style:italic;">
+              例:「学校復帰を意識して、対人スキル強化を重視して」
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右: 編集エリア -->
+      <div>
+
+        <!-- 基本情報 -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header"><div class="card-title">計画 基本情報 <span class="req-id">P-02</span></div></div>
+          <div class="card-body">
+            <div class="form-group-row">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">計画期間 開始<span class="required">*</span></label>
+                <input class="form-input" type="date" value="2026-03-20">
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">計画期間 終了<span class="required">*</span></label>
+                <input class="form-input" type="date" value="2026-09-20">
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:14px;margin-bottom:0;">
+              <label class="form-label">様式テンプレート <span class="req-tag">P-04 / ⚠ 質問2</span></label>
+              <select class="form-select">
+                <option>FC本部統一フォーマット（児発・放デイ併設型）</option>
+                <option>東京都指定様式</option>
+                <option>自治体カスタム様式（追加開発）</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 本人・保護者の意向 -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <div class="card-title">本人・保護者の意向 <span class="req-id">P-02</span></div>
+            <button class="btn btn-ghost btn-sm">✨ AIに任せる</button>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">本人の希望</label>
+              <textarea class="form-textarea">お友達と仲良く遊びたい。学校でも怒られないようになりたい。</textarea>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">保護者の希望</label>
+              <textarea class="form-textarea">来年度の通常学級復帰を目標に、感情コントロールと言語表現の練習を継続してほしい。家庭でも実践できる方法を教えてほしい。</textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- 総合的支援方針 -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header"><div class="card-title">総合的支援方針 <span class="req-id">P-02</span></div></div>
+          <div class="card-body">
+            <textarea class="form-textarea" style="min-height:100px;">前期で観察された言語・コミュニケーション領域の停滞を受け、感情表現スキル習得を本期の重点目標とする。並行して、改善傾向にある認知・行動領域の強化と、来年度の通常学級復帰を見据えた対人スキル育成を進める。音への配慮は継続。</textarea>
+          </div>
+        </div>
+
+        <!-- 5領域別 短期目標 -->
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <div class="card-title">5領域別 短期目標（6ヶ月）<span class="req-id">P-05 / 令和6年度改定対応</span></div>
+            <span class="badge badge-info">5/5 領域 設定済</span>
+          </div>
+          <div class="card-body" style="padding:0;">
+
+            <!-- 領域1: 健康・生活 -->
+            <div style="padding:18px 20px;border-bottom:1px solid var(--border);">
+              <div class="flex items-center gap-2" style="margin-bottom:12px;">
+                <span class="badge" style="background:#fee2e2;color:#991b1b;border:none;">健康・生活</span>
+                <span class="text-xs text-muted">領域 1/5</span>
+                <span class="badge badge-info" style="margin-left:auto;">✨ AI下書き反映</span>
+              </div>
+              <div class="form-group-row">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">短期目標</label>
+                  <input class="form-input" value="朝の身支度を週5回自分で完了できる">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">頻度</label>
+                  <select class="form-select"><option>毎日</option><option>週5回</option><option>週3回</option></select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:12px;margin-bottom:0;">
+                <label class="form-label">支援内容・方法 / 担当者</label>
+                <textarea class="form-textarea" style="min-height:60px;">視覚的スケジュールを使用し、自分で準備チェック。完了時にシール獲得制で動機づけ。担当: 高橋（副担当）</textarea>
+              </div>
+            </div>
+
+            <!-- 領域2: 運動・感覚 -->
+            <div style="padding:18px 20px;border-bottom:1px solid var(--border);">
+              <div class="flex items-center gap-2" style="margin-bottom:12px;">
+                <span class="badge" style="background:#fef3c7;color:#92400e;border:none;">運動・感覚</span>
+                <span class="text-xs text-muted">領域 2/5</span>
+              </div>
+              <div class="form-group-row">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">短期目標</label>
+                  <input class="form-input" value="音への過敏性対処を自発的に行える（個別ブース or 耳栓利用）">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">頻度</label>
+                  <select class="form-select"><option>1日複数回</option><option>毎日</option><option>週3回</option></select>
+                </div>
+              </div>
+            </div>
+
+            <!-- 領域3: 認知・行動 -->
+            <div style="padding:18px 20px;border-bottom:1px solid var(--border);">
+              <div class="flex items-center gap-2" style="margin-bottom:12px;">
+                <span class="badge badge-teal">認知・行動</span>
+                <span class="text-xs text-muted">領域 3/5</span>
+                <span class="badge badge-success" style="margin-left:auto;">前期 +1pt 改善</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">短期目標</label>
+                <input class="form-input" value="順番待ちを1日3回以上、衝動を抑えて実施できる">
+              </div>
+            </div>
+
+            <!-- 領域4: 言語・コミュニケーション ⚠重点 -->
+            <div style="padding:18px 20px;border-bottom:1px solid var(--border);background:#fffbeb;">
+              <div class="flex items-center gap-2" style="margin-bottom:12px;">
+                <span class="badge" style="background:#e0e7ff;color:#3730a3;border:none;">言語・コミュニケーション</span>
+                <span class="text-xs text-muted">領域 4/5</span>
+                <span class="badge badge-danger" style="margin-left:auto;">⚠ 重点強化</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">短期目標 <span class="text-xs text-muted">— AI推奨</span></label>
+                <input class="form-input" value="感情カード4種（楽しい/悲しい/怒り/不安）を自発的に選択して表現できる">
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">支援内容・方法</label>
+                <textarea class="form-textarea" style="min-height:60px;">毎日の活動振り返り時に感情カードを使用。週1回は家庭でも実施し連絡帳で共有。担当: 石川（主担当）</textarea>
+              </div>
+            </div>
+
+            <!-- 領域5: 人間関係・社会性 -->
+            <div style="padding:18px 20px;">
+              <div class="flex items-center gap-2" style="margin-bottom:12px;">
+                <span class="badge" style="background:#fce7f3;color:#9d174d;border:none;">人間関係・社会性</span>
+                <span class="text-xs text-muted">領域 5/5</span>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">短期目標</label>
+                <input class="form-input" value="小集団活動（2〜3人）に5分以上継続参加できる">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 過去計画の参照（折りたたみ風） -->
+        <div class="card" style="margin-bottom:20px;background:var(--surface-2);">
+          <div class="card-header" style="background:transparent;">
+            <div class="card-title">📂 参照: 前回計画 v2（2025-09〜2026-03）<span class="req-id">P-07</span></div>
+            <a href="02_child_detail.html" class="btn btn-ghost btn-sm">児童詳細で見る →</a>
+          </div>
+          <div class="card-body" style="background:#fff;border-top:1px solid var(--border);font-size:12px;color:var(--text-2);">
+            <div class="flex gap-4" style="flex-wrap:wrap;">
+              <span><strong>達成度サマリ:</strong></span>
+              <span>健康・生活 <strong style="color:var(--success);">75%</strong></span>
+              <span>運動・感覚 <strong style="color:var(--warning);">60%</strong></span>
+              <span>認知・行動 <strong style="color:var(--success);">80%</strong></span>
+              <span>言語・コミュ <strong style="color:var(--danger);">45%</strong></span>
+              <span>人間関係 <strong style="color:var(--success);">70%</strong></span>
+            </div>
+            <p style="margin-top:10px;">前期は「言語・コミュニケーション」領域の達成度が45%と低く、本期の重点強化テーマに反映済み。</p>
+          </div>
+        </div>
+
+        <!-- 次のステップ -->
+        <div class="card" style="background:linear-gradient(135deg,#fff 0%,#ecfdf5 100%);border-color:#a7f3d0;">
+          <div class="card-body">
+            <h4 style="font-size:14px;font-weight:700;color:#065f46;margin-bottom:6px;">承認フロー次ステップ</h4>
+            <p class="text-sm" style="color:#047857;margin-bottom:14px;">下書きを保存して、管理者（田中）へ承認依頼を送ります。承認後、保護者へ文書同意を取得します。</p>
+            <div class="flex gap-2">
+              <button class="btn btn-secondary">📄 PDFプレビュー (保護者説明用)</button>
+              <button class="btn btn-secondary">💾 下書き保存</button>
+              <button class="btn btn-primary" style="margin-left:auto;">→ 管理者へ承認依頼を送信</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="note-callout" style="margin-top:24px;">
+      <strong>P-01「アセスメント参照作成」+ P-12「AI下書き作成」の UX 価値:</strong><br>
+      ・児発管の<strong>計画作成所要時間が3〜5時間 → 1〜1.5時間に短縮</strong>される設計（業務調査メモ §2-A 参照）<br>
+      ・5領域の<strong>網羅性を AI が自動チェック</strong>し、令和6年度報酬改定の減算リスクを未然に防ぐ<br>
+      ・前期計画の達成度・前回アセスメントとの差分を <strong>同一画面で参照</strong>（P-07）<br>
+      ・AI下書きはあくまで「下書き」。<strong>児発管の専門判断による加筆修正</strong> が最終確定の前提（法令上の作成権限は児発管のみ）<br>
+      ・AI送信ポリシーは <strong>Azure OpenAI Service の学習非利用テナント</strong>で実装（質問15への弊社仮置き）
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

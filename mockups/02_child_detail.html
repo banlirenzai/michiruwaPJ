@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>児童詳細（田中 結菜さん）| 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── サイドバー ─── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">表示中</div>
+    <div class="value">みちるわ渋谷</div>
+    <div class="value">児童 1名</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="02_child_detail.html" class="nav-item active"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="#" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="#" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="#" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="#" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">鈴</div>
+    <div class="user-info">
+      <div class="name">鈴木 美穂</div>
+      <div class="role">児発管 / みちるわ渋谷</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── メインコンテンツ ─── -->
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">児童詳細</div>
+      <div class="topbar-breadcrumb">
+        <a href="#">児童一覧</a> <span class="sep">›</span> 田中 結菜さん
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="#" class="btn btn-secondary btn-sm">← 前の児童</a>
+      <a href="#" class="btn btn-secondary btn-sm">次の児童 →</a>
+      <a href="#" class="btn btn-ghost btn-sm">⋯</a>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ─── 児童ヘッダー ─── -->
+    <div class="child-header">
+      <div class="child-avatar warm">結</div>
+      <div class="child-header-body">
+        <div class="name">
+          田中 結菜
+          <span class="badge badge-info">DH 歯科衛生士領域</span>
+          <span class="badge badge-success">アクティブ</span>
+        </div>
+        <div class="meta">
+          <span>8歳（小学3年）</span>
+          <span class="sep">·</span>
+          <span>女児</span>
+          <span class="sep">·</span>
+          <span>利用開始: 2025-09-12</span>
+          <span class="sep">·</span>
+          <span>受給者証: 2027-04-30 期限</span>
+          <span class="sep">·</span>
+          <span>担当児発管: 鈴木 美穂</span>
+        </div>
+      </div>
+      <div class="child-header-actions">
+        <button class="btn btn-secondary"><span>📞</span>保護者連絡</button>
+        <button class="btn btn-primary"><span>📝</span>記録を追加</button>
+      </div>
+    </div>
+
+    <!-- ─── タブ（Pure CSS） ─── -->
+    <input type="radio" id="tab-a" name="tab" class="tab-input">
+    <input type="radio" id="tab-p" name="tab" class="tab-input" checked>
+    <input type="radio" id="tab-d" name="tab" class="tab-input">
+    <input type="radio" id="tab-m" name="tab" class="tab-input">
+    <input type="radio" id="tab-r" name="tab" class="tab-input">
+
+    <div class="tabs">
+      <label for="tab-a" class="tab-label">📋 アセスメント <span class="req-tag" style="background:transparent;border:none;color:var(--text-3);">A-01〜A-10</span></label>
+      <label for="tab-p" class="tab-label">📝 個別支援計画 <span class="req-tag" style="background:transparent;border:none;color:var(--text-3);">P-01〜P-12</span></label>
+      <label for="tab-d" class="tab-label">📓 日々の支援記録 <span class="req-tag" style="background:transparent;border:none;color:var(--text-3);">D-01〜D-12</span></label>
+      <label for="tab-m" class="tab-label">🔔 モニタリング <span class="req-tag" style="background:transparent;border:none;color:var(--text-3);">P-11</span></label>
+      <label for="tab-r" class="tab-label">📄 帳票出力 <span class="req-tag" style="background:transparent;border:none;color:var(--text-3);">RP-01〜03</span></label>
+    </div>
+
+    <div class="tab-content">
+
+      <!-- ─── アセスメントタブ ─── -->
+      <div class="tab-pane" id="pane-a">
+        <div class="two-col lg">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">最新アセスメント（2025-09-15 実施）<span class="req-id">A-01 / A-02</span></div>
+              <a href="04_assessment.html" class="btn btn-secondary btn-sm">編集</a>
+            </div>
+            <div class="card-body">
+              <h4 style="font-size:13px;color:var(--text-2);margin-bottom:10px;font-weight:700;">5領域別の状況サマリ</h4>
+              <div class="five-col">
+                <div class="domain-card"><div class="domain-name"><span class="dot dot-1"></span>健康・生活</div><div class="domain-score">4<span class="denom">/5</span></div><div class="domain-trend">▲ 改善傾向</div></div>
+                <div class="domain-card"><div class="domain-name"><span class="dot dot-2"></span>運動・感覚</div><div class="domain-score">3<span class="denom">/5</span></div><div class="domain-trend">→ 横ばい</div></div>
+                <div class="domain-card"><div class="domain-name"><span class="dot dot-3"></span>認知・行動</div><div class="domain-score">3<span class="denom">/5</span></div><div class="domain-trend">▲ 改善傾向</div></div>
+                <div class="domain-card"><div class="domain-name"><span class="dot dot-4"></span>言語・コミュ</div><div class="domain-score">2<span class="denom">/5</span></div><div class="domain-trend">▼ 要重点支援</div></div>
+                <div class="domain-card"><div class="domain-name"><span class="dot dot-5"></span>人間関係</div><div class="domain-score">3<span class="denom">/5</span></div><div class="domain-trend">→ 横ばい</div></div>
+              </div>
+
+              <h4 style="font-size:13px;color:var(--text-2);margin:20px 0 10px;font-weight:700;">困りごと・希望・留意点 <span class="req-tag">A-03</span></h4>
+              <div class="form-group" style="margin-bottom:8px;">
+                <div class="form-label">本人の困りごと</div>
+                <div style="padding:10px 12px;background:var(--surface-2);border-radius:6px;font-size:13px;line-height:1.6;">
+                  集団活動の中で順番を待つことが難しく、衝動的に動いてしまう。発語に時間がかかり、感情を言葉で表現するのが苦手。
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:8px;">
+                <div class="form-label">保護者の希望</div>
+                <div style="padding:10px 12px;background:var(--surface-2);border-radius:6px;font-size:13px;line-height:1.6;">
+                  学校生活で困らないように、感情のコントロールと自分の気持ちを言葉で伝える練習をしてほしい。来年度の通常学級復帰を目指している。
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <div class="form-label">支援上の留意点</div>
+                <div style="padding:10px 12px;background:var(--surface-2);border-radius:6px;font-size:13px;line-height:1.6;">
+                  音への過敏性あり。大きな音のする活動では事前予告と個別ブース利用を推奨。療育手帳 B2、ADHD 傾向の診断あり。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">アセスメント履歴 <span class="req-id">A-06 / A-07</span></div></div>
+            <div class="card-body">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="date">2025-09-15 — 初回</div>
+                  <div class="text">入所時アセスメント実施（児発管 鈴木）</div>
+                  <div class="actor">面接 1.5時間 / 保護者同席</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="date">2026-03-15 — 第2回</div>
+                  <div class="text">6ヶ月見直し時 再アセスメント実施</div>
+                  <div class="actor">差分: 認知・行動 +1pt / 言語 -1pt</div>
+                </div>
+                <div class="timeline-item" style="opacity:0.6;">
+                  <div class="date">2026-09-15 — 予定</div>
+                  <div class="text">次回アセスメント予定（自動アラート設定済）</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" style="margin-top:14px;width:100%;justify-content:center;">📥 履歴比較レポート（PDF）<span class="req-tag">A-08</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 個別支援計画タブ（デフォルト表示） ─── -->
+      <div class="tab-pane" id="pane-p">
+        <div class="two-col lg">
+          <div>
+            <div class="card" style="margin-bottom:20px;">
+              <div class="card-header">
+                <div class="card-title">現在の個別支援計画 <span class="req-id">P-02 / P-05 / P-09</span></div>
+                <div class="flex gap-2">
+                  <span class="badge badge-warning">⏰ 見直し期限 5日超過</span>
+                  <a href="03_support_plan.html" class="btn btn-warm btn-sm">📝 見直しを開始</a>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="flex justify-between items-center" style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);">
+                  <div>
+                    <div style="font-size:12px;color:var(--text-2);">計画期間</div>
+                    <div style="font-size:14px;font-weight:700;color:var(--navy);margin-top:2px;">2025年9月20日 〜 2026年3月20日（第2版・改訂中）</div>
+                  </div>
+                  <div>
+                    <div style="font-size:12px;color:var(--text-2);">承認状況</div>
+                    <div style="font-size:13px;font-weight:600;color:var(--success);margin-top:2px;">✓ 児発管・管理者・本部 承認済</div>
+                  </div>
+                  <div>
+                    <div style="font-size:12px;color:var(--text-2);">保護者同意</div>
+                    <div style="font-size:13px;font-weight:600;color:var(--success);margin-top:2px;">✓ 文書同意済（2025-09-20）</div>
+                  </div>
+                </div>
+
+                <h4 style="font-size:13px;color:var(--text-2);margin-bottom:8px;font-weight:700;">本人・保護者の意向</h4>
+                <div style="padding:10px 12px;background:var(--surface-2);border-radius:6px;font-size:13px;line-height:1.6;margin-bottom:14px;">
+                  「お友達と仲良く遊びたい（本人）」「学校生活で困らないように、自分の気持ちを言葉で伝えられるようになってほしい（保護者）」
+                </div>
+
+                <h4 style="font-size:13px;color:var(--text-2);margin-bottom:8px;font-weight:700;">総合的支援方針</h4>
+                <div style="padding:10px 12px;background:var(--surface-2);border-radius:6px;font-size:13px;line-height:1.6;margin-bottom:18px;">
+                  感情調整スキルと言語表現スキルの段階的習得を主軸に、小集団活動を通じた社会性の育成を行う。音への配慮を継続し、安心して活動できる環境を確保する。
+                </div>
+
+                <h4 style="font-size:13px;color:var(--text-2);margin-bottom:10px;font-weight:700;">5領域別 短期目標（6ヶ月）<span class="req-tag">P-05</span></h4>
+                <table class="table" style="border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+                  <thead>
+                    <tr><th style="width:120px;">5領域</th><th>短期目標</th><th style="width:90px;">頻度</th><th style="width:90px;">達成度</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><span class="badge" style="background:#fee2e2;color:#991b1b;border:none;">健康・生活</span></td><td>朝の身支度を自分でできる回数を週3回に増やす</td><td>毎日</td><td><div class="progress" style="width:80px;"><div class="progress-bar success" style="width:75%;"></div></div><span class="text-xs">75%</span></td></tr>
+                    <tr><td><span class="badge" style="background:#fef3c7;color:#92400e;border:none;">運動・感覚</span></td><td>大きな音への対処を「個別ブースに入る」で自発的に行える</td><td>週2回</td><td><div class="progress" style="width:80px;"><div class="progress-bar warning" style="width:60%;"></div></div><span class="text-xs">60%</span></td></tr>
+                    <tr><td><span class="badge badge-teal">認知・行動</span></td><td>順番を待つことができる場面を1日2回以上記録する</td><td>毎日</td><td><div class="progress" style="width:80px;"><div class="progress-bar success" style="width:80%;"></div></div><span class="text-xs">80%</span></td></tr>
+                    <tr><td><span class="badge" style="background:#e0e7ff;color:#3730a3;border:none;">言語・コミュ</span></td><td>感情カードを使って「楽しい」「悲しい」を表現できる</td><td>毎日</td><td><div class="progress" style="width:80px;"><div class="progress-bar danger" style="width:45%;"></div></div><span class="text-xs">45%</span></td></tr>
+                    <tr><td><span class="badge" style="background:#fce7f3;color:#9d174d;border:none;">人間関係</span></td><td>友だちと一緒の活動に3分以上参加できる</td><td>週2回</td><td><div class="progress" style="width:80px;"><div class="progress-bar success" style="width:70%;"></div></div><span class="text-xs">70%</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- 過去計画 -->
+            <div class="card">
+              <div class="card-header"><div class="card-title">計画書 履歴 <span class="req-id">P-06</span></div></div>
+              <div class="card-body" style="padding:0;">
+                <table class="table">
+                  <thead><tr><th>バージョン</th><th>期間</th><th>状態</th><th>承認者</th><th></th></tr></thead>
+                  <tbody>
+                    <tr style="background:#fef3c7;">
+                      <td><strong>v3</strong> (改訂中)</td>
+                      <td>2026-03-20〜09-20 予定</td>
+                      <td><span class="badge badge-warning">改訂中（期限超過）</span></td>
+                      <td>—</td>
+                      <td><a href="03_support_plan.html" class="btn btn-warm btn-sm">編集 →</a></td>
+                    </tr>
+                    <tr><td><strong>v2</strong></td><td>2025-09-20〜2026-03-20</td><td><span class="badge badge-success">確定</span></td><td>鈴木→田中→坂梨</td><td><a href="#" class="btn btn-ghost btn-sm">📄 PDF</a></td></tr>
+                    <tr><td><strong>v1</strong></td><td>2025-03-20〜2025-09-20</td><td><span class="badge badge-success">確定</span></td><td>鈴木→田中→坂梨</td><td><a href="#" class="btn btn-ghost btn-sm">📄 PDF</a></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- サイドパネル -->
+          <div class="flex flex-col gap-4">
+            <div class="card">
+              <div class="card-header"><div class="card-title">関連職員 <span class="req-id">P-03</span></div></div>
+              <div class="card-body">
+                <div class="flex items-center gap-3" style="margin-bottom:12px;">
+                  <div class="user-avatar" style="background:var(--teal);">鈴</div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;">鈴木 美穂</div>
+                    <div style="font-size:11px;color:var(--text-2);">担当児発管 / 計画作成者</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3" style="margin-bottom:12px;">
+                  <div class="user-avatar" style="background:#818cf8;">石</div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;">石川 健太</div>
+                    <div style="font-size:11px;color:var(--text-2);">主担当 / 児童指導員</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="user-avatar" style="background:#f472b6;">高</div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;">高橋 あゆみ</div>
+                    <div style="font-size:11px;color:var(--text-2);">副担当 / 保育士</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header"><div class="card-title">直近の申し送り <span class="req-id">D-06</span></div></div>
+              <div class="card-body">
+                <div class="timeline">
+                  <div class="timeline-item">
+                    <div class="date">2026-05-19 (昨日)</div>
+                    <div class="text">感情カードでの「悲しい」表現が初めて自発的に出ました。家庭での実施もお願いします。</div>
+                    <div class="actor">記入: 石川</div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="date">2026-05-17</div>
+                    <div class="text">運動会練習で個別ブース利用を自発要求。継続的に対応する。</div>
+                    <div class="actor">記入: 高橋</div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="date">2026-05-15</div>
+                    <div class="text">学校でのトラブル報告あり。担任と連携が必要。</div>
+                    <div class="actor">記入: 鈴木</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header"><div class="card-title">添付ファイル <span class="req-id">D-11</span></div></div>
+              <div class="card-body">
+                <div class="flex flex-col gap-2">
+                  <a href="#" style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--surface-2);border-radius:6px;font-size:12px;color:var(--text);text-decoration:none;">
+                    📷 感情カード活動.jpg <span class="text-xs text-muted-2" style="margin-left:auto;">5/19</span>
+                  </a>
+                  <a href="#" style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--surface-2);border-radius:6px;font-size:12px;color:var(--text);text-decoration:none;">
+                    📄 学校連絡帳_5月.pdf <span class="text-xs text-muted-2" style="margin-left:auto;">5/15</span>
+                  </a>
+                  <a href="#" style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--surface-2);border-radius:6px;font-size:12px;color:var(--text);text-decoration:none;">
+                    📄 受給者証コピー.pdf <span class="text-xs text-muted-2" style="margin-left:auto;">2025/9</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 日々の支援記録タブ ─── -->
+      <div class="tab-pane" id="pane-d">
+        <div class="flex justify-between items-center" style="margin-bottom:16px;">
+          <div class="flex gap-2">
+            <select class="form-select" style="width:140px;"><option>期間: 今月</option><option>過去3ヶ月</option></select>
+            <input class="form-input" placeholder="🔍 キーワード検索" style="width:240px;">
+            <select class="form-select" style="width:140px;"><option>カテゴリ: 全て</option><option>言語</option><option>感情</option></select>
+          </div>
+          <div class="flex gap-2">
+            <button class="btn btn-secondary btn-sm">📥 出力 <span class="req-tag">RP-03</span></button>
+            <button class="btn btn-primary"><span>📝</span> 新規記録</button>
+          </div>
+        </div>
+
+        <div class="card no-pad">
+          <table class="table">
+            <thead>
+              <tr><th style="width:110px;">日付</th><th style="width:120px;">担当</th><th>支援内容・様子・気づき</th><th style="width:140px;">関連目標</th><th style="width:80px;">タグ</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>2026-05-19</strong><br><span class="text-xs text-muted">月曜</span></td>
+                <td>石川 健太</td>
+                <td>
+                  <strong>感情カード活動（10:30〜11:00）</strong><br>
+                  本日初めて「悲しい」カードを自発的に選び、家でお父さんに怒られたと言葉で説明できた。これまで言語化が難しかった場面で大きな進歩。<br>
+                  <span class="text-xs text-muted" style="margin-top:4px;display:inline-block;">📷 写真1枚 / 申し送り: 家庭でも実施依頼</span>
+                </td>
+                <td><span class="badge" style="background:#e0e7ff;color:#3730a3;border:none;font-size:10px;">言語・コミュ</span></td>
+                <td><span class="badge badge-success">進歩</span></td>
+              </tr>
+              <tr>
+                <td><strong>2026-05-17</strong><br><span class="text-xs text-muted">土曜</span></td>
+                <td>高橋 あゆみ</td>
+                <td>
+                  <strong>運動会練習（13:00〜14:30）</strong><br>
+                  音楽が大きくなる前に「ブース行く」と自発的に申し出。前回までは支援員からの声かけが必要だったが、今回は自分で判断できた。
+                </td>
+                <td><span class="badge" style="background:#fef3c7;color:#92400e;border:none;font-size:10px;">運動・感覚</span></td>
+                <td><span class="badge badge-success">進歩</span></td>
+              </tr>
+              <tr>
+                <td><strong>2026-05-15</strong><br><span class="text-xs text-muted">木曜</span></td>
+                <td>鈴木 美穂</td>
+                <td>
+                  <strong>学校との連携（保護者面談）</strong><br>
+                  担任から「集団活動での衝動性が再び目立つ」との報告。家庭でも変化なしとのこと。次週から再度個別支援を強化する。
+                </td>
+                <td><span class="badge badge-teal" style="font-size:10px;">認知・行動</span></td>
+                <td><span class="badge badge-warning">課題</span></td>
+              </tr>
+              <tr>
+                <td><strong>2026-05-13</strong><br><span class="text-xs text-muted">火曜</span></td>
+                <td>石川 健太</td>
+                <td>
+                  <strong>順番待ち練習（15:00〜15:30）</strong><br>
+                  3人グループでのカードゲーム。1回は自分から順番を譲る場面あり。2回目以降は衝動的に手が出てしまった。
+                </td>
+                <td><span class="badge badge-teal" style="font-size:10px;">認知・行動</span></td>
+                <td><span class="badge">記録</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note-callout" style="margin-top:16px;">
+          <strong>同一画面集約（UI-03 ◎必須）の価値:</strong>
+          ここで日々の支援記録を見ながら、上タブのアセスメント・個別支援計画と画面切替なしで照合できます。
+          記録の根拠と計画目標の達成度を、児発管がモニタリング時に同時参照可能（P-11 / D-02 / P-07）。
+        </div>
+      </div>
+
+      <!-- ─── モニタリングタブ ─── -->
+      <div class="tab-pane" id="pane-m">
+        <div class="future-ribbon" style="margin-bottom:18px;">
+          <div class="ribbon-icon">⏱</div>
+          <div class="ribbon-body">
+            <strong>モニタリング期限が近づいています</strong>
+            <span>次回モニタリング予定: 2026年9月15日（残り 118日） / 法定6ヶ月見直しと同期</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">モニタリング履歴 <span class="req-id">P-11</span></div>
+          </div>
+          <div class="card-body">
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="date">2026-03-15 — 第2回モニタリング</div>
+                <div class="text">児発管 鈴木 実施。日々記録（D-01〜）と計画目標（P-02）の照合により達成度を評価。「認知・行動」+1pt 改善、「言語・コミュニケーション」やや低下を確認。</div>
+                <div class="actor">次期計画 v3 への反映: 言語・コミュ領域を重点強化</div>
+              </div>
+              <div class="timeline-item">
+                <div class="date">2025-09-15 — 初回モニタリング（兼 入所時アセスメント）</div>
+                <div class="text">児発管 鈴木 実施。アセスメント結果に基づき計画 v1 を策定。</div>
+              </div>
+            </div>
+            <div class="note-callout">
+              <strong>モニタリングと日々記録の関係（弊社理解）:</strong>
+              モニタリング（P-11）は <strong>6ヶ月ごとの計画見直し時の児発管評価</strong> であり、日々の支援記録（D-01〜）とは別概念として実装しています。
+              モニタリング画面では、対象期間の日々記録すべてが目標別に自動集計され、減算リスクを可視化します。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 帳票出力タブ ─── -->
+      <div class="tab-pane" id="pane-r">
+        <div class="card">
+          <div class="card-header"><div class="card-title">帳票出力 <span class="req-id">RP-01〜RP-06 / P-09</span></div></div>
+          <div class="card-body">
+            <p class="text-muted text-sm" style="margin-bottom:18px;">この児童に関する帳票を3バリエーション（行政提出用／事業所記録用／保護者説明用）で出力できます。</p>
+            <div class="three-col">
+              <div class="card" style="box-shadow:none;">
+                <div class="card-body">
+                  <h4 style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;">📋 アセスメントシート</h4>
+                  <p class="text-xs text-muted" style="margin-bottom:14px;">最新版 2025-09-15 実施分</p>
+                  <div class="flex flex-col gap-2">
+                    <button class="btn btn-secondary btn-sm" style="justify-content:flex-start;">📄 PDF（行政提出用）</button>
+                    <button class="btn btn-secondary btn-sm" style="justify-content:flex-start;">📊 Excel</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="box-shadow:none;">
+                <div class="card-body">
+                  <h4 style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;">📝 個別支援計画書</h4>
+                  <p class="text-xs text-muted" style="margin-bottom:14px;">v2（2025-09-20〜2026-03-20）</p>
+                  <div class="flex flex-col gap-2">
+                    <button class="btn btn-secondary btn-sm" style="justify-content:flex-start;">📄 (a) 行政提出用</button>
+                    <button class="btn btn-secondary btn-sm" style="justify-content:flex-start;">📄 (b) 事業所記録用</button>
+                    <button class="btn btn-primary btn-sm" style="justify-content:flex-start;">📄 (c) 保護者説明用</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="box-shadow:none;">
+                <div class="card-body">
+                  <h4 style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;">📓 日々の支援記録一覧</h4>
+                  <p class="text-xs text-muted" style="margin-bottom:14px;">期間指定で出力（最大12ヶ月）</p>
+                  <div class="flex flex-col gap-2">
+                    <select class="form-select" style="font-size:12px;"><option>期間: 過去1ヶ月</option><option>過去3ヶ月</option><option>過去6ヶ月</option></select>
+                    <button class="btn btn-secondary btn-sm" style="justify-content:flex-start;">📊 Excel / CSV</button>
+                    <button class="btn btn-secondary btn-sm" style="justify-content:flex-start;">📄 PDF</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note-callout" style="margin-top:24px;">
+      <strong>UI-03 ◎必須「同一児童の情報集約」の実装方針:</strong>
+      アセスメント・個別支援計画・日々の支援記録・モニタリング・帳票出力をすべて
+      <strong>1つの児童画面のタブ切替で集約</strong>。画面遷移なしで業務間を行き来できるため、
+      児発管のモニタリング業務（P-11）における目標達成度評価が大幅に効率化されます。
+      タブの並び順は「業務フロー順」（アセス → 計画 → 記録 → モニタリング → 帳票）を採用。
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

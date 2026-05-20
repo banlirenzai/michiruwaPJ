@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>アセスメント入力 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── サイドバー ─── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">対象児童</div>
+    <div class="value">田中 結菜（DH 8歳）</div>
+    <div class="value">アセス v3 実施中</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="02_child_detail.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item active"><span class="icon">📋</span>アセスメント</a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="#" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="#" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="#" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="#" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">鈴</div>
+    <div class="user-info">
+      <div class="name">鈴木 美穂</div>
+      <div class="role">児発管 / みちるわ渋谷</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── メインコンテンツ ─── -->
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">アセスメント実施 — 第3回</div>
+      <div class="topbar-breadcrumb">
+        <a href="02_child_detail.html">田中 結菜さん</a> <span class="sep">›</span> アセスメント v3 (再アセスメント)
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="badge">最終保存: 30秒前 (自動保存)</span>
+      <button class="btn btn-secondary">一時保存</button>
+      <button class="btn btn-primary">完了 → 計画書下書きへ →</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ─── アセスメント基本情報 ─── -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-body">
+        <div class="form-group-row" style="grid-template-columns:repeat(4,1fr);">
+          <div>
+            <div class="form-label">実施日</div>
+            <input class="form-input" type="date" value="2026-09-15">
+          </div>
+          <div>
+            <div class="form-label">実施者</div>
+            <input class="form-input" value="鈴木 美穂（児発管）" readonly style="background:var(--surface-2);">
+          </div>
+          <div>
+            <div class="form-label">同席者 <span class="text-xs text-muted">⚠ 質問1</span></div>
+            <select class="form-select">
+              <option>保護者のみ</option>
+              <option>保護者＋児童本人</option>
+              <option>保護者＋学校関係者</option>
+              <option>保護者＋医療機関</option>
+            </select>
+          </div>
+          <div>
+            <div class="form-label">実施場所</div>
+            <select class="form-select">
+              <option>事業所内（みちるわ渋谷）</option>
+              <option>訪問（自宅）</option>
+              <option>オンライン</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 音声入力パネル（将来要件） ─── -->
+    <div class="future-ribbon" style="margin-bottom:8px;">
+      <div class="ribbon-icon">🎤</div>
+      <div class="ribbon-body">
+        <strong>D-12 音声入力 — 将来要件（2027年以降提供予定）</strong>
+        <span>スマホブラウザを開き話しかけると、AI（GPT-4 Transcribe / Whisper想定）がリアルタイムで文字起こし＋一定フォーマットへ整形して各項目に自動入力します。本UIはUXイメージのデモです。</span>
+      </div>
+    </div>
+
+    <div class="voice-panel" style="margin-bottom:24px;">
+      <div class="voice-panel-header">
+        <div class="title">🎤 音声入力モード <span class="badge badge-future">将来機能 2027年〜</span></div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-muted">面接の会話を録音 → 自動で項目に振り分け</span>
+          <button class="btn btn-secondary btn-sm" disabled style="opacity:0.6;cursor:not-allowed;">⚙️ 設定</button>
+        </div>
+      </div>
+      <div class="voice-mic">🎤</div>
+      <div class="voice-status">
+        <strong>音声入力スタンバイ中</strong><br>
+        マイクボタンを押して、児童・保護者との会話を録音してください。
+      </div>
+      <div class="voice-transcript">
+        ▸ サンプル: 「結菜ちゃんは最近、感情カードを使って自分の気持ちを伝えられるようになりました...」<br>
+        → AI が「言語・コミュニケーション領域」「本人の困りごと」欄に自動振り分け
+      </div>
+    </div>
+
+    <!-- ─── 5領域別 アセスメント項目（タブ式） ─── -->
+    <input type="radio" id="dom-1" name="dom" class="tab-input" checked>
+    <input type="radio" id="dom-2" name="dom" class="tab-input">
+    <input type="radio" id="dom-3" name="dom" class="tab-input">
+    <input type="radio" id="dom-4" name="dom" class="tab-input">
+    <input type="radio" id="dom-5" name="dom" class="tab-input">
+    <input type="radio" id="dom-6" name="dom" class="tab-input">
+
+    <div class="tabs" style="margin-bottom:0;">
+      <label for="dom-1" class="tab-label"><span class="dot dot-1" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>健康・生活</label>
+      <label for="dom-2" class="tab-label"><span class="dot dot-2" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>運動・感覚</label>
+      <label for="dom-3" class="tab-label"><span class="dot dot-3" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>認知・行動</label>
+      <label for="dom-4" class="tab-label"><span class="dot dot-4" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>言語・コミュ</label>
+      <label for="dom-5" class="tab-label"><span class="dot dot-5" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>人間関係</label>
+      <label for="dom-6" class="tab-label">📌 困りごと・希望・留意点</label>
+    </div>
+
+    <style>
+      #dom-1:checked ~ .domain-content #dom-pane-1,
+      #dom-2:checked ~ .domain-content #dom-pane-2,
+      #dom-3:checked ~ .domain-content #dom-pane-3,
+      #dom-4:checked ~ .domain-content #dom-pane-4,
+      #dom-5:checked ~ .domain-content #dom-pane-5,
+      #dom-6:checked ~ .domain-content #dom-pane-6 { display: block; }
+    </style>
+
+    <div class="domain-content">
+
+      <!-- 領域1: 健康・生活 -->
+      <div class="tab-pane" id="dom-pane-1">
+        <div class="card">
+          <div class="card-body">
+            <div class="flex items-center justify-between" style="margin-bottom:20px;">
+              <div>
+                <h3 style="font-size:16px;font-weight:700;color:var(--navy);">健康・生活</h3>
+                <p class="text-sm text-muted mt-1">食事・睡眠・基本的生活習慣・健康管理</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-muted">前回（2026-03）スコア: 4/5</span>
+                <span class="badge badge-success">▲ 改善中</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">食事の自立度 <span class="req-tag">A-10 構造化</span></label>
+              <div class="choice-group">
+                <span class="choice">1: 全介助</span>
+                <span class="choice">2: 部分介助</span>
+                <span class="choice">3: 声かけで自立</span>
+                <span class="choice active">4: ほぼ自立</span>
+                <span class="choice">5: 完全自立</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">睡眠リズム</label>
+              <div class="choice-group">
+                <span class="choice">毎日変動が大きい</span>
+                <span class="choice active">概ね安定（21時就寝・7時起床）</span>
+                <span class="choice">完全に安定</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">身辺自立（着替え・歯磨き等）</label>
+              <div class="choice-group">
+                <span class="choice">1: 要全介助</span>
+                <span class="choice">2: 要支援多</span>
+                <span class="choice active">3: 一部支援</span>
+                <span class="choice">4: 概ね自立</span>
+                <span class="choice">5: 完全自立</span>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">自由記述 <span class="req-tag">A-05</span></label>
+              <textarea class="form-textarea">朝の身支度に時間がかかるが、視覚スケジュール導入後は週3回程度自分でできるようになった。歯磨きは声かけ必要。睡眠はおおむね安定しているが、運動会等のイベント前は寝つきが悪い傾向。</textarea>
+            </div>
+
+            <div class="flex justify-between items-center" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
+              <span class="text-xs text-muted">領域 1/5 完了</span>
+              <label for="dom-2" class="btn btn-primary btn-sm">次の領域へ →</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 領域2: 運動・感覚 -->
+      <div class="tab-pane" id="dom-pane-2">
+        <div class="card">
+          <div class="card-body">
+            <h3 style="font-size:16px;font-weight:700;color:var(--navy);">運動・感覚</h3>
+            <p class="text-sm text-muted mt-1" style="margin-bottom:20px;">粗大運動・微細運動・感覚統合</p>
+            <div class="form-group">
+              <label class="form-label">粗大運動の発達</label>
+              <div class="choice-group">
+                <span class="choice">1: 大幅遅延</span>
+                <span class="choice">2: やや遅延</span>
+                <span class="choice active">3: 年齢相応</span>
+                <span class="choice">4: 良好</span>
+                <span class="choice">5: 優れている</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">感覚過敏の有無（複数選択可）</label>
+              <div class="choice-group">
+                <span class="choice active warm">音への過敏</span>
+                <span class="choice">光への過敏</span>
+                <span class="choice">触覚過敏</span>
+                <span class="choice">味覚過敏</span>
+                <span class="choice">嗅覚過敏</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">自由記述</label>
+              <textarea class="form-textarea">大きな音（運動会の音楽、雷、掃除機）への過敏性が顕著。個別ブース利用や耳栓で対処可能。本期から自発的に対処を求められるようになった。</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 領域3, 4, 5は簡略表示（実装イメージとして） -->
+      <div class="tab-pane" id="dom-pane-3">
+        <div class="card"><div class="card-body">
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);">認知・行動</h3>
+          <p class="text-sm text-muted mt-1">注意・記憶・予測・行動コントロール</p>
+          <p class="mt-4 text-sm text-muted">領域 1〜2 と同様の構造化入力フォーム＋自由記述欄を表示します。</p>
+        </div></div>
+      </div>
+      <div class="tab-pane" id="dom-pane-4">
+        <div class="card"><div class="card-body">
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);">言語・コミュニケーション</h3>
+          <p class="text-sm text-muted mt-1">言葉の理解と表出・代替手段含む</p>
+          <p class="mt-4 text-sm text-muted">領域 1〜2 と同様の構造化入力フォーム＋自由記述欄を表示します。</p>
+        </div></div>
+      </div>
+      <div class="tab-pane" id="dom-pane-5">
+        <div class="card"><div class="card-body">
+          <h3 style="font-size:16px;font-weight:700;color:var(--navy);">人間関係・社会性</h3>
+          <p class="text-sm text-muted mt-1">対人関係・集団参加・社会ルール</p>
+          <p class="mt-4 text-sm text-muted">領域 1〜2 と同様の構造化入力フォーム＋自由記述欄を表示します。</p>
+        </div></div>
+      </div>
+
+      <!-- 困りごと・希望・留意点 -->
+      <div class="tab-pane" id="dom-pane-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:6px;">困りごと・希望・留意点 <span class="req-tag">A-03</span></h3>
+            <p class="text-sm text-muted" style="margin-bottom:20px;">本人／保護者／支援者の視点を分けて記録します（音声入力時は AI が自動振り分け）。</p>
+
+            <div class="form-group">
+              <label class="form-label">👧 本人の困りごと・希望</label>
+              <textarea class="form-textarea">集団活動で順番を待てない時があり、お友達とケンカになってしまうのが嫌。お友達と仲良く遊びたい。学校でも怒られないようになりたい。</textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">👪 保護者の希望</label>
+              <textarea class="form-textarea">前回からの大きな変化として、感情カードでの表現が出始めた点が嬉しい。来年度の通常学級復帰を目標に、感情コントロールと言語表現の練習を継続してほしい。家庭でも実践できる方法を教えてほしい。</textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">🧑‍⚕️ 支援上の留意点（支援者視点）</label>
+              <textarea class="form-textarea">音への過敏性は継続。大きな音のする活動では事前予告と個別ブース利用を推奨。療育手帳 B2、ADHD 傾向の診断あり。来年度の通常学級復帰に向けて、学校との連携強化が必要。</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── 前回からの差分 ─── -->
+    <div class="card" style="margin-top:24px;background:linear-gradient(135deg,#fff 0%,#f0fdf4 100%);border-color:#a7f3d0;">
+      <div class="card-header" style="background:transparent;border-bottom-color:#a7f3d0;">
+        <div class="card-title" style="color:#065f46;">📊 前回アセスメントとの差分 <span class="req-id">A-06 / A-07</span></div>
+        <span class="badge badge-success">差分のみ更新可</span>
+      </div>
+      <div class="card-body">
+        <p class="text-sm" style="color:#047857;margin-bottom:14px;">前回（2026-03-15）の入力値が初期表示されています。変更箇所のみ上書きしてください。変更履歴は監査ログ（AU-04）に記録されます。</p>
+        <div class="five-col">
+          <div class="domain-card" style="background:#fff;">
+            <div class="domain-name"><span class="dot dot-1"></span>健康・生活</div>
+            <div class="domain-score">4<span class="denom">→ 4</span></div>
+            <div class="domain-trend" style="color:var(--text-3);">変化なし</div>
+          </div>
+          <div class="domain-card" style="background:#fff;">
+            <div class="domain-name"><span class="dot dot-2"></span>運動・感覚</div>
+            <div class="domain-score">3<span class="denom">→ 3</span></div>
+            <div class="domain-trend" style="color:var(--text-3);">変化なし</div>
+          </div>
+          <div class="domain-card" style="background:#fff;border-color:#a7f3d0;">
+            <div class="domain-name"><span class="dot dot-3"></span>認知・行動</div>
+            <div class="domain-score" style="color:var(--success);">3<span class="denom">→ 4</span></div>
+            <div class="domain-trend" style="color:var(--success);">▲ +1pt</div>
+          </div>
+          <div class="domain-card" style="background:#fff;border-color:#a7f3d0;">
+            <div class="domain-name"><span class="dot dot-4"></span>言語・コミュ</div>
+            <div class="domain-score" style="color:var(--success);">2<span class="denom">→ 3</span></div>
+            <div class="domain-trend" style="color:var(--success);">▲ +1pt</div>
+          </div>
+          <div class="domain-card" style="background:#fff;">
+            <div class="domain-name"><span class="dot dot-5"></span>人間関係</div>
+            <div class="domain-score">3<span class="denom">→ 3</span></div>
+            <div class="domain-trend" style="color:var(--text-3);">変化なし</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 次のステップ ─── -->
+    <div class="card" style="margin-top:20px;background:linear-gradient(135deg,#fff 0%,#ecfeff 100%);border-color:var(--teal-light);">
+      <div class="card-body">
+        <h4 style="font-size:14px;font-weight:700;color:#0f766e;margin-bottom:6px;">次のステップ</h4>
+        <p class="text-sm" style="color:#155e75;margin-bottom:14px;">
+          このアセスメント結果は <strong>個別支援計画（v3）</strong> の作成に自動連動します（A-04 計画への引用・転記）。
+          完了ボタンを押すと、AI が計画書の下書きを生成し、編集画面が開きます。
+        </p>
+        <div class="flex gap-2">
+          <button class="btn btn-secondary">📄 PDF出力 (現時点)</button>
+          <button class="btn btn-secondary">💾 一時保存</button>
+          <a href="03_support_plan.html" class="btn btn-primary" style="margin-left:auto;">✓ 完了 → 個別支援計画 v3 を作成 →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-callout" style="margin-top:24px;">
+      <strong>本画面のUX設計ポイント:</strong><br>
+      ・<strong>5領域＋困りごとを横並びタブ</strong>で配置し、面接の流れに沿った入力動線（A-02 / A-03）<br>
+      ・<strong>構造化入力（スコア5段階）＋自由記述の併用</strong>で、量的データ（FT-09 集計用）と質的データ（記録用）を両立（A-10）<br>
+      ・<strong>前回からの差分のみ更新</strong>することで再アセスメント時の入力負担を最小化（A-07）<br>
+      ・<strong>音声入力（D-12）は将来要件</strong>として段階提供。初期リリースは構造化フォーム入力が標準<br>
+      ・完了後は <strong>P-01「アセスメント参照作成」</strong>で計画書 v3 の AI 下書き生成へ自動連動
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

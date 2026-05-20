@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>記録ソフト UXモック | 株式会社バース提案</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="mock-index">
+  <h1>記録ソフト UXモック</h1>
+  <p class="sub">
+    児童発達支援・放課後等デイサービス向け 記録ソフト ご提案書（2026-05-20 ドラフト）の UX 可視化。
+    主要4画面を HTML/CSS 静的モックで実装しています。RFI 要件IDと連動。
+  </p>
+
+  <div class="mock-grid">
+    <a href="01_dashboard.html" class="mock-card">
+      <div class="num">SCREEN 01</div>
+      <h2>管理者ダッシュボード</h2>
+      <p>記録達成率／期限アラート5種／5領域バランス／事業所比較。FC本部・管理者の朝1で開く画面として設計。</p>
+      <div class="reqs">
+        <span class="req-tag">D-08</span>
+        <span class="req-tag">P-10</span>
+        <span class="req-tag">P-11</span>
+        <span class="req-tag">D-07</span>
+        <span class="req-tag">FT-10</span>
+      </div>
+    </a>
+
+    <a href="02_child_detail.html" class="mock-card">
+      <div class="num">SCREEN 02</div>
+      <h2>児童詳細 — 同一画面集約</h2>
+      <p>アセスメント／個別支援計画／日々の支援記録／モニタリング／帳票を1つの児童画面のタブで集約。UI-03 ◎必須。</p>
+      <div class="reqs">
+        <span class="req-tag">UI-03</span>
+        <span class="req-tag">A-01</span>
+        <span class="req-tag">P-02</span>
+        <span class="req-tag">D-01</span>
+        <span class="req-tag">P-11</span>
+      </div>
+    </a>
+
+    <a href="03_support_plan.html" class="mock-card">
+      <div class="num">SCREEN 03</div>
+      <h2>個別支援計画作成 — AI下書き起点</h2>
+      <p>アセスメント根拠→AI下書き生成→児発管が加筆修正→承認フロー。5領域の網羅性を可視化。</p>
+      <div class="reqs">
+        <span class="req-tag">P-01</span>
+        <span class="req-tag">P-02</span>
+        <span class="req-tag">P-05</span>
+        <span class="req-tag">P-08</span>
+        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">P-12 将来</span>
+      </div>
+    </a>
+
+    <a href="04_assessment.html" class="mock-card">
+      <div class="num">SCREEN 04</div>
+      <h2>アセスメント入力</h2>
+      <p>児発管が5領域別に構造化入力＋自由記述。音声入力は将来要件（2027年〜）バッジ付きで可視化。</p>
+      <div class="reqs">
+        <span class="req-tag">A-01</span>
+        <span class="req-tag">A-02</span>
+        <span class="req-tag">A-03</span>
+        <span class="req-tag">A-10</span>
+        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">D-12 将来</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="note-callout">
+    <strong>本モックの位置付け</strong><br>
+    本モックは提案書の UX 部分を可視化するための<strong>静的 HTML/CSS</strong>です。
+    インタラクションは表現していません（タブ切替のみ Pure CSS で動作）。
+    色彩設計・情報配置・要件ID連動を確認するためのものとしてご覧ください。
+  </div>
+</div>
+</body>
+</html>
