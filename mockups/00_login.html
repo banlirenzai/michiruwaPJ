@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="style.css">
 <style>
   body {
-    background:var(--memo);
+    background: var(--memo);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -18,43 +18,47 @@
     max-width: 980px;
     display: grid;
     grid-template-columns: 1.1fr 1fr;
-    background: #fff;
+    background: var(--surface);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   }
   .login-brand {
     padding: 48px 40px;
-    background:var(--memo);
-    color: #fff;
+    background: var(--surface-2);
+    color: var(--text);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 580px;
+    border-right: 1px solid var(--border);
   }
   .login-brand .product {
     font-size: 26px;
     font-weight: 800;
     letter-spacing: 0.5px;
     margin-bottom: 6px;
+    color: var(--text);
   }
   .login-brand .product-sub {
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 1px;
+    font-size: 11px;
+    color: var(--text-2);
+    letter-spacing: 1.5px;
     margin-bottom: 32px;
+    font-weight: 600;
   }
   .login-brand .pitch {
     font-size: 22px;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.5;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 14px;
   }
   .login-brand .pitch-sub {
     font-size: 13px;
     line-height: 1.8;
-    color: rgba(255,255,255,0.75);
+    color: var(--text-2);
   }
   .feature-list {
     margin-top: 28px;
@@ -67,14 +71,14 @@
     align-items: flex-start;
     gap: 10px;
     font-size: 12px;
-    color: rgba(255,255,255,0.85);
+    color: var(--text-2);
   }
   .feature-item .icon {
     width: 28px;
     height: 28px;
     border-radius: 8px;
-    background: rgba(20,184,166,0.2);
-    color: var(--teal-light);
+    background: var(--accent-soft);
+    color: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,15 +87,15 @@
   }
   .feature-item .title {
     font-weight: 700;
-    color: #fff;
+    color: var(--text);
     margin-bottom: 1px;
   }
   .login-brand .footer-note {
     font-size: 10px;
-    color: rgba(255,255,255,0.4);
+    color: var(--text-3);
     margin-top: 32px;
     padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--border);
   }
   .login-form {
     padding: 48px 40px;
@@ -127,23 +131,26 @@
     text-decoration: none;
     margin-bottom: 12px;
   }
-  .sso-button:hover { border-color: var(--navy); background: var(--surface-2); }
-  .sso-button .ms-icon {
-    width: 20px; height: 20px;
-    background:var(--memo);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: transparent;
-    position: relative;
+  .sso-button:hover { border-color: var(--accent); background: var(--surface-2); }
+  .sso-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: var(--memo);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
   }
-  .ms-icon::before, .ms-icon::after, .ms-icon i:nth-child(1), .ms-icon i:nth-child(2) {
-    content: ''; display: block; width: 9px; height: 9px;
+  .sso-hint {
+    font-size: 11px;
+    color: var(--text-2);
+    font-weight: 600;
   }
-  .ms-icon::before { background:var(--text-3); position: absolute; top: 0; left: 0; }
-  .ms-icon::after { background:var(--text-3); position: absolute; top: 11px; left: 0; }
-  .ms-icon i:nth-child(1) { background:var(--text-3); position: absolute; top: 0; left: 11px; }
-  .ms-icon i:nth-child(2) { background:var(--text-3); position: absolute; top: 11px; left: 11px; }
   .divider {
     display: flex;
     align-items: center;
@@ -240,16 +247,16 @@
 
     <!-- Microsoft Entra ID SSO -->
     <a href="01_dashboard.html" class="sso-button">
-      <div class="ms-icon"><i></i><i></i></div>
+      <div class="sso-icon">M</div>
       <span style="flex:1;">Microsoft Entra ID でサインイン</span>
-      <span class="text-xs text-muted">推奨</span>
+      <span class="sso-hint">推奨</span>
     </a>
 
     <!-- Google Workspace (オプション) -->
-    <a href="01_dashboard.html" class="sso-button" style="opacity:0.7;">
-      <div style="width:20px;height:20px;background:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"><path fill=\"%234285f4\" d=\"M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z\"/><path fill=\"%2334a853\" d=\"M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z\"/><path fill=\"%23fbbc05\" d=\"M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z\"/><path fill=\"%23ea4335\" d=\"M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z\"/></svg>') center/contain no-repeat;"></div>
+    <a href="01_dashboard.html" class="sso-button">
+      <div class="sso-icon">G</div>
       <span style="flex:1;">Google Workspace でサインイン</span>
-      <span class="text-xs text-muted">⚠ 質問7</span>
+      <span class="sso-hint">⚠ 質問7</span>
     </a>
 
     <div class="divider">または</div>

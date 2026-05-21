@@ -21,13 +21,13 @@
   --hover: #f9fafb;
 
   /* Borders */
-  --border: #e5e7eb;
-  --border-strong: #d1d5db;
+  --border: #d1d5db;
+  --border-strong: #9ca3af;
 
-  /* Text */
-  --text: #111827;
-  --text-2: #6b7280;
-  --text-3: #9ca3af;
+  /* Text — コントラスト重視で全体的に濃いめ */
+  --text: #0b1220;
+  --text-2: #374151;
+  --text-3: #6b7280;
 
   /* Accents — logo derived (2色のみ) */
   --accent: #1e88e5;

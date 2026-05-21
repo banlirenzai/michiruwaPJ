@@ -27,9 +27,9 @@
     position: relative;
   }
   .step-cell:last-child { border-right: none; }
-  .step-cell.done { background:var(--memo); }
-  .step-cell.current { background:var(--memo); border-bottom: 3px solid var(--warm); }
-  .step-cell.todo { opacity: 0.6; }
+  .step-cell.done { background: var(--success-soft); }
+  .step-cell.current { background: var(--accent-soft); border-bottom: 3px solid var(--accent); }
+  .step-cell.todo { background: var(--surface); opacity: 0.65; }
   .step-num {
     width: 32px; height: 32px;
     border-radius: 50%;
@@ -43,7 +43,7 @@
     flex-shrink: 0;
   }
   .step-cell.done .step-num { background: var(--success); }
-  .step-cell.current .step-num { background: var(--warm); box-shadow: 0 0 0 4px rgba(249,115,22,0.2); }
+  .step-cell.current .step-num { background: var(--accent); }
   .step-info .step-title { font-size: 12px; font-weight: 700; color: var(--navy); }
   .step-info .step-meta { font-size: 10px; color: var(--text-2); margin-top: 2px; }
 
@@ -68,7 +68,9 @@
     font-weight: 700;
     padding: 3px 10px;
     border-radius: 12px;
-    color: #fff;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--accent);
   }
   .voice-quote {
     background: rgba(255,255,255,0.7);
@@ -94,13 +96,14 @@
     justify-content: center;
     gap: 3px;
     height: 60px;
-    background:var(--memo);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 6px;
     padding: 12px;
   }
   .waveform .bar {
     width: 3px;
-    background:var(--memo);
+    background: var(--accent);
     border-radius: 2px;
     animation: wave 1.2s ease-in-out infinite;
   }
@@ -130,38 +133,38 @@
     align-items: center;
     gap: 12px;
     margin: 32px 0 14px;
-    padding: 12px 18px;
-    background:var(--memo) 0%, var(--text) 100%);
-    color: #fff;
+    padding: 14px 18px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
     border-radius: var(--radius);
   }
   .section-heading .num {
-    width: 36px; height: 36px;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    background: var(--warm);
+    background: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 800;
     color: #fff;
+    flex-shrink: 0;
   }
   .section-heading h2 {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 800;
-    color: #fff;
+    color: var(--text);
     margin: 0;
   }
   .section-heading .sub {
     font-size: 11px;
-    color: rgba(255,255,255,0.7);
+    color: var(--text-2);
     margin-top: 2px;
   }
   .section-heading .req-tag {
     margin-left: auto;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    border-color: rgba(255,255,255,0.3);
   }
 </style>
 </head>

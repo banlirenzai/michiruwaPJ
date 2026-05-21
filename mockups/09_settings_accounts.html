@@ -24,8 +24,9 @@
   .settings-nav a.active { color: var(--teal); border-bottom-color: var(--teal); }
 
   .role-hierarchy {
-    background:var(--memo);
-    color: #fff;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 24px;
     margin-bottom: 24px;
@@ -37,8 +38,8 @@
     margin-top: 14px;
   }
   .role-node {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
     border-radius: 8px;
     padding: 14px;
     position: relative;
@@ -48,7 +49,7 @@
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: var(--teal);
+    background: var(--accent);
     color: #fff;
     font-size: 11px;
     font-weight: 700;
@@ -56,15 +57,16 @@
     text-align: center;
     margin-bottom: 8px;
   }
-  .role-node h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .role-node .scope { font-size: 10px; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
-  .role-node .count { font-size: 18px; font-weight: 800; color: var(--teal-light); }
-  .role-node .count .unit { font-size: 11px; color: rgba(255,255,255,0.6); }
+  .role-node h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .role-node .scope { font-size: 10px; color: var(--text-2); margin-bottom: 6px; }
+  .role-node .count { font-size: 18px; font-weight: 800; color: var(--accent); }
+  .role-node .count .unit { font-size: 11px; color: var(--text-2); }
   .role-node.sv {
-    border-color: rgba(192,132,252,0.5);
-    background: rgba(192,132,252,0.12);
+    border-color: var(--border-strong);
+    background: var(--memo);
+    border-style: dashed;
   }
-  .role-node.sv .role-num { background:var(--memo); }
+  .role-node.sv .role-num { background: var(--text-2); }
 </style>
 </head>
 <body>
