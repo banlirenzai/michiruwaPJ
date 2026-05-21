@@ -93,21 +93,18 @@
       </div>
     </div>
 
-    <!-- ─── 音声入力パネル（将来要件） ─── -->
-    <div class="future-ribbon" style="margin-bottom:8px;">
-      <div class="ribbon-icon">🎤</div>
-      <div class="ribbon-body">
-        <strong>D-12 音声入力 — 将来要件（2027年以降提供予定）</strong>
-        <span>スマホブラウザを開き話しかけると、AI（GPT-4 Transcribe / Whisper想定）がリアルタイムで文字起こし＋一定フォーマットへ整形して各項目に自動入力します。本UIはUXイメージのデモです。</span>
-      </div>
+    <!-- ─── 音声入力パネル ─── -->
+    <div class="note-callout" style="margin-bottom:8px;background:var(--accent-soft);border-left:3px solid var(--accent);color:var(--text);">
+      <strong>🎤 音声入力 — 2026年9月リリース時 ◎標準対応</strong>（A-02 / A-03 補足記載どおり）<br>
+      <span>アセスメントの構造化フォーム内で、面接の会話を録音 → 文字起こし。スマホブラウザでも対応。<strong>AI による自動振り分け（D-09）／全フォーム横断統合（D-12 完成形）は将来要件 2027年〜</strong>として段階提供。</span>
     </div>
 
     <div class="voice-panel" style="margin-bottom:24px;">
       <div class="voice-panel-header">
-        <div class="title">🎤 音声入力モード <span class="badge badge-future">将来機能 2027年〜</span></div>
+        <div class="title">🎤 音声入力モード <span class="badge">◎ 標準対応</span></div>
         <div class="flex items-center gap-2">
-          <span class="text-xs text-muted">面接の会話を録音 → 自動で項目に振り分け</span>
-          <button class="btn btn-secondary btn-sm" disabled style="opacity:0.6;cursor:not-allowed;">⚙️ 設定</button>
+          <span class="text-xs text-muted">面接の会話を録音 → 各項目に文字起こし</span>
+          <button class="btn btn-secondary btn-sm">⚙️ 設定</button>
         </div>
       </div>
       <div class="voice-mic">🎤</div>
@@ -117,7 +114,7 @@
       </div>
       <div class="voice-transcript">
         ▸ サンプル: 「結菜ちゃんは最近、感情カードを使って自分の気持ちを伝えられるようになりました...」<br>
-        → AI が「言語・コミュニケーション領域」「本人の困りごと」欄に自動振り分け
+        → 文字起こし結果を各項目に貼り付け（AI による自動振り分け = D-09 将来要件 2027年〜）
       </div>
     </div>
 
@@ -351,7 +348,7 @@
       ・<strong>5領域＋困りごとを横並びタブ</strong>で配置し、面接の流れに沿った入力動線（A-02 / A-03）<br>
       ・<strong>構造化入力（スコア5段階）＋自由記述の併用</strong>で、量的データ（FT-09 集計用）と質的データ（記録用）を両立（A-10）<br>
       ・<strong>前回からの差分のみ更新</strong>することで再アセスメント時の入力負担を最小化（A-07）<br>
-      ・<strong>音声入力（D-12）は将来要件</strong>として段階提供。初期リリースは構造化フォーム入力が標準<br>
+      ・<strong>音声入力は 2026年9月リリース時 ◎標準対応</strong>（A-02 / A-03 補足記載どおり、面接会話→文字起こしまで）。<strong>AI 自動振り分け（D-09）／全フォーム横断統合（D-12 完成形）</strong>は将来要件 2027年〜<br>
       ・完了後は <strong>P-01「アセスメント参照作成」</strong>で計画書 v3 の AI 下書き生成へ自動連動
     </div>
 
