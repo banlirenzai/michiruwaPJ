@@ -2,98 +2,751 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>記録ソフト UXモック | 株式会社バース提案</title>
+<title>記録ソフト プロダクト UXモック | 株式会社バース提案</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  body { background: var(--bg); padding: 0; }
+
+  /* HERO — 白ベース */
+  .index-hero {
+    background: var(--surface);
+    color: var(--text);
+    padding: 48px 40px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  .index-hero-inner { max-width: 1280px; margin: 0 auto; }
+  .index-hero .eyebrow {
+    font-size: 11px;
+    color: var(--text-2);
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .index-hero h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+  .index-hero .sub {
+    font-size: 15px;
+    color: var(--text-2);
+    margin-bottom: 24px;
+    max-width: 800px;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 18px;
+  }
+  .hero-meta strong { color: var(--text); }
+
+  .index-body { max-width: 1280px; margin: 32px auto 64px; padding: 0 24px; }
+
+  /* サマリ */
+  .summary-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .summary-cell {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 18px;
+    border: 1px solid var(--border);
+  }
+  .summary-cell .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.1;
+  }
+  .summary-cell .num .unit { font-size: 14px; color: var(--text-2); font-weight: 600; }
+  .summary-cell .label { font-size: 12px; color: var(--text-2); margin-top: 4px; }
+
+  /* セクション見出し */
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 40px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .section-title .sub { font-size: 13px; color: var(--text-2); }
+
+  /* サイトマップ */
+  .sitemap-tree {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .sitemap-group {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .sitemap-group:last-child { border-bottom: none; }
+  .sitemap-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .sitemap-screens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .sitemap-screen {
+    background: var(--surface);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.12s;
+  }
+  .sitemap-screen:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .sitemap-screen .num { font-size: 10px; color: var(--text-3); font-weight: 700; font-family: 'SF Mono', 'Menlo', monospace; }
+  .sitemap-screen:hover .num { color: rgba(255,255,255,0.7); }
+  .sitemap-screen.disabled { opacity: 0.5; cursor: not-allowed; }
+  .sitemap-screen.disabled:hover { background: var(--surface); color: var(--text); border-color: var(--border); }
+
+  /* 役割別 動線 — 全て同一フラットカード */
+  .role-flow {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .role-flow h3 {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .role-flow .role-meta {
+    font-size: 11px;
+    color: var(--text-2);
+    margin-bottom: 16px;
+  }
+  .role-flow .flow-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .role-flow .flow-step {
+    background: var(--surface-2);
+    padding: 7px 13px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    border: 1px solid var(--border);
+    text-decoration: none;
+  }
+  .role-flow .flow-step:hover { border-color: var(--accent); color: var(--accent); }
+  .role-flow .flow-arrow { color: var(--text-3); font-size: 14px; }
+
+  /* スクリーンカード — 全て同色サムネ */
+  .screen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .screen-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    display: flex;
+    flex-direction: column;
+  }
+  .screen-card:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+  .screen-thumb {
+    height: 84px;
+    background: var(--surface-2);
+    color: var(--text-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .screen-thumb .num-badge {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 10px;
+    background: var(--surface);
+    color: var(--text-2);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: 1px solid var(--border);
+    font-family: 'SF Mono', 'Menlo', monospace;
+  }
+  .screen-thumb .role-badge {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 10px;
+    background: var(--surface);
+    color: var(--text-2);
+    padding: 3px 8px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .screen-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+  .screen-card-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .screen-card-body p { font-size: 12px; color: var(--text-2); line-height: 1.6; margin-bottom: 10px; flex: 1; }
+  .screen-card-body .reqs { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  /* 業務フロー */
+  .business-flow {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .flow-stages {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    position: relative;
+  }
+  .flow-stage {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    position: relative;
+  }
+  .flow-stage.highlight { background: var(--surface-2); border-color: var(--border-strong); }
+  .flow-stage .stage-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--text-2);
+    color: #fff;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    font-size: 13px;
+  }
+  .flow-stage.highlight .stage-num { background: var(--accent); }
+  .flow-stage h4 { font-size: 13px; color: var(--text); margin-bottom: 4px; font-weight: 700; }
+  .flow-stage .stage-meta { font-size: 10px; color: var(--text-2); }
+  .flow-stage .stage-time {
+    margin-top: 8px;
+    padding: 4px 8px;
+    background: var(--memo);
+    border-radius: 4px;
+    font-size: 10px;
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* 凡例 */
+  .legend {
+    background: var(--memo);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .legend-item { font-size: 12px; color: var(--text-2); }
+  .legend-item .label { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .legend-item code {
+    background: var(--surface);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    border: 1px solid var(--border);
+  }
+  .color-chip { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; margin-right: 4px; }
+</style>
 </head>
 <body>
-<div class="mock-index">
-  <h1>記録ソフト UXモック</h1>
-  <p class="sub">
-    児童発達支援・放課後等デイサービス向け 記録ソフト ご提案書（2026-05-20 ドラフト）の UX 可視化。
-    主要5画面を HTML/CSS 静的モックで実装しています。RFI 要件IDと連動。
-  </p>
 
-  <div class="mock-grid">
-    <a href="01_dashboard.html" class="mock-card">
-      <div class="num">SCREEN 01</div>
-      <h2>管理者ダッシュボード</h2>
-      <p>記録達成率／期限アラート5種／5領域バランス／事業所比較。FC本部・管理者の朝1で開く画面として設計。</p>
-      <div class="reqs">
-        <span class="req-tag">D-08</span>
-        <span class="req-tag">P-10</span>
-        <span class="req-tag">P-11</span>
-        <span class="req-tag">D-07</span>
-        <span class="req-tag">FT-10</span>
-      </div>
-    </a>
+<!-- ─── HERO ─── -->
+<section class="index-hero">
+  <div class="index-hero-inner">
+    <div class="eyebrow">MICHIRUWA GROUP / FC本部</div>
+    <h1>記録ソフト UXモック — 製品サイトマップ</h1>
+    <p class="sub">
+      児童発達支援・放課後等デイサービス向け 記録ソフト の<strong>製品全体</strong>を可視化した UX モックアップ。
+      アセスメント・個別支援計画・日々の支援記録の3業務を中核に、認証・本部管理まで含めた<strong>全11画面</strong>を実装。
+      RFI v4 の要件ID（A-01〜FT-10）と完全連動。
+    </p>
+    <div class="hero-meta">
+      <span><strong>提案者:</strong> 株式会社バース</span>
+      <span><strong>提案日:</strong> 2026年5月20日</span>
+      <span><strong>クライアント:</strong> ミチルワグループ FC本部 情報システム部</span>
+      <span><strong>関連RFI:</strong> 記録ソフト_機能要件チェックリスト_v4</span>
+    </div>
+  </div>
+</section>
 
-    <a href="02_child_detail.html" class="mock-card">
-      <div class="num">SCREEN 02</div>
-      <h2>児童詳細 — 同一画面集約</h2>
-      <p>アセスメント／個別支援計画／日々の支援記録／モニタリング／帳票を1つの児童画面のタブで集約。UI-03 ◎必須。</p>
-      <div class="reqs">
-        <span class="req-tag">UI-03</span>
-        <span class="req-tag">A-01</span>
-        <span class="req-tag">P-02</span>
-        <span class="req-tag">D-01</span>
-        <span class="req-tag">P-11</span>
-      </div>
-    </a>
+<div class="index-body">
 
-    <a href="03_support_plan.html" class="mock-card">
-      <div class="num">SCREEN 03</div>
-      <h2>個別支援計画作成 — AI下書き起点</h2>
-      <p>アセスメント根拠→AI下書き生成→児発管が加筆修正→承認フロー。5領域の網羅性を可視化。</p>
-      <div class="reqs">
-        <span class="req-tag">P-01</span>
-        <span class="req-tag">P-02</span>
-        <span class="req-tag">P-05</span>
-        <span class="req-tag">P-08</span>
-        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">P-12 将来</span>
-      </div>
-    </a>
-
-    <a href="04_assessment.html" class="mock-card">
-      <div class="num">SCREEN 04</div>
-      <h2>アセスメント入力（再アセスメント版）</h2>
-      <p>2回目以降の差分更新フォーム。児発管が5領域別に構造化入力＋自由記述。前回からの差分のみ更新可。</p>
-      <div class="reqs">
-        <span class="req-tag">A-01</span>
-        <span class="req-tag">A-02</span>
-        <span class="req-tag">A-03</span>
-        <span class="req-tag">A-07</span>
-        <span class="req-tag">A-10</span>
-      </div>
-    </a>
-
-    <a href="05_new_intake.html" class="mock-card" style="grid-column:span 2;background:linear-gradient(135deg,#fff 0%,#f5f3ff 100%);border-color:#c084fc;">
-      <div class="num" style="color:#7c3aed;">SCREEN 05 — NEW</div>
-      <h2>新規児童 入所時アセスメント＋計画作成 — 音声×AI 一気通貫</h2>
-      <p>
-        新規児童1名分を、音声入力 → AI構造化 → AI計画下書き → 加筆修正 → 承認 まで <strong>1画面・1セッション</strong>で完結。
-        従来の児発管作業時間 5〜8時間を 1.5〜2.5時間に短縮する設計を可視化。話者自動識別・5領域自動振り分け・新規児童向けAI下書き生成の流れがわかります。
-      </p>
-      <div class="reqs">
-        <span class="req-tag">A-01</span>
-        <span class="req-tag">A-02</span>
-        <span class="req-tag">A-03</span>
-        <span class="req-tag">P-01</span>
-        <span class="req-tag">P-02</span>
-        <span class="req-tag">P-05</span>
-        <span class="req-tag">P-08</span>
-        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">D-12 将来</span>
-        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">D-09 将来</span>
-        <span class="req-tag" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">P-12 将来</span>
-      </div>
-    </a>
+  <!-- ─── 製品サマリ ─── -->
+  <div class="summary-strip">
+    <div class="summary-cell">
+      <div class="num">11<span class="unit">画面</span></div>
+      <div class="label">実装済みモック画面数（認証〜本部管理）</div>
+    </div>
+    <div class="summary-cell">
+      <div class="num">73<span class="unit">件</span></div>
+      <div class="label">RFI 要件ID（機能34 / 共通14 / 非機能15 / 将来10）</div>
+    </div>
+    <div class="summary-cell">
+      <div class="num">5<span class="unit">階層</span></div>
+      <div class="label">権限階層（本部 / FCオーナー / SV / 児発管 / 一般職員）</div>
+    </div>
+    <div class="summary-cell">
+      <div class="num">1/3<span class="unit"></span></div>
+      <div class="label">児発管の業務時間削減目標（5〜8h → 1.5〜2.5h）</div>
+    </div>
   </div>
 
-  <div class="note-callout">
-    <strong>本モックの位置付け</strong><br>
-    本モックは提案書の UX 部分を可視化するための<strong>静的 HTML/CSS</strong>です。
-    インタラクションは表現していません（タブ切替のみ Pure CSS で動作）。
-    色彩設計・情報配置・要件ID連動を確認するためのものとしてご覧ください。
+  <!-- ─── サイトマップ ─── -->
+  <div class="section-title">
+    <h2>サイトマップ</h2>
+    <span class="sub">機能カテゴリ別に整理した全画面の構成</span>
+  </div>
+
+  <div class="sitemap-tree">
+
+    <div class="sitemap-group">
+      <div class="sitemap-label">認証</div>
+      <div class="sitemap-screens">
+        <a href="00_login.html" class="sitemap-screen"><span class="num">00</span> ログイン</a>
+      </div>
+    </div>
+
+    <div class="sitemap-group">
+      <div class="sitemap-label">トップ / 横断</div>
+      <div class="sitemap-screens">
+        <a href="01_dashboard.html" class="sitemap-screen"><span class="num">01</span> ダッシュボード</a>
+        <a href="06_child_list.html" class="sitemap-screen"><span class="num">06</span> 児童一覧</a>
+      </div>
+    </div>
+
+    <div class="sitemap-group">
+      <div class="sitemap-label">児童業務</div>
+      <div class="sitemap-screens">
+        <a href="02_child_detail.html" class="sitemap-screen"><span class="num">02</span> 児童詳細（タブ集約）</a>
+        <a href="05_new_intake.html" class="sitemap-screen"><span class="num">05</span> 新規児童 入所時 音声×AI フロー</a>
+      </div>
+    </div>
+
+    <div class="sitemap-group">
+      <div class="sitemap-label">業務記録</div>
+      <div class="sitemap-screens">
+        <a href="04_assessment.html" class="sitemap-screen"><span class="num">04</span> アセスメント実施</a>
+        <a href="03_support_plan.html" class="sitemap-screen"><span class="num">03</span> 個別支援計画 作成・改訂</a>
+        <a href="07_daily_record.html" class="sitemap-screen"><span class="num">07</span> 日々の支援記録 入力</a>
+        <a href="#" class="sitemap-screen disabled"><span class="num">--</span> モニタリング ※02のタブ内</a>
+        <a href="#" class="sitemap-screen disabled"><span class="num">--</span> 帳票出力センター ※02のタブ内</a>
+      </div>
+    </div>
+
+    <div class="sitemap-group">
+      <div class="sitemap-label">本部管理</div>
+      <div class="sitemap-screens">
+        <a href="08_settings_offices.html" class="sitemap-screen"><span class="num">08</span> 事業所管理</a>
+        <a href="09_settings_accounts.html" class="sitemap-screen"><span class="num">09</span> アカウント管理</a>
+        <a href="10_settings_templates.html" class="sitemap-screen"><span class="num">10</span> テンプレート管理</a>
+        <a href="#" class="sitemap-screen disabled"><span class="num">--</span> 監査ログ ※未実装</a>
+        <a href="#" class="sitemap-screen disabled"><span class="num">--</span> 通知設定 ※未実装</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 役割別 業務動線 ─── -->
+  <div class="section-title">
+    <h2>役割別 業務動線</h2>
+    <span class="sub">5階層のユーザーがそれぞれ辿る画面遷移</span>
+  </div>
+
+  <div class="role-flow">
+    <h3>FC本部 管理者</h3>
+    <div class="role-meta">全事業所横断閲覧・本部設定編集権限。月次レポート確認とテンプレート承認が主業務。</div>
+    <div class="flow-line">
+      <a href="00_login.html" class="flow-step">00 ログイン</a>
+      <span class="flow-arrow">→</span>
+      <a href="01_dashboard.html" class="flow-step">01 ダッシュボード（全事業所）</a>
+      <span class="flow-arrow">→</span>
+      <a href="08_settings_offices.html" class="flow-step">08 事業所管理</a>
+      <span class="flow-arrow">→</span>
+      <a href="10_settings_templates.html" class="flow-step">10 テンプレート承認</a>
+      <span class="flow-arrow">→</span>
+      <a href="09_settings_accounts.html" class="flow-step">09 アカウント管理</a>
+    </div>
+  </div>
+
+  <div class="role-flow">
+    <h3>児発管（事業所責任者）</h3>
+    <div class="role-meta">自事業所のみ閲覧。計画作成権限保有。新規児童の入所〜計画作成〜モニタリングが主業務。</div>
+    <div class="flow-line">
+      <a href="00_login.html" class="flow-step">00 ログイン</a>
+      <span class="flow-arrow">→</span>
+      <a href="06_child_list.html" class="flow-step">06 児童一覧</a>
+      <span class="flow-arrow">→</span>
+      <a href="05_new_intake.html" class="flow-step">05 新規入所 音声×AI</a>
+      <span class="flow-arrow">→</span>
+      <a href="04_assessment.html" class="flow-step">04 アセス（更新時）</a>
+      <span class="flow-arrow">→</span>
+      <a href="03_support_plan.html" class="flow-step">03 計画改訂</a>
+      <span class="flow-arrow">→</span>
+      <a href="02_child_detail.html" class="flow-step">02 モニタリング（タブ）</a>
+    </div>
+  </div>
+
+  <div class="role-flow">
+    <h3>一般職員</h3>
+    <div class="role-meta">担当児童のみ閲覧。日々の支援後に記録入力が主業務。音声入力（将来）で帰宅時間中に完了。</div>
+    <div class="flow-line">
+      <a href="00_login.html" class="flow-step">00 ログイン</a>
+      <span class="flow-arrow">→</span>
+      <a href="07_daily_record.html" class="flow-step">07 日々の支援記録 入力</a>
+      <span class="flow-arrow">→</span>
+      <a href="02_child_detail.html" class="flow-step">02 児童詳細（参照のみ）</a>
+    </div>
+  </div>
+
+  <!-- ─── 中核業務フロー ─── -->
+  <div class="section-title">
+    <h2>中核業務フロー — 新規児童 入所時（音声×AI 一気通貫）</h2>
+    <span class="sub">児発管の作業時間 5〜8h → 1.5〜2.5h（約 1/3 短縮）</span>
+  </div>
+
+  <div class="business-flow">
+    <div class="flow-stages">
+      <div class="flow-stage">
+        <div class="stage-num">1</div>
+        <h4>基本情報登録</h4>
+        <div class="stage-meta">児童・保護者・受給者証情報</div>
+        <div class="stage-time">⏱ 5分</div>
+      </div>
+      <div class="flow-stage highlight">
+        <div class="stage-num">2</div>
+        <h4>音声アセスメント面接</h4>
+        <div class="stage-meta">話者自動識別・録音 → 文字起こし</div>
+        <div class="stage-time">⏱ 60〜90分</div>
+      </div>
+      <div class="flow-stage highlight">
+        <div class="stage-num">3</div>
+        <h4>AI 構造化</h4>
+        <div class="stage-meta">5領域別 自動振り分け</div>
+        <div class="stage-time">⏱ 15〜20分 ← 従来1〜2h</div>
+      </div>
+      <div class="flow-stage highlight">
+        <div class="stage-num">4</div>
+        <h4>AI 計画書 下書き</h4>
+        <div class="stage-meta">アセス根拠から自動生成</div>
+        <div class="stage-time">⏱ 30〜45分 ← 従来3〜5h</div>
+      </div>
+      <div class="flow-stage">
+        <div class="stage-num">5</div>
+        <h4>承認・保護者同意</h4>
+        <div class="stage-meta">児発管→管理者→本部→保護者</div>
+        <div class="stage-time">⏱ 各10分</div>
+      </div>
+    </div>
+    <p class="text-sm text-muted" style="margin-top:18px;text-align:center;">
+      ステージ ②③④ が <strong>D-12 音声入力 × D-09 AI整形 × P-12 AI計画下書き</strong>（いずれも将来要件 2027年〜）の効果領域です。
+      詳細は <a href="05_new_intake.html" style="color:var(--accent);font-weight:700;">SCREEN 05 新規児童 入所時フロー →</a>
+    </p>
+  </div>
+
+  <!-- ─── 全画面 一覧 ─── -->
+  <div class="section-title">
+    <h2>画面一覧（全11画面）</h2>
+    <span class="sub">サムネイル＋要件ID付き</span>
+  </div>
+
+  <div class="screen-grid">
+
+    <a href="00_login.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">00</span>
+        <span class="role-badge">全役割</span>
+        🔐
+      </div>
+      <div class="screen-card-body">
+        <h3>ログイン</h3>
+        <p>Microsoft Entra ID SSO ／ Google Workspace 連携 ／ メール・パスワード フォールバック。役割切替デモ機能あり。</p>
+        <div class="reqs">
+          <span class="req-tag">IF-01</span>
+          <span class="req-tag">AU-02</span>
+          <span class="req-tag">SE-01</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="01_dashboard.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">01</span>
+        <span class="role-badge">本部/管理者</span>
+        📊
+      </div>
+      <div class="screen-card-body">
+        <h3>管理者ダッシュボード</h3>
+        <p>記録達成率／期限アラート5種／5領域バランス／事業所別比較。FC本部の朝1で開く画面。</p>
+        <div class="reqs">
+          <span class="req-tag">D-08</span>
+          <span class="req-tag">P-10</span>
+          <span class="req-tag">P-11</span>
+          <span class="req-tag">FT-10</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="06_child_list.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">06</span>
+        <span class="role-badge">全役割</span>
+        👤
+      </div>
+      <div class="screen-card-body">
+        <h3>児童一覧</h3>
+        <p>検索・フィルタ・事業所スコープ切替。権限階層に応じて表示範囲が自動制限される。</p>
+        <div class="reqs">
+          <span class="req-tag">UI-06</span>
+          <span class="req-tag">UI-07</span>
+          <span class="req-tag">AU-01</span>
+          <span class="req-tag">SE-04</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="02_child_detail.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">02</span>
+        <span class="role-badge">児発管/職員</span>
+        👤
+      </div>
+      <div class="screen-card-body">
+        <h3>児童詳細 — 同一画面集約</h3>
+        <p>アセス／計画／記録／モニタリング／帳票を1つの児童画面のタブで集約。UI-03 ◎必須要件への対応。</p>
+        <div class="reqs">
+          <span class="req-tag">UI-03</span>
+          <span class="req-tag">A-06</span>
+          <span class="req-tag">P-06</span>
+          <span class="req-tag">D-05</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="05_new_intake.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">05</span>
+        <span class="role-badge">児発管</span>
+        ✨
+      </div>
+      <div class="screen-card-body">
+        <h3>新規児童 入所時フロー（音声×AI）</h3>
+        <p>1名分のアセス＋計画作成を、音声入力 → AI構造化 → AI計画下書き → 加筆 → 承認まで1セッションで完結。将来要件（D-12/D-09/P-12）のUXイメージ。</p>
+        <div class="reqs">
+          <span class="req-tag">A-01</span>
+          <span class="req-tag">A-02</span>
+          <span class="req-tag">P-01</span>
+          <span class="req-tag">D-12 将来</span>
+          <span class="req-tag">P-12 将来</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="04_assessment.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">04</span>
+        <span class="role-badge">児発管</span>
+        📋
+      </div>
+      <div class="screen-card-body">
+        <h3>アセスメント実施（再アセス）</h3>
+        <p>2回目以降の差分更新。5領域別の構造化入力＋自由記述。前回からの差分のみ更新可。</p>
+        <div class="reqs">
+          <span class="req-tag">A-01</span>
+          <span class="req-tag">A-02</span>
+          <span class="req-tag">A-03</span>
+          <span class="req-tag">A-07</span>
+          <span class="req-tag">A-10</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="03_support_plan.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">03</span>
+        <span class="role-badge">児発管</span>
+        📝
+      </div>
+      <div class="screen-card-body">
+        <h3>個別支援計画 改訂（v3）</h3>
+        <p>既存児童の計画書改訂版。AI下書きパネル＋児発管編集UI＋承認フロー4段。</p>
+        <div class="reqs">
+          <span class="req-tag">P-01</span>
+          <span class="req-tag">P-02</span>
+          <span class="req-tag">P-05</span>
+          <span class="req-tag">P-08</span>
+          <span class="req-tag">P-12 将来</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="07_daily_record.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">07</span>
+        <span class="role-badge">一般職員</span>
+        📓
+      </div>
+      <div class="screen-card-body">
+        <h3>日々の支援記録 入力</h3>
+        <p>本日担当8名のうち未入力をストリップ表示。テンプレ＋計画目標タップ紐付け＋音声入力（将来）。</p>
+        <div class="reqs">
+          <span class="req-tag">D-01</span>
+          <span class="req-tag">D-02</span>
+          <span class="req-tag">D-03</span>
+          <span class="req-tag">D-06</span>
+          <span class="req-tag">D-12 将来</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="08_settings_offices.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">08</span>
+        <span class="role-badge">本部のみ</span>
+        🏢
+      </div>
+      <div class="screen-card-body">
+        <h3>事業所管理</h3>
+        <p>12事業所の指定情報・FCオーナー・実績KPIを一覧管理。テナント論理分離の単位。</p>
+        <div class="reqs">
+          <span class="req-tag">AU-01</span>
+          <span class="req-tag">AU-02</span>
+          <span class="req-tag">SE-04</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="09_settings_accounts.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">09</span>
+        <span class="role-badge">本部のみ</span>
+        👥
+      </div>
+      <div class="screen-card-body">
+        <h3>アカウント管理</h3>
+        <p>5階層 RBAC ＋ SV（オプション）の権限階層を可視化。Entra ID 同期で退職・異動を即時反映。</p>
+        <div class="reqs">
+          <span class="req-tag">AU-02</span>
+          <span class="req-tag">AU-03</span>
+          <span class="req-tag">IF-01</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="10_settings_templates.html" class="screen-card">
+      <div class="screen-thumb">
+        <span class="num-badge">10</span>
+        <span class="role-badge">本部のみ</span>
+        📐
+      </div>
+      <div class="screen-card-body">
+        <h3>テンプレート管理</h3>
+        <p>FC統一テンプレ＋事業所固有テンプレの承認制管理。項目膨張統制で現場負担を抑制。</p>
+        <div class="reqs">
+          <span class="req-tag">UI-04</span>
+          <span class="req-tag">UI-05</span>
+          <span class="req-tag">A-09</span>
+          <span class="req-tag">D-03</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ─── 凡例 ─── -->
+  <div class="section-title">
+    <h2>凡例 & 設計方針</h2>
+    <span class="sub">読み解きのための補助情報</span>
+  </div>
+
+  <div class="legend">
+    <div class="legend-grid">
+      <div class="legend-item">
+        <div class="label">要件ID メモ</div>
+        各UI要素に <code>A-01</code> 等のグレー枠タグ。RFI 要件IDとの直接対応を示します。
+      </div>
+      <div class="legend-item">
+        <div class="label">将来要件</div>
+        D-12 音声入力 / P-12 AI計画下書き / D-09 AI整形 など、2027年以降提供予定の機能。「将来機能」と記載のあるメモで明示。
+      </div>
+      <div class="legend-item">
+        <div class="label">⚠️ 確認待ち マーカー</div>
+        クライアントへの15質問への弊社仮置きを示すマーカー。回答取得後に要件本文へ反映予定。
+      </div>
+      <div class="legend-item">
+        <div class="label">権限制御</div>
+        画面の <code>role-badge</code> で対象ロールを表示。本部のみ／児発管／一般職員などで自動制限。
+      </div>
+      <div class="legend-item">
+        <div class="label">カラートークン（ロゴ準拠）</div>
+        <span class="color-chip" style="background:#1e88e5;"></span>Accent <code>#1e88e5</code> ／
+        <span class="color-chip" style="background:#22c55e;"></span>Success <code>#22c55e</code>
+      </div>
+      <div class="legend-item">
+        <div class="label">技術仕様</div>
+        HTML5 + CSS3 のみ（JS なし）。タブ切替は radio input + ~ セレクタによる Pure CSS 実装。
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 注釈 ─── -->
+  <div class="note-callout" style="margin-top:24px;">
+    <strong>本モックの位置付け:</strong>
+    本モックは提案書（要件定義）の UX 部分を可視化するための<strong>静的 HTML/CSS</strong>です。
+    機能実装（DB・API・認証）は含まれていません。
+    情報配置・要件IDとの連動・業務動線を確認するためのものとしてご覧ください。
+    実装フェーズでは、本モックを参考にしつつ、要件定義書・既存UIガイドラインに沿って設計・開発を進めます。
   </div>
 </div>
+
 </body>
 </html>

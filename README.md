@@ -2,7 +2,7 @@
 
 児童発達支援・放課後等デイサービス向け 記録ソフトの UX 可視化用 静的モックアップです。
 
-クライアント（ミチルワグループ FC本部 情報システム部）への提案書ドラフトに対応する5画面を、HTML + CSS のみで構築しています。
+クライアント（ミチルワグループ FC本部 情報システム部）への提案書ドラフトに対応する**製品全体（11画面）**を、HTML + CSS のみで構築しています。
 
 ---
 
@@ -17,32 +17,81 @@ open michiruwa/mockups/index.html
 # 任意のブラウザで index.html を直接開く
 ```
 
-エントリポイントは [`mockups/index.html`](mockups/index.html) です。4画面へのリンクが並んでいます。
+エントリポイントは [`mockups/index.html`](mockups/index.html) です。製品全体のサイトマップ・役割別動線・全画面のサムネイル一覧が並んでいます。
 
 ---
 
-## 画面一覧
+## サイトマップ（全11画面）
 
-| # | 画面 | ファイル | 主な要件ID |
-|---|---|---|---|
-| 01 | 管理者ダッシュボード | [`mockups/01_dashboard.html`](mockups/01_dashboard.html) | D-08 / P-10 / P-11 / D-07 / FT-10 |
-| 02 | 児童詳細・同一画面集約 | [`mockups/02_child_detail.html`](mockups/02_child_detail.html) | UI-03 / A-01 / P-02 / D-01 / P-11 |
-| 03 | 個別支援計画作成（既存児童 v3 改訂） | [`mockups/03_support_plan.html`](mockups/03_support_plan.html) | P-01 / P-02 / P-05 / P-08 / P-12（将来） |
-| 04 | アセスメント入力（再アセス・差分更新） | [`mockups/04_assessment.html`](mockups/04_assessment.html) | A-01 / A-02 / A-03 / A-07 / A-10 |
-| 05 | **新規児童 入所時アセス＋計画作成 — 音声×AI 一気通貫** | [`mockups/05_new_intake.html`](mockups/05_new_intake.html) | A-01〜A-03 / P-01 / P-02 / P-05 / P-08 / D-09・D-12・P-12（将来） |
+```
+🔐 認証
+  └ 00 ログイン (Entra ID SSO / Google Workspace / メール)
+
+📊 トップ / 横断
+  ├ 01 管理者ダッシュボード (KPI / アラート5種 / 5領域バランス)
+  └ 06 児童一覧 (検索・フィルタ・事業所スコープ切替)
+
+👤 児童業務
+  ├ 02 児童詳細 — 同一画面集約タブ (アセス/計画/記録/モニタリング/帳票)
+  └ 05 新規児童 入所時 音声×AI 一気通貫フロー
+
+📋 業務記録
+  ├ 04 アセスメント実施 (再アセス・差分更新)
+  ├ 03 個別支援計画 改訂 (v3 / AI下書き起点)
+  └ 07 日々の支援記録 入力 (一般職員ビュー)
+
+🏢 本部管理 (FC本部管理者のみ)
+  ├ 08 事業所管理
+  ├ 09 アカウント管理 (5階層 RBAC + SV)
+  └ 10 テンプレート管理 (本部権限 / 承認制)
+```
+
+---
+
+## 画面一覧と主な要件ID
+
+| # | 画面 | 対象役割 | ファイル | 主な要件ID |
+|---|---|---|---|---|
+| 00 | ログイン | 全役割 | [`00_login.html`](mockups/00_login.html) | IF-01 / AU-02 / SE-01 |
+| 01 | 管理者ダッシュボード | 本部/管理者 | [`01_dashboard.html`](mockups/01_dashboard.html) | D-08 / P-10 / P-11 / FT-10 |
+| 02 | 児童詳細・同一画面集約 | 児発管/職員 | [`02_child_detail.html`](mockups/02_child_detail.html) | UI-03 / A-06 / P-06 / D-05 |
+| 03 | 個別支援計画 改訂 (v3) | 児発管 | [`03_support_plan.html`](mockups/03_support_plan.html) | P-01 / P-02 / P-05 / P-08 / P-12（将来） |
+| 04 | アセスメント実施（再アセス） | 児発管 | [`04_assessment.html`](mockups/04_assessment.html) | A-01 / A-02 / A-03 / A-07 / A-10 |
+| 05 | **新規児童 入所時 音声×AI フロー** | 児発管 | [`05_new_intake.html`](mockups/05_new_intake.html) | A-01〜A-03 / P-01 / P-02 / P-05 / P-08 / D-09・D-12・P-12（将来） |
+| 06 | 児童一覧 | 全役割 | [`06_child_list.html`](mockups/06_child_list.html) | UI-06 / UI-07 / AU-01 / SE-04 |
+| 07 | 日々の支援記録 入力 | 一般職員 | [`07_daily_record.html`](mockups/07_daily_record.html) | D-01 / D-02 / D-03 / D-06 / D-12（将来） |
+| 08 | 事業所管理 | 本部のみ | [`08_settings_offices.html`](mockups/08_settings_offices.html) | AU-01 / AU-02 / SE-04 |
+| 09 | アカウント管理 | 本部のみ | [`09_settings_accounts.html`](mockups/09_settings_accounts.html) | AU-02 / AU-03 / IF-01 |
+| 10 | テンプレート管理 | 本部のみ | [`10_settings_templates.html`](mockups/10_settings_templates.html) | UI-04 / UI-05 / A-09 / D-03 |
+
+---
+
+## 役割別 業務動線
+
+### 🟦 FC本部 管理者
+`00 ログイン → 01 ダッシュボード → 08 事業所管理 → 10 テンプレート承認 → 09 アカウント管理`
+
+### 🟧 児発管（事業所責任者）
+`00 ログイン → 06 児童一覧 → 05 新規入所（音声×AI） → 04 アセス更新 → 03 計画改訂 → 02 モニタリング`
+
+### 🟦 一般職員
+`00 ログイン → 07 日々の支援記録 入力 → 02 児童詳細（参照のみ）`
 
 ---
 
 ## 設計の前提
 
 ### 要件IDとの連動
-画面上の各UI要素には RFI の **要件ID（A-01〜D-12, UI-01〜RP-06, SE-01〜OP-04, FT-01〜FT-10）** をバッジ表示しています。要件定義書（提案書）との対応関係が一目でわかります。
+画面上の各UI要素には RFI v4 の **要件ID（A-01〜D-12 / UI-01〜RP-06 / SE-01〜OP-04 / FT-01〜FT-10）** をバッジ表示しています。要件定義書（提案書）との対応関係が一目でわかります。
 
 ### 将来要件の明示
-本提案で △ロードマップ 扱いの機能（**D-12 音声入力 / P-12 AI下書き作成**）は、紫グラデーションのリボン＋「2027年〜」バッジで明示しています。初期リリーススコープと将来スコープの境界が明確になっています。
+本提案で △ロードマップ 扱いの機能（**D-12 音声入力 / D-09 AI整形 / P-12 AI計画下書き**）は、紫グラデーションのリボン＋「2027年〜」バッジで明示しています。初期リリーススコープと将来スコープの境界が明確になっています。
 
 ### 確認待ち事項
 クライアントへの未確定論点（質問15問）は、関連UI付近に「⚠ 確認待ち（質問#N）」マーカーで可視化しています。
+
+### 権限階層（5階層 + SV）
+全画面でロールベースアクセス制御（RBAC）を前提とした設計。`role-badge` バッジで対象ロールを明示。事業所単位のテナント論理分離（SE-04）と連動。
 
 ---
 
@@ -50,15 +99,21 @@ open michiruwa/mockups/index.html
 
 ```
 michiruwa/
-├── README.md           # 本ファイル
+├── README.md
 └── mockups/
-    ├── index.html              # エントリポイント（5画面ナビゲーション）
+    ├── index.html              # 製品サイトマップ・エントリポイント
+    ├── 00_login.html
     ├── 01_dashboard.html
     ├── 02_child_detail.html
-    ├── 03_support_plan.html    # 既存児童の計画 v3 改訂
-    ├── 04_assessment.html      # 再アセス・差分更新
-    ├── 05_new_intake.html      # 新規児童 入所時 音声×AI 一気通貫フロー
-    └── style.css               # 共通スタイル
+    ├── 03_support_plan.html
+    ├── 04_assessment.html
+    ├── 05_new_intake.html       # 新規児童 音声×AI 一気通貫
+    ├── 06_child_list.html
+    ├── 07_daily_record.html
+    ├── 08_settings_offices.html
+    ├── 09_settings_accounts.html
+    ├── 10_settings_templates.html
+    └── style.css                # 共通スタイル
 ```
 
 ---
@@ -93,7 +148,7 @@ michiruwa/
 - **静的モック**であり、機能実装は含まれていません（DB・API・認証なし）
 - **インタラクションは表現していません**（タブ切替のみ動作）
 - 提案書（要件定義）の **UX 部分を可視化するため** のものです
-- 色彩設計・情報配置・要件IDとの連動を確認する用途を想定しています
+- 色彩設計・情報配置・要件IDとの連動・業務動線を確認する用途を想定しています
 
 実装フェーズでは、本モックを参考にしつつ、要件定義書・既存UIガイドラインに沿った設計・開発を進めてください。
 

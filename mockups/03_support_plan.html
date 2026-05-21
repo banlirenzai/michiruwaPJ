@@ -99,13 +99,13 @@
 
       <!-- 左: AIパネル -->
       <div class="card" style="position:sticky;top:80px;align-self:flex-start;">
-        <div class="card-header" style="background:linear-gradient(135deg,#f0f9ff 0%,#ecfeff 100%);border-bottom-color:#bae6fd;">
-          <div class="card-title" style="color:#1e40af;">
+        <div class="card-header" style="background:var(--memo);border-bottom-color:var(--border);">
+          <div class="card-title" style="color:var(--text);">
             <span class="ai-icon" style="width:24px;height:24px;font-size:13px;">✨</span>
             AI 下書きアシスタント
-            <span class="req-id" style="background:#f3e8ff;color:#7c3aed;border-color:#c084fc;">P-12 将来</span>
+            <span class="req-id" style="background:var(--memo);color:var(--text-2);border-color:var(--border);">P-12 将来</span>
           </div>
-          <span class="badge" style="background:#fff;color:#1e40af;border-color:#bae6fd;">Azure OpenAI</span>
+          <span class="badge" style="background:#fff;color:var(--text);border-color:var(--border);">Azure OpenAI</span>
         </div>
         <div class="card-body">
 
@@ -117,7 +117,7 @@
             ・モニタリング評価 — P-11
           </div>
 
-          <h4 style="font-size:12px;color:#1e40af;font-weight:700;margin:14px 0 8px;">💡 AI による5領域別 短期目標案</h4>
+          <h4 style="font-size:12px;color:var(--text);font-weight:700;margin:14px 0 8px;">💡 AI による5領域別 短期目標案</h4>
 
           <div class="ai-suggestion">
             <strong><span class="dot dot-1" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>健康・生活</strong><br>
@@ -127,13 +127,13 @@
             <strong><span class="dot dot-2" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>運動・感覚</strong><br>
             音への過敏性対処を1日複数回、自発的に行える（個別ブース or 耳栓利用）
           </div>
-          <div class="ai-suggestion" style="border-left-color:#10b981;">
+          <div class="ai-suggestion" style="border-left-color:var(--border-strong);">
             <strong><span class="dot dot-3" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>認知・行動</strong><br>
-            <span style="background:#fef9c3;padding:1px 4px;border-radius:3px;">v2 から改善傾向（+1pt）</span> 順番待ちを1日3回以上、衝動を抑えて実施できる
+            <span style="background:var(--memo);padding:1px 4px;border-radius:3px;">v2 から改善傾向（+1pt）</span> 順番待ちを1日3回以上、衝動を抑えて実施できる
           </div>
-          <div class="ai-suggestion" style="border-left-color:#ef4444;">
+          <div class="ai-suggestion" style="border-left-color:var(--border-strong);">
             <strong><span class="dot dot-4" style="width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:4px;"></span>言語・コミュ ⚠️ 重点強化</strong><br>
-            <span style="background:#fee2e2;padding:1px 4px;border-radius:3px;">前期低下傾向</span><br>
+            <span style="background:var(--memo);padding:1px 4px;border-radius:3px;">前期低下傾向</span><br>
             感情カード4種（楽しい/悲しい/怒り/不安）を自発的に選択して表現できる
           </div>
           <div class="ai-suggestion">
@@ -146,7 +146,7 @@
             <button class="btn btn-secondary btn-sm">🔄 再生成</button>
           </div>
 
-          <div style="margin-top:14px;padding:10px 12px;background:rgba(255,255,255,0.6);border-radius:6px;font-size:11px;color:var(--text-2);line-height:1.6;border:1px solid #bae6fd;">
+          <div style="margin-top:14px;padding:10px 12px;background:rgba(255,255,255,0.6);border-radius:6px;font-size:11px;color:var(--text-2);line-height:1.6;border:1px solid var(--border);">
             💬 児発管からの追加指示があれば AI に伝えてください。<br>
             <div style="margin-top:6px;padding:6px 8px;background:#fff;border:1px solid var(--border);border-radius:4px;color:var(--text-3);font-style:italic;">
               例:「学校復帰を意識して、対人スキル強化を重視して」
@@ -220,7 +220,7 @@
             <!-- 領域1: 健康・生活 -->
             <div style="padding:18px 20px;border-bottom:1px solid var(--border);">
               <div class="flex items-center gap-2" style="margin-bottom:12px;">
-                <span class="badge" style="background:#fee2e2;color:#991b1b;border:none;">健康・生活</span>
+                <span class="badge" style="background:var(--memo);color:var(--text-2);border:1px solid var(--border);">健康・生活</span>
                 <span class="text-xs text-muted">領域 1/5</span>
                 <span class="badge badge-info" style="margin-left:auto;">✨ AI下書き反映</span>
               </div>
@@ -243,7 +243,7 @@
             <!-- 領域2: 運動・感覚 -->
             <div style="padding:18px 20px;border-bottom:1px solid var(--border);">
               <div class="flex items-center gap-2" style="margin-bottom:12px;">
-                <span class="badge" style="background:#fef3c7;color:#92400e;border:none;">運動・感覚</span>
+                <span class="badge" style="background:var(--memo);color:var(--text);border:none;">運動・感覚</span>
                 <span class="text-xs text-muted">領域 2/5</span>
               </div>
               <div class="form-group-row">
@@ -272,9 +272,9 @@
             </div>
 
             <!-- 領域4: 言語・コミュニケーション ⚠重点 -->
-            <div style="padding:18px 20px;border-bottom:1px solid var(--border);background:#fffbeb;">
+            <div style="padding:18px 20px;border-bottom:1px solid var(--border);background:var(--memo);">
               <div class="flex items-center gap-2" style="margin-bottom:12px;">
-                <span class="badge" style="background:#e0e7ff;color:#3730a3;border:none;">言語・コミュニケーション</span>
+                <span class="badge" style="background:var(--memo);color:var(--text-2);border:1px solid var(--border);">言語・コミュニケーション</span>
                 <span class="text-xs text-muted">領域 4/5</span>
                 <span class="badge badge-danger" style="margin-left:auto;">⚠ 重点強化</span>
               </div>
@@ -291,7 +291,7 @@
             <!-- 領域5: 人間関係・社会性 -->
             <div style="padding:18px 20px;">
               <div class="flex items-center gap-2" style="margin-bottom:12px;">
-                <span class="badge" style="background:#fce7f3;color:#9d174d;border:none;">人間関係・社会性</span>
+                <span class="badge" style="background:var(--memo);color:var(--text-2);border:1px solid var(--border);">人間関係・社会性</span>
                 <span class="text-xs text-muted">領域 5/5</span>
               </div>
               <div class="form-group" style="margin-bottom:0;">
@@ -322,10 +322,10 @@
         </div>
 
         <!-- 次のステップ -->
-        <div class="card" style="background:linear-gradient(135deg,#fff 0%,#ecfdf5 100%);border-color:#a7f3d0;">
+        <div class="card" style="background:var(--memo);border-color:var(--border);">
           <div class="card-body">
-            <h4 style="font-size:14px;font-weight:700;color:#065f46;margin-bottom:6px;">承認フロー次ステップ</h4>
-            <p class="text-sm" style="color:#047857;margin-bottom:14px;">下書きを保存して、管理者（田中）へ承認依頼を送ります。承認後、保護者へ文書同意を取得します。</p>
+            <h4 style="font-size:14px;font-weight:700;color:var(--text-2);margin-bottom:6px;">承認フロー次ステップ</h4>
+            <p class="text-sm" style="color:var(--text-2);margin-bottom:14px;">下書きを保存して、管理者（田中）へ承認依頼を送ります。承認後、保護者へ文書同意を取得します。</p>
             <div class="flex gap-2">
               <button class="btn btn-secondary">📄 PDFプレビュー (保護者説明用)</button>
               <button class="btn btn-secondary">💾 下書き保存</button>

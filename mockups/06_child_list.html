@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>児童一覧 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .filter-bar {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 18px;
+    align-items: end;
+  }
+  .scope-switcher {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .scope-pill {
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--text-2);
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .scope-pill:last-child { border-right: none; }
+  .scope-pill.active { background: var(--navy); color: #fff; font-weight: 700; }
+  .scope-pill .count { background: rgba(255,255,255,0.2); padding: 1px 7px; border-radius: 10px; font-size: 10px; }
+  .scope-pill:not(.active) .count { background: var(--surface-2); color: var(--text-3); }
+  .scope-pill .req-tag { background: transparent; border: none; color: rgba(255,255,255,0.5); font-size: 9px; padding: 0; }
+  .scope-pill.active .req-tag { color: rgba(255,255,255,0.6); }
+  .scope-pill:not(.active) .req-tag { color: var(--text-3); }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">表示中スコープ</div>
+    <div class="value">FC本部（全12事業所）</div>
+    <div class="value">児童 172名</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="06_child_list.html" class="nav-item active"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="05_new_intake.html" class="nav-item"><span class="icon">✨</span>新規児童 入所時<span class="nav-badge">1</span></a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="07_daily_record.html" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="08_settings_offices.html" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="09_settings_accounts.html" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="10_settings_templates.html" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">坂</div>
+    <div class="user-info">
+      <div class="name">坂梨 仁哉</div>
+      <div class="role">FC本部 管理者</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">児童一覧</div>
+      <div class="topbar-breadcrumb">
+        <a href="01_dashboard.html">ダッシュボード</a> <span class="sep">›</span>
+        児童一覧 <span class="sep">›</span>
+        全 172 名
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-secondary"><span>📥</span> エクスポート <span class="req-tag" style="background:transparent;border:none;">IF-03</span></button>
+      <a href="05_new_intake.html" class="btn btn-primary"><span>✨</span> 新規児童を追加</a>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ─── 事業所スコープ切替 ─── -->
+    <div class="scope-switcher">
+      <div class="scope-pill active">
+        <span>🏢 FC本部 横断</span>
+        <span class="count">172</span>
+        <span class="req-tag">AU-01</span>
+      </div>
+      <div class="scope-pill">
+        <span>みちるわ渋谷</span>
+        <span class="count">48</span>
+      </div>
+      <div class="scope-pill">
+        <span>みちるわ大田</span>
+        <span class="count">52</span>
+      </div>
+      <div class="scope-pill">
+        <span>みちるわ品川</span>
+        <span class="count">39</span>
+      </div>
+      <div class="scope-pill">
+        <span>みちるわ蒲田</span>
+        <span class="count">33</span>
+      </div>
+      <div class="scope-pill" style="margin-left:auto;border-left:1px solid var(--border);border-right:none;color:var(--text-3);cursor:default;">
+        <span>📌 本部管理者のみ全事業所閲覧可能 ⚠ 質問13</span>
+      </div>
+    </div>
+
+    <!-- ─── フィルタバー ─── -->
+    <div class="filter-bar">
+      <div>
+        <div class="form-label">🔍 検索（氏名・カナ・受給者証番号）</div>
+        <input class="form-input" placeholder="例: 田中 結菜">
+      </div>
+      <div>
+        <div class="form-label">サービス種別</div>
+        <select class="form-select">
+          <option>全て</option>
+          <option>児童発達支援</option>
+          <option>放課後等デイサービス</option>
+        </select>
+      </div>
+      <div>
+        <div class="form-label">担当児発管</div>
+        <select class="form-select">
+          <option>全て</option>
+          <option>鈴木 美穂（渋谷）</option>
+          <option>佐藤 健（大田）</option>
+          <option>田島 ゆかり（品川）</option>
+          <option>中村 雄太（蒲田）</option>
+        </select>
+      </div>
+      <div>
+        <div class="form-label">ステータス</div>
+        <select class="form-select">
+          <option>全て</option>
+          <option>アクティブ</option>
+          <option>新規 入所時</option>
+          <option>休止中</option>
+          <option>卒業・退所</option>
+        </select>
+      </div>
+      <div>
+        <div class="form-label">アラート</div>
+        <select class="form-select">
+          <option>全て</option>
+          <option>⚠ 計画期限超過</option>
+          <option>⚠ モニタリング未実施</option>
+          <option>⚠ 受給者証 更新間近</option>
+          <option>⚠ 日々記録 未入力</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary">🔄 リセット</button>
+    </div>
+
+    <!-- ─── 一覧テーブル ─── -->
+    <div class="card no-pad">
+      <div class="card-header">
+        <div class="card-title">児童一覧 <span class="req-id">UI-06 / UI-07</span></div>
+        <div class="flex gap-2 items-center">
+          <span class="text-xs text-muted">表示中: 172 件中 1〜20</span>
+          <select class="form-select" style="width:160px;">
+            <option>並び順: 計画期限近い順</option>
+            <option>並び順: 氏名（あいうえお）</option>
+            <option>並び順: 利用開始日</option>
+            <option>並び順: 年齢</option>
+          </select>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="width:36px;"><input type="checkbox"></th>
+            <th>児童</th>
+            <th>事業所 / サービス</th>
+            <th>担当児発管</th>
+            <th>ステータス</th>
+            <th>次回モニタリング</th>
+            <th>計画見直し</th>
+            <th>受給者証</th>
+            <th>アラート</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--memo);">
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar warm">結</div>
+                <div class="info">
+                  <div class="name">田中 結菜</div>
+                  <div class="meta">8歳・小3 / 女児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ渋谷<br><span class="text-xs text-muted">放課後等デイ</span></td>
+            <td>鈴木 美穂</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td>2026-09-15<br><span class="text-xs text-muted">残118日</span></td>
+            <td style="color:var(--danger);font-weight:600;">期限超過5日</td>
+            <td>2027-04-30</td>
+            <td><span class="badge badge-danger">⚠ 計画見直し</span></td>
+            <td><a href="02_child_detail.html" class="btn btn-ghost btn-sm">詳細 →</a></td>
+          </tr>
+          <tr style="background:var(--memo);">
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar indigo">太</div>
+                <div class="info">
+                  <div class="name">山田 太郎</div>
+                  <div class="meta">6歳・年長 / 男児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ渋谷<br><span class="text-xs text-muted">児童発達支援</span></td>
+            <td>鈴木 美穂</td>
+            <td><span class="badge badge-warning">新規 入所時</span></td>
+            <td>未設定</td>
+            <td>計画作成中 v1</td>
+            <td>2027-05-31</td>
+            <td><span class="badge badge-warning">⏰ 計画作成中</span></td>
+            <td><a href="05_new_intake.html" class="btn btn-warm btn-sm">作成継続 →</a></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar pink">美</div>
+                <div class="info">
+                  <div class="name">大西 美咲</div>
+                  <div class="meta">9歳・小4 / 女児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ大田<br><span class="text-xs text-muted">放課後等デイ</span></td>
+            <td>佐藤 健</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td>2026-07-22</td>
+            <td>2026-09-12 予定</td>
+            <td style="color:var(--warning);font-weight:600;">2026-06-10<br><span class="text-xs">残20日</span></td>
+            <td><span class="badge badge-warning">📅 受給者証</span></td>
+            <td><a href="#" class="btn btn-ghost btn-sm">詳細 →</a></td>
+          </tr>
+          <tr style="background:var(--memo);">
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar" style="background:var(--memo);">翔</div>
+                <div class="info">
+                  <div class="name">山本 翔太</div>
+                  <div class="meta">10歳・小5 / 男児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ大田<br><span class="text-xs text-muted">放課後等デイ</span></td>
+            <td>佐藤 健</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td style="color:var(--danger);font-weight:600;">期限超過3日</td>
+            <td>2026-08-05 予定</td>
+            <td>2026-12-31</td>
+            <td><span class="badge badge-danger">⚠ モニタ未実施</span></td>
+            <td><a href="#" class="btn btn-ghost btn-sm">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar">健</div>
+                <div class="info">
+                  <div class="name">伊藤 健一</div>
+                  <div class="meta">7歳・小1 / 男児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ品川<br><span class="text-xs text-muted">放課後等デイ</span></td>
+            <td>田島 ゆかり</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td>2026-10-08</td>
+            <td>2026-10-08 予定</td>
+            <td>2026-09-30</td>
+            <td>—</td>
+            <td><a href="#" class="btn btn-ghost btn-sm">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar warm">花</div>
+                <div class="info">
+                  <div class="name">渡辺 花</div>
+                  <div class="meta">5歳・年中 / 女児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ品川<br><span class="text-xs text-muted">児童発達支援</span></td>
+            <td>田島 ゆかり</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td>2026-11-15</td>
+            <td>2026-11-15 予定</td>
+            <td>2027-02-28</td>
+            <td>—</td>
+            <td><a href="#" class="btn btn-ghost btn-sm">詳細 →</a></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar indigo">直</div>
+                <div class="info">
+                  <div class="name">小林 直樹</div>
+                  <div class="meta">11歳・小6 / 男児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ蒲田<br><span class="text-xs text-muted">放課後等デイ</span></td>
+            <td>中村 雄太</td>
+            <td><span class="badge badge-success">アクティブ</span></td>
+            <td>2026-08-20</td>
+            <td>2026-08-20 予定</td>
+            <td>2026-07-15</td>
+            <td><span class="badge badge-warning">📅 受給者証</span></td>
+            <td><a href="#" class="btn btn-ghost btn-sm">詳細 →</a></td>
+          </tr>
+          <tr style="opacity:0.6;">
+            <td><input type="checkbox"></td>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar pink">愛</div>
+                <div class="info">
+                  <div class="name">岡田 愛</div>
+                  <div class="meta">12歳・中1 / 女児</div>
+                </div>
+              </div>
+            </td>
+            <td>みちるわ蒲田<br><span class="text-xs text-muted">放課後等デイ</span></td>
+            <td>中村 雄太</td>
+            <td><span class="badge">休止中</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>2027-01-15</td>
+            <td>—</td>
+            <td><a href="#" class="btn btn-ghost btn-sm">詳細 →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ─── ページネーション ─── -->
+    <div class="flex justify-between items-center" style="margin-top:14px;">
+      <span class="text-xs text-muted">1〜20 件目を表示（全 172 件中）</span>
+      <div class="flex gap-2">
+        <button class="btn btn-secondary btn-sm" disabled style="opacity:0.5;">← 前へ</button>
+        <button class="btn btn-secondary btn-sm" style="background:var(--navy);color:#fff;">1</button>
+        <button class="btn btn-secondary btn-sm">2</button>
+        <button class="btn btn-secondary btn-sm">3</button>
+        <button class="btn btn-secondary btn-sm">...</button>
+        <button class="btn btn-secondary btn-sm">9</button>
+        <button class="btn btn-secondary btn-sm">次へ →</button>
+      </div>
+    </div>
+
+    <div class="note-callout">
+      <strong>本画面で実現する権限制御（AU-01 / AU-02 / 質問13）:</strong><br>
+      ・<strong>FC本部管理者</strong>: 全12事業所横断閲覧可、上部「FC本部 横断」タブで全体俯瞰<br>
+      ・<strong>FCオーナー</strong>: 配下事業所のみ閲覧（例: オーナーAは渋谷・品川の2事業所）<br>
+      ・<strong>SV（スーパーバイザー）</strong>: 担当事業所横断（⚠ 質問13で要否確認）<br>
+      ・<strong>児発管</strong>: 自事業所の児童のみ閲覧<br>
+      ・<strong>一般職員</strong>: 自分が主担当・副担当の児童のみ閲覧（さらに絞り込み）<br>
+      ・テナント論理分離（SE-04）により、権限外データはアプリケーション層・DB層双方で参照不可
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

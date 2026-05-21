@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>設定 - テンプレート管理 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .settings-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .settings-nav a {
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+  }
+  .settings-nav a:hover { color: var(--navy); }
+  .settings-nav a.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+  .tpl-categories {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+  }
+  .tpl-category {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: hidden;
+  }
+  .tpl-cat-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .tpl-cat-item:last-child { border-bottom: none; }
+  .tpl-cat-item:hover { background: var(--surface-2); }
+  .tpl-cat-item.active { background: var(--teal-soft); border-left: 3px solid var(--teal); color:var(--text-2); font-weight: 600; }
+  .tpl-cat-item .count {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-3);
+    background: var(--surface-2);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .tpl-cat-item.active .count { background: var(--teal); color: #fff; }
+
+  .tpl-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .tpl-card.fc { border-left: 4px solid var(--navy); }
+  .tpl-card.office { border-left: 4px solid var(--warm); }
+  .tpl-card.pending { border-left:3px solid var(--border-strong); background:var(--memo); }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">本部管理</div>
+    <div class="value">テンプレート管理</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="06_child_list.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="05_new_intake.html" class="nav-item"><span class="icon">✨</span>新規児童 入所時<span class="nav-badge">1</span></a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="07_daily_record.html" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="08_settings_offices.html" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="09_settings_accounts.html" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="10_settings_templates.html" class="nav-item active"><span class="icon">📐</span>テンプレート管理<span class="nav-badge">2</span></a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">坂</div>
+    <div class="user-info">
+      <div class="name">坂梨 仁哉</div>
+      <div class="role">FC本部 管理者</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">設定</div>
+      <div class="topbar-breadcrumb">
+        <a href="01_dashboard.html">ダッシュボード</a> <span class="sep">›</span>
+        本部管理 <span class="sep">›</span>
+        テンプレート管理 <span class="sep">›</span>
+        日々の支援記録 テンプレート
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="badge badge-warning">📥 承認待ち 2件</span>
+      <button class="btn btn-primary">+ FC統一テンプレートを作成</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <div class="settings-nav">
+      <a href="08_settings_offices.html">🏢 事業所管理</a>
+      <a href="09_settings_accounts.html">👥 アカウント管理</a>
+      <a href="10_settings_templates.html" class="active">📐 テンプレート管理</a>
+      <a href="#">📋 監査ログ</a>
+      <a href="#">🔔 通知設定</a>
+      <a href="#">⚙️ 環境・連携</a>
+    </div>
+
+    <div class="page-header">
+      <div>
+        <div class="page-title">テンプレート管理 — 本部権限</div>
+        <div class="page-subtitle">入力項目・テンプレートマスタを FC本部で一元管理。事業所追加要望は本部承認制（UI-04 / UI-05）。</div>
+      </div>
+    </div>
+
+    <div class="tpl-categories">
+      <!-- 左: カテゴリ -->
+      <div class="tpl-category">
+        <div class="tpl-cat-item">
+          📋 <span>アセスメント項目</span>
+          <span class="count">28</span>
+        </div>
+        <div class="tpl-cat-item">
+          📝 <span>個別支援計画 様式</span>
+          <span class="count">3</span>
+        </div>
+        <div class="tpl-cat-item active">
+          📓 <span>日々の支援記録</span>
+          <span class="count">7</span>
+        </div>
+        <div class="tpl-cat-item">
+          🏷 <span>カテゴリタグマスタ</span>
+          <span class="count">24</span>
+        </div>
+        <div class="tpl-cat-item">
+          📄 <span>帳票レイアウト</span>
+          <span class="count">3</span>
+        </div>
+        <div class="tpl-cat-item">
+          🔔 <span>アラート種別</span>
+          <span class="count">5</span>
+        </div>
+      </div>
+
+      <!-- 右: テンプレート一覧 -->
+      <div>
+        <div class="flex justify-between items-center" style="margin-bottom:14px;">
+          <h3 style="font-size:15px;font-weight:800;color:var(--navy);">日々の支援記録 テンプレート — 7件</h3>
+          <div class="flex gap-2">
+            <select class="form-select" style="width:160px;">
+              <option>並び順: 利用頻度</option>
+              <option>並び順: 作成日</option>
+            </select>
+            <button class="btn btn-secondary btn-sm">📥 利用統計</button>
+          </div>
+        </div>
+
+        <div class="flex flex-col" style="gap:12px;">
+
+          <!-- FC統一テンプレ -->
+          <div class="tpl-card fc">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;">
+                <div class="flex items-center gap-2" style="margin-bottom:6px;">
+                  <h4 style="font-size:15px;font-weight:700;color:var(--navy);">放課後等デイサービス 基本テンプレート</h4>
+                  <span class="badge" style="background:var(--navy);color:#fff;border:none;">FC統一</span>
+                  <span class="badge badge-success">配信中</span>
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom:8px;">必須項目: サービス提供日 / 提供時間 / 担当職員 / 活動内容 / 様子 / 気づき / 申し送り。5領域タグ自動付与。</p>
+                <div class="flex gap-4" style="font-size:11px;color:var(--text-3);">
+                  <span>📅 作成: 2024-04-01 坂梨</span>
+                  <span>🔄 最終更新: 2025-08-15</span>
+                  <span>📊 利用: 月 1,847 件</span>
+                  <span>🏢 配信対象: 全12事業所</span>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-ghost btn-sm">📊 統計</button>
+                <button class="btn btn-secondary btn-sm">編集</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tpl-card fc">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;">
+                <div class="flex items-center gap-2" style="margin-bottom:6px;">
+                  <h4 style="font-size:15px;font-weight:700;color:var(--navy);">児童発達支援 基本テンプレート</h4>
+                  <span class="badge" style="background:var(--navy);color:#fff;border:none;">FC統一</span>
+                  <span class="badge badge-success">配信中</span>
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom:8px;">未就学児向け。発達観察項目を強化（粗大運動・微細運動・言語・社会性スコア）。</p>
+                <div class="flex gap-4" style="font-size:11px;color:var(--text-3);">
+                  <span>📅 作成: 2024-04-01</span>
+                  <span>🔄 最終更新: 2025-08-15</span>
+                  <span>📊 利用: 月 412 件</span>
+                  <span>🏢 配信対象: 児発提供6事業所</span>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-ghost btn-sm">📊 統計</button>
+                <button class="btn btn-secondary btn-sm">編集</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tpl-card fc">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;">
+                <div class="flex items-center gap-2" style="margin-bottom:6px;">
+                  <h4 style="font-size:15px;font-weight:700;color:var(--navy);">医療的ケア児 拡張テンプレート</h4>
+                  <span class="badge" style="background:var(--navy);color:#fff;border:none;">FC統一</span>
+                  <span class="badge badge-success">配信中</span>
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom:8px;">基本テンプレに追加: バイタル記録 / 経管栄養 / 吸引 / 服薬 / 医療連携メモ。</p>
+                <div class="flex gap-4" style="font-size:11px;color:var(--text-3);">
+                  <span>📅 作成: 2024-10-12</span>
+                  <span>🔄 最終更新: 2026-02-08</span>
+                  <span>📊 利用: 月 87 件</span>
+                  <span>🏢 配信対象: 医ケア受入3事業所</span>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-ghost btn-sm">📊 統計</button>
+                <button class="btn btn-secondary btn-sm">編集</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 事業所固有テンプレ -->
+          <div class="tpl-card office">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;">
+                <div class="flex items-center gap-2" style="margin-bottom:6px;">
+                  <h4 style="font-size:15px;font-weight:700;color:var(--navy);">渋谷 学習支援特化テンプレート</h4>
+                  <span class="badge" style="background:var(--warm);color:#fff;border:none;">事業所固有</span>
+                  <span class="badge badge-success">承認済</span>
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom:8px;">渋谷の学習特化プログラム用。教科別の取り組み記録項目を追加。</p>
+                <div class="flex gap-4" style="font-size:11px;color:var(--text-3);">
+                  <span>📅 作成: 2025-09-10 鈴木（児発管）</span>
+                  <span>✓ 承認: 2025-09-18 坂梨</span>
+                  <span>📊 利用: 月 78 件</span>
+                  <span>🏢 配信対象: みちるわ渋谷のみ</span>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <button class="btn btn-ghost btn-sm">📊 統計</button>
+                <button class="btn btn-secondary btn-sm">編集</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 承認待ちテンプレ -->
+          <div class="tpl-card pending">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;">
+                <div class="flex items-center gap-2" style="margin-bottom:6px;">
+                  <h4 style="font-size:15px;font-weight:700;color:var(--text-2);">⏳ 大田 SST特化テンプレート</h4>
+                  <span class="badge badge-future">承認待ち</span>
+                  <span class="text-xs text-muted">事業所固有 / 申請日 2026-05-15</span>
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom:8px;">ソーシャルスキルトレーニング（SST）プログラム用。場面別の行動観察項目（10種）を追加。</p>
+                <div class="flex gap-4" style="font-size:11px;color:var(--text-3);">
+                  <span>📅 申請: 2026-05-15 佐藤（児発管・大田）</span>
+                  <span>📊 想定利用: 月 60-80 件</span>
+                  <span>🏢 配信希望: みちるわ大田のみ</span>
+                </div>
+                <div style="margin-top:10px;padding:10px;background:rgba(192,132,252,0.1);border-radius:6px;font-size:11px;color:var(--text-2);">
+                  <strong>申請理由（佐藤 児発管）:</strong> 大田の SST プログラムを記録する際、基本テンプレでは行動観察項目が不足するため、独自項目を追加したい。FC全体への展開も視野。
+                </div>
+              </div>
+              <div class="flex flex-col" style="gap:6px;">
+                <button class="btn btn-warm btn-sm">承認</button>
+                <button class="btn btn-secondary btn-sm">差戻し</button>
+                <button class="btn btn-ghost btn-sm">プレビュー</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tpl-card pending">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;">
+                <div class="flex items-center gap-2" style="margin-bottom:6px;">
+                  <h4 style="font-size:15px;font-weight:700;color:var(--text-2);">⏳ 品川 送迎連絡帳統合テンプレート</h4>
+                  <span class="badge badge-future">承認待ち</span>
+                  <span class="text-xs text-muted">事業所固有 / 申請日 2026-05-18</span>
+                </div>
+                <p class="text-sm text-muted" style="margin-bottom:8px;">送迎時の保護者対話を記録に統合（FT-03 デジタル連絡帳の先行的試行）。</p>
+                <div class="flex gap-4" style="font-size:11px;color:var(--text-3);">
+                  <span>📅 申請: 2026-05-18 田島（児発管・品川）</span>
+                  <span>🏢 配信希望: みちるわ品川のみ</span>
+                </div>
+              </div>
+              <div class="flex flex-col" style="gap:6px;">
+                <button class="btn btn-warm btn-sm">承認</button>
+                <button class="btn btn-secondary btn-sm">差戻し</button>
+                <button class="btn btn-ghost btn-sm">プレビュー</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tpl-card" style="border-left:4px solid var(--text-3);opacity:0.7;">
+            <div class="flex justify-between items-start">
+              <div style="flex:1;">
+                <div class="flex items-center gap-2" style="margin-bottom:6px;">
+                  <h4 style="font-size:15px;font-weight:700;color:var(--text-2);">蒲田 体力測定テンプレート（廃止予定）</h4>
+                  <span class="badge">廃止予定</span>
+                </div>
+                <p class="text-sm text-muted">2026-06-30 で廃止予定。代替: 標準テンプレに体力測定項目を統合済み。</p>
+              </div>
+              <button class="btn btn-secondary btn-sm">復活</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-callout">
+      <strong>本部権限管理画面の役割 (UI-04 / UI-05 / 質問13):</strong><br>
+      ・<strong>FC統一テンプレート</strong>: 本部管理者のみが作成・編集可。全事業所に自動配信され品質を均一化<br>
+      ・<strong>事業所固有テンプレート</strong>: 児発管が申請 → 本部管理者が承認 → 事業所固有に配信。無秩序な項目膨張を統制<br>
+      ・<strong>申請ワークフロー</strong>: 児発管申請 → 自動的に本部承認キューに入る → 承認/差戻し/コメント可能<br>
+      ・<strong>項目膨張統制</strong>: 現場負担増加を防ぐため、事業所からの追加要望は本部承認フロー経由（UI-04）<br>
+      ・テンプレ利用統計は事業所ごとに記録され、品質改善のソースとなる（FT-09 / FT-10）
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

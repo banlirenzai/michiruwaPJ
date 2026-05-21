@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>日々の支援記録 入力 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .child-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .child-strip-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .child-strip-item:hover { border-color: var(--teal); }
+  .child-strip-item.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .child-strip-item.active .child-avatar { background: #fff; color: var(--teal); }
+  .child-strip-item .info .name { font-size: 12px; font-weight: 700; }
+  .child-strip-item .info .meta { font-size: 10px; opacity: 0.7; }
+  .child-strip-item .status-dot {
+    margin-left: auto;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--danger);
+  }
+  .child-strip-item .status-dot.done { background: var(--success); }
+  .child-strip-item.active .status-dot { background: #fff; }
+
+  .target-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--text-2);
+    cursor: pointer;
+    background: var(--surface);
+  }
+  .target-chip.active {
+    background: var(--teal-soft);
+    border-color: var(--teal);
+    color:var(--text-2);
+    font-weight: 600;
+  }
+  .target-chip .domain-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">本日の記録対象</div>
+    <div class="value">2026-05-21（木）</div>
+    <div class="value">担当児童 8名</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="06_child_list.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="05_new_intake.html" class="nav-item"><span class="icon">✨</span>新規児童 入所時<span class="nav-badge">1</span></a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="07_daily_record.html" class="nav-item active"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="08_settings_offices.html" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="09_settings_accounts.html" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="10_settings_templates.html" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar" style="background:var(--text-3);">石</div>
+    <div class="user-info">
+      <div class="name">石川 健太</div>
+      <div class="role">一般職員 / みちるわ渋谷</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">日々の支援記録 入力</div>
+      <div class="topbar-breadcrumb">
+        <a href="01_dashboard.html">ダッシュボード</a> <span class="sep">›</span>
+        2026-05-21（木）<span class="sep">›</span>
+        担当8名 / 未入力3名
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="badge">最終保存: 12秒前 (自動)</span>
+      <button class="btn btn-secondary">一時保存</button>
+      <button class="btn btn-primary">提出 → 児発管確認へ</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ─── 本日の担当児童 ストリップ ─── -->
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-header">
+        <div class="card-title">本日の担当児童 — 8名 <span class="req-id">D-07 / 一般職員ビュー</span></div>
+        <div class="flex gap-2">
+          <span class="badge badge-success">✓ 5名 入力済</span>
+          <span class="badge badge-danger">⏰ 3名 未入力</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="child-strip">
+          <div class="child-strip-item">
+            <div class="child-avatar warm">結</div>
+            <div class="info"><div class="name">田中 結菜</div><div class="meta">8歳・小3</div></div>
+            <div class="status-dot done"></div>
+          </div>
+          <div class="child-strip-item active">
+            <div class="child-avatar">直</div>
+            <div class="info"><div class="name">小林 直樹</div><div class="meta">11歳・小6 / 入力中</div></div>
+            <div class="status-dot"></div>
+          </div>
+          <div class="child-strip-item">
+            <div class="child-avatar pink">花</div>
+            <div class="info"><div class="name">渡辺 花</div><div class="meta">5歳・年中</div></div>
+            <div class="status-dot done"></div>
+          </div>
+          <div class="child-strip-item">
+            <div class="child-avatar">健</div>
+            <div class="info"><div class="name">伊藤 健一</div><div class="meta">7歳・小1</div></div>
+            <div class="status-dot done"></div>
+          </div>
+          <div class="child-strip-item">
+            <div class="child-avatar pink">美</div>
+            <div class="info"><div class="name">大西 美咲</div><div class="meta">9歳・小4</div></div>
+            <div class="status-dot done"></div>
+          </div>
+          <div class="child-strip-item">
+            <div class="child-avatar indigo">翔</div>
+            <div class="info"><div class="name">山本 翔太</div><div class="meta">10歳・小5</div></div>
+            <div class="status-dot"></div>
+          </div>
+          <div class="child-strip-item">
+            <div class="child-avatar pink">愛</div>
+            <div class="info"><div class="name">岡田 愛</div><div class="meta">12歳・中1</div></div>
+            <div class="status-dot"></div>
+          </div>
+          <div class="child-strip-item">
+            <div class="child-avatar warm">陽</div>
+            <div class="info"><div class="name">中島 陽菜</div><div class="meta">6歳・年長</div></div>
+            <div class="status-dot done"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 児童ヘッダー ─── -->
+    <div class="child-header" style="margin-bottom:18px;">
+      <div class="child-avatar">直</div>
+      <div class="child-header-body">
+        <div class="name">
+          小林 直樹さん
+          <span class="badge badge-info">放課後等デイサービス</span>
+        </div>
+        <div class="meta">
+          <span>11歳・小6</span>
+          <span class="sep">·</span>
+          <span>男児</span>
+          <span class="sep">·</span>
+          <span>みちるわ蒲田</span>
+          <span class="sep">·</span>
+          <span>担当児発管: 中村 雄太</span>
+          <span class="sep">·</span>
+          <span>主担当: 石川 健太</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 将来要件リボン ─── -->
+    <div class="future-ribbon" style="margin-bottom:18px;">
+      <div class="ribbon-icon">🎤</div>
+      <div class="ribbon-body">
+        <strong>D-12 音声入力 × D-09 AI整形 — 将来要件（2027年〜）</strong>
+        <span>マイクボタンを押して話しかけるだけで、AI が文章を整形し各項目に自動振り分け。記録時間を 1名10〜15分 → 2〜3分に短縮。本UIは将来機能のUXイメージです。</span>
+      </div>
+    </div>
+
+    <!-- ─── 音声入力パネル（将来要件） ─── -->
+    <div class="voice-panel" style="margin-bottom:24px;">
+      <div class="voice-panel-header">
+        <div class="title">🎤 音声入力モード <span class="badge badge-future">将来機能 2027年〜</span></div>
+        <span class="text-xs text-muted">支援終了後、移動中・帰宅後にスマホから話しかけて記録</span>
+      </div>
+      <div style="display:flex;gap:14px;align-items:center;">
+        <button class="voice-mic" style="background:var(--memo);width:54px;height:54px;font-size:22px;margin:0;flex-shrink:0;cursor:pointer;border:none;">🎤</button>
+        <div style="flex:1;">
+          <div style="font-size:12px;font-weight:700;color:var(--text-2);margin-bottom:4px;">タップで録音開始</div>
+          <div style="font-size:11px;color:var(--text-2);">例: 「今日の小林くんは午後の集団活動でリーダー役をやってくれて、お友達にもしっかり指示を出せていました。途中で音が大きくなった時も自分から個別ブースに行きました」</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 入力フォーム ─── -->
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-header">
+        <div class="card-title">記録項目 <span class="req-id">D-01 / 法定必須記載項目</span></div>
+        <span class="badge badge-info">テンプレート: 放課後等デイサービス基本 <span class="req-tag" style="background:transparent;border:none;">D-03</span></span>
+      </div>
+      <div class="card-body">
+        <div class="form-group-row" style="grid-template-columns:repeat(4,1fr);">
+          <div>
+            <div class="form-label">サービス提供日<span class="required">*</span></div>
+            <input class="form-input" type="date" value="2026-05-21">
+          </div>
+          <div>
+            <div class="form-label">提供時間<span class="required">*</span></div>
+            <input class="form-input" value="14:30 〜 17:00（2.5h）">
+          </div>
+          <div>
+            <div class="form-label">担当職員<span class="required">*</span></div>
+            <input class="form-input" value="石川 健太（主）/ 高橋 あゆみ（副）" readonly style="background:var(--surface-2);">
+          </div>
+          <div>
+            <div class="form-label">活動カテゴリ <span class="req-tag">D-10</span></div>
+            <select class="form-select">
+              <option>集団活動</option>
+              <option>個別活動</option>
+              <option>学習支援</option>
+              <option>創作活動</option>
+              <option>運動</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 計画目標との紐付け -->
+        <div class="form-group" style="margin-top:18px;">
+          <div class="form-label">📌 関連する個別支援計画 目標（タップで紐付け）<span class="req-tag">D-02</span></div>
+          <p class="text-xs text-muted" style="margin-bottom:8px;">直樹くんの v3 計画から短期目標を選択。記録が目標達成度の集計（FT-09）に連動します。</p>
+          <div class="flex gap-2" style="flex-wrap:wrap;">
+            <div class="target-chip"><span class="domain-dot dot-1"></span>朝の準備を自分で完了</div>
+            <div class="target-chip active"><span class="domain-dot dot-3"></span>集団活動で5分以上リーダー役 ✓</div>
+            <div class="target-chip active"><span class="domain-dot dot-2"></span>音への自己対処（個別ブース） ✓</div>
+            <div class="target-chip"><span class="domain-dot dot-4"></span>友達への声かけ</div>
+            <div class="target-chip"><span class="domain-dot dot-5"></span>ルールを守って遊ぶ</div>
+          </div>
+        </div>
+
+        <!-- 支援内容・様子 -->
+        <div class="form-group" style="margin-top:18px;">
+          <div class="form-label">支援内容・本日の様子<span class="required">*</span></div>
+          <textarea class="form-textarea" style="min-height:100px;">午後の集団活動（カード読みリレー、14:45〜15:30）でリーダー役を担当。前回は5分で交代を希望していたが、本日は15分間継続してチームメンバーに指示出しを行えた。15:20頃、隣のグループの音楽が大きくなった際、自発的に「ちょっと個別ブースに行ってきます」と申し出。3分程で戻って活動継続。担当指示なしでの自己対処は今期初。</textarea>
+        </div>
+
+        <!-- 気づき・課題 -->
+        <div class="form-group">
+          <div class="form-label">気づき・課題</div>
+          <textarea class="form-textarea" style="min-height:70px;">リーダー役の指示出しが「やって」だけで終わることがあった。具体的な手順（「最初に〇〇、次に△△」）を伝える練習を次回以降に組み入れたい。</textarea>
+        </div>
+
+        <!-- 申し送り -->
+        <div class="form-group">
+          <div class="form-label">次回への申し送り <span class="req-tag">D-06</span></div>
+          <textarea class="form-textarea" style="min-height:60px;">明日の創作活動でリーダー役の機会を再度作る。具体的な手順を3ステップで提示する声かけパターンを試す。</textarea>
+        </div>
+
+        <!-- 写真添付 -->
+        <div class="form-group" style="margin-bottom:0;">
+          <div class="form-label">写真添付 <span class="req-tag">D-11 / EXIF位置情報除去</span></div>
+          <div class="flex gap-2" style="flex-wrap:wrap;">
+            <div style="width:120px;height:90px;background:var(--memo);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;">🎨</div>
+            <div style="width:120px;height:90px;background:var(--memo);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;">📷</div>
+            <button class="btn btn-secondary" style="width:120px;height:90px;flex-direction:column;gap:4px;font-size:11px;">
+              <span style="font-size:20px;">📷</span>
+              写真を追加
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── 前日の申し送り（自動表示） ─── -->
+    <div class="card" style="margin-bottom:18px;background:var(--memo);border-color:var(--border);">
+      <div class="card-header" style="background:transparent;border-bottom-color:var(--border);">
+        <div class="card-title" style="color:var(--text);">📌 前日（5月20日）の申し送り — 自動表示 <span class="req-id">D-06</span></div>
+        <a href="#" class="btn btn-ghost btn-sm">5/20 の記録を見る →</a>
+      </div>
+      <div class="card-body" style="font-size:12px;line-height:1.7;">
+        本日（5/20）リーダー役を本人から希望する場面が初めてあり、前向き。明日（5/21）の集団活動でリーダー機会を作って、継続できるか確認したい。本人の興味は「カード」「電車」系。<br>
+        <span class="text-xs text-muted">記入: 高橋 あゆみ（副担当）</span>
+      </div>
+    </div>
+
+    <!-- ─── 過去記録 サマリ ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">直近1週間の記録サマリ <span class="req-id">D-05 / D-02</span></div>
+        <a href="02_child_detail.html" class="btn btn-secondary btn-sm">児童詳細で全記録を見る →</a>
+      </div>
+      <div class="card-body">
+        <div class="five-col">
+          <div class="domain-card"><div class="domain-name"><span class="dot dot-1"></span>健康・生活</div><div class="domain-score">5<span class="denom">/5回</span></div><div class="domain-trend" style="color:var(--success);">▲ 継続</div></div>
+          <div class="domain-card"><div class="domain-name"><span class="dot dot-2"></span>運動・感覚</div><div class="domain-score">3<span class="denom">/5回</span></div><div class="domain-trend" style="color:var(--success);">▲ 改善</div></div>
+          <div class="domain-card"><div class="domain-name"><span class="dot dot-3"></span>認知・行動</div><div class="domain-score">4<span class="denom">/5回</span></div><div class="domain-trend" style="color:var(--success);">▲ 良好</div></div>
+          <div class="domain-card"><div class="domain-name"><span class="dot dot-4"></span>言語・コミュ</div><div class="domain-score">2<span class="denom">/5回</span></div><div class="domain-trend" style="color:var(--warning);">→ 横ばい</div></div>
+          <div class="domain-card"><div class="domain-name"><span class="dot dot-5"></span>人間関係</div><div class="domain-score">3<span class="denom">/5回</span></div><div class="domain-trend" style="color:var(--success);">▲ 改善</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-callout">
+      <strong>一般職員視点での UX 設計ポイント:</strong><br>
+      ・<strong>本日の担当児童ストリップ</strong>で記録漏れを一目で把握。残り3名を順番にタップして記録完了へ<br>
+      ・<strong>テンプレート＋計画目標タップ紐付け</strong>で、構造化記録を最短時間で作成（D-02 / D-03）<br>
+      ・<strong>前日の申し送り自動表示</strong>で、引き継ぎが滑らかに（D-06）<br>
+      ・<strong>音声入力（D-12 将来）</strong>で、送迎後・帰宅後の「まとめ書き」を スマホから話しかけるだけ で完了<br>
+      ・記録は児発管へ提出 → モニタリング時に目標達成度として集計（P-11 / FT-09）
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

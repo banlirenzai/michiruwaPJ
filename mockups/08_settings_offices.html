@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>設定 - 事業所管理 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .settings-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .settings-nav a {
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+  }
+  .settings-nav a:hover { color: var(--navy); }
+  .settings-nav a.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .office-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 20px;
+    align-items: center;
+  }
+  .office-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background:var(--memo) 0%, var(--text) 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+  }
+  .office-stat {
+    text-align: center;
+    min-width: 80px;
+  }
+  .office-stat .num { font-size: 20px; font-weight: 800; color: var(--navy); }
+  .office-stat .label { font-size: 10px; color: var(--text-2); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">本部管理</div>
+    <div class="value">事業所管理</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="06_child_list.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="05_new_intake.html" class="nav-item"><span class="icon">✨</span>新規児童 入所時<span class="nav-badge">1</span></a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="07_daily_record.html" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="08_settings_offices.html" class="nav-item active"><span class="icon">🏢</span>事業所管理</a>
+    <a href="09_settings_accounts.html" class="nav-item"><span class="icon">👥</span>アカウント管理</a>
+    <a href="10_settings_templates.html" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">坂</div>
+    <div class="user-info">
+      <div class="name">坂梨 仁哉</div>
+      <div class="role">FC本部 管理者</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">設定</div>
+      <div class="topbar-breadcrumb">
+        <a href="01_dashboard.html">ダッシュボード</a> <span class="sep">›</span>
+        本部管理 <span class="sep">›</span>
+        事業所管理
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-secondary">📥 一括エクスポート</button>
+      <button class="btn btn-primary">+ 新規事業所を登録</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <div class="settings-nav">
+      <a href="08_settings_offices.html" class="active">🏢 事業所管理</a>
+      <a href="09_settings_accounts.html">👥 アカウント管理</a>
+      <a href="10_settings_templates.html">📐 テンプレート管理</a>
+      <a href="#">📋 監査ログ</a>
+      <a href="#">🔔 通知設定</a>
+      <a href="#">⚙️ 環境・連携</a>
+    </div>
+
+    <div class="page-header">
+      <div>
+        <div class="page-title">事業所管理</div>
+        <div class="page-subtitle">FC本部配下の全事業所の管理。テナント論理分離（SE-04）の単位となります。</div>
+      </div>
+      <div class="flex gap-2">
+        <span class="badge badge-info">12 事業所</span>
+        <span class="badge badge-success">全て稼働中</span>
+      </div>
+    </div>
+
+    <!-- KPI -->
+    <div class="kpi-grid">
+      <div class="kpi-card info">
+        <div class="label">事業所総数</div>
+        <div class="value">12<span class="unit">事業所</span></div>
+        <div class="delta" style="color:var(--text-2);">直営 4 / FC加盟 8</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="label">利用児童 総数</div>
+        <div class="value">172<span class="unit">名</span></div>
+        <div class="delta up">▲ 8名（今月新規）</div>
+      </div>
+      <div class="kpi-card info">
+        <div class="label">アクティブ職員数</div>
+        <div class="value">68<span class="unit">名</span></div>
+        <div class="delta" style="color:var(--text-2);">児発管 12 / 一般 56</div>
+      </div>
+      <div class="kpi-card warning">
+        <div class="label">本月 平均記録達成率</div>
+        <div class="value">96.4<span class="unit">%</span></div>
+        <div class="delta up">▲ 2.1pt 改善</div>
+      </div>
+    </div>
+
+    <!-- 事業所カード一覧 -->
+    <div class="flex flex-col" style="gap:12px;">
+
+      <div class="office-card">
+        <div class="office-icon">渋</div>
+        <div>
+          <div class="flex items-center gap-2" style="margin-bottom:4px;">
+            <h3 style="font-size:16px;font-weight:800;color:var(--navy);">みちるわ渋谷</h3>
+            <span class="badge badge-success">直営</span>
+            <span class="badge">児発・放デイ併設</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-2);">
+            東京都渋谷区道玄坂2-XX-XX / 開所: 2022-04-01 / 児発管: 鈴木 美穂
+          </div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:2px;">
+            指定番号: 1311XXXX01 / 法人番号: 1234567890123 / FCオーナー: 直営
+          </div>
+        </div>
+        <div class="office-stat"><div class="num">48</div><div class="label">利用児童</div></div>
+        <div class="office-stat"><div class="num">12</div><div class="label">職員</div></div>
+        <div class="office-stat"><div class="num">98%</div><div class="label">記録達成率</div></div>
+        <button class="btn btn-secondary btn-sm">編集</button>
+      </div>
+
+      <div class="office-card">
+        <div class="office-icon" style="background:var(--memo);">大</div>
+        <div>
+          <div class="flex items-center gap-2" style="margin-bottom:4px;">
+            <h3 style="font-size:16px;font-weight:800;color:var(--navy);">みちるわ大田</h3>
+            <span class="badge badge-success">直営</span>
+            <span class="badge">児発・放デイ併設</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-2);">
+            東京都大田区蒲田5-XX-XX / 開所: 2022-10-01 / 児発管: 佐藤 健
+          </div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:2px;">
+            指定番号: 1311XXXX02 / 法人番号: 1234567890123 / FCオーナー: 直営
+          </div>
+        </div>
+        <div class="office-stat"><div class="num">52</div><div class="label">利用児童</div></div>
+        <div class="office-stat"><div class="num">14</div><div class="label">職員</div></div>
+        <div class="office-stat"><div class="num">95%</div><div class="label">記録達成率</div></div>
+        <button class="btn btn-secondary btn-sm">編集</button>
+      </div>
+
+      <div class="office-card">
+        <div class="office-icon" style="background:var(--memo);">品</div>
+        <div>
+          <div class="flex items-center gap-2" style="margin-bottom:4px;">
+            <h3 style="font-size:16px;font-weight:800;color:var(--navy);">みちるわ品川</h3>
+            <span class="badge badge-info">FC加盟</span>
+            <span class="badge">放課後等デイ</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-2);">
+            東京都品川区大井1-XX-XX / 開所: 2024-04-01 / 児発管: 田島 ゆかり
+          </div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:2px;">
+            指定番号: 1311XXXX03 / FCオーナー: 株式会社サンライト
+          </div>
+        </div>
+        <div class="office-stat"><div class="num">39</div><div class="label">利用児童</div></div>
+        <div class="office-stat"><div class="num">10</div><div class="label">職員</div></div>
+        <div class="office-stat"><div class="num">91%</div><div class="label">記録達成率</div></div>
+        <button class="btn btn-secondary btn-sm">編集</button>
+      </div>
+
+      <div class="office-card">
+        <div class="office-icon" style="background:var(--memo);">蒲</div>
+        <div>
+          <div class="flex items-center gap-2" style="margin-bottom:4px;">
+            <h3 style="font-size:16px;font-weight:800;color:var(--navy);">みちるわ蒲田</h3>
+            <span class="badge badge-info">FC加盟</span>
+            <span class="badge">放課後等デイ</span>
+          </div>
+          <div style="font-size:12px;color:var(--text-2);">
+            東京都大田区西蒲田4-XX-XX / 開所: 2024-09-01 / 児発管: 中村 雄太
+          </div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:2px;">
+            指定番号: 1311XXXX04 / FCオーナー: 株式会社ハーモニー
+          </div>
+        </div>
+        <div class="office-stat"><div class="num">33</div><div class="label">利用児童</div></div>
+        <div class="office-stat"><div class="num">9</div><div class="label">職員</div></div>
+        <div class="office-stat"><div class="num">88%</div><div class="label">記録達成率</div></div>
+        <button class="btn btn-secondary btn-sm">編集</button>
+      </div>
+
+      <!-- 略 -->
+      <div class="card" style="text-align:center;padding:18px;color:var(--text-3);font-size:13px;">
+        … 他 8 事業所（横浜南／川崎中央／世田谷／練馬／杉並／豊島／中野／新宿）
+        <br>
+        <a href="#" class="btn btn-ghost btn-sm" style="margin-top:8px;">残り 8 事業所を表示 →</a>
+      </div>
+    </div>
+
+    <div class="note-callout">
+      <strong>事業所管理の権限・運用方針:</strong><br>
+      ・FC本部管理者のみが新規事業所登録・指定情報変更可能（AU-02 / 質問13）<br>
+      ・FCオーナー権限は配下事業所の閲覧・職員アサインのみ可、本部設定の変更は不可<br>
+      ・事業所IDはテナント論理分離（SE-04）の単位となり、他事業所データへのアクセスは権限階層で制御<br>
+      ・指定番号・法人番号・FCオーナーは契約管理用情報。法改正対応（OP-04）時に一括更新可
+    </div>
+
+  </div>
+</main>
+</body>
+</html>

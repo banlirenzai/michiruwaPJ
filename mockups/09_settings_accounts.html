@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>設定 - アカウント管理 | 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .settings-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .settings-nav a {
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+  }
+  .settings-nav a:hover { color: var(--navy); }
+  .settings-nav a.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+  .role-hierarchy {
+    background:var(--memo);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .role-tree {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .role-node {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 14px;
+    position: relative;
+  }
+  .role-node .role-num {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 22px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .role-node h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .role-node .scope { font-size: 10px; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  .role-node .count { font-size: 18px; font-weight: 800; color: var(--teal-light); }
+  .role-node .count .unit { font-size: 11px; color: rgba(255,255,255,0.6); }
+  .role-node.sv {
+    border-color: rgba(192,132,252,0.5);
+    background: rgba(192,132,252,0.12);
+  }
+  .role-node.sv .role-num { background:var(--memo); }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-text">記録ソフト</div>
+    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+  </div>
+  <div class="sidebar-context">
+    <div class="label">本部管理</div>
+    <div class="value">アカウント管理</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">日常業務</div>
+    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
+    <a href="06_child_list.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
+    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
+    <a href="05_new_intake.html" class="nav-item"><span class="icon">✨</span>新規児童 入所時<span class="nav-badge">1</span></a>
+    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
+    <a href="07_daily_record.html" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
+    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
+    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
+    <div class="nav-section" style="margin-top:8px;">本部管理</div>
+    <a href="08_settings_offices.html" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
+    <a href="09_settings_accounts.html" class="nav-item active"><span class="icon">👥</span>アカウント管理</a>
+    <a href="10_settings_templates.html" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
+    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
+  </nav>
+  <div class="sidebar-user">
+    <div class="user-avatar">坂</div>
+    <div class="user-info">
+      <div class="name">坂梨 仁哉</div>
+      <div class="role">FC本部 管理者</div>
+    </div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">設定</div>
+      <div class="topbar-breadcrumb">
+        <a href="01_dashboard.html">ダッシュボード</a> <span class="sep">›</span>
+        本部管理 <span class="sep">›</span>
+        アカウント管理
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-secondary">🔗 Entra ID 同期実行</button>
+      <button class="btn btn-primary">+ アカウント追加</button>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <div class="settings-nav">
+      <a href="08_settings_offices.html">🏢 事業所管理</a>
+      <a href="09_settings_accounts.html" class="active">👥 アカウント管理</a>
+      <a href="10_settings_templates.html">📐 テンプレート管理</a>
+      <a href="#">📋 監査ログ</a>
+      <a href="#">🔔 通知設定</a>
+      <a href="#">⚙️ 環境・連携</a>
+    </div>
+
+    <!-- 権限階層 可視化 -->
+    <div class="role-hierarchy">
+      <h3 style="font-size:16px;font-weight:800;margin-bottom:6px;">権限階層 — 5階層 + SV（オプション）</h3>
+      <p style="font-size:12px;color:rgba(255,255,255,0.7);margin-bottom:6px;">
+        FC本部運用を想定した 5階層 RBAC モデル（AU-01 / AU-02 / SE-04）。SV ロールは ⚠ 質問13 で要否確認後に正式採用。
+      </p>
+      <div class="role-tree">
+        <div class="role-node">
+          <span class="role-num">1</span>
+          <h4>FC本部 管理者</h4>
+          <div class="scope">全事業所 横断閲覧／本部設定 全権限</div>
+          <div class="count">2<span class="unit">名</span></div>
+        </div>
+        <div class="role-node sv">
+          <span class="role-num">SV</span>
+          <h4>スーパーバイザー</h4>
+          <div class="scope">担当事業所 横断閲覧（オプション）</div>
+          <div class="count">0<span class="unit">名 ⚠ 質問13</span></div>
+        </div>
+        <div class="role-node">
+          <span class="role-num">2</span>
+          <h4>FCオーナー</h4>
+          <div class="scope">配下事業所のみ閲覧／職員アサイン可</div>
+          <div class="count">4<span class="unit">名</span></div>
+        </div>
+        <div class="role-node">
+          <span class="role-num">3</span>
+          <h4>児発管</h4>
+          <div class="scope">自事業所のみ／計画作成権限保有</div>
+          <div class="count">12<span class="unit">名</span></div>
+        </div>
+        <div class="role-node">
+          <span class="role-num">4</span>
+          <h4>一般職員</h4>
+          <div class="scope">担当児童のみ／記録入力</div>
+          <div class="count">56<span class="unit">名</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アカウント一覧 -->
+    <div class="page-header">
+      <div>
+        <div class="page-title">アカウント一覧</div>
+        <div class="page-subtitle">74 アカウント（本部2 / FCオーナー4 / 児発管12 / 一般職員56）</div>
+      </div>
+      <div class="flex gap-2">
+        <select class="form-select" style="width:160px;">
+          <option>役割: 全て</option>
+          <option>FC本部 管理者</option>
+          <option>FCオーナー</option>
+          <option>児発管</option>
+          <option>一般職員</option>
+        </select>
+        <select class="form-select" style="width:160px;">
+          <option>事業所: 全て</option>
+          <option>みちるわ渋谷</option>
+          <option>みちるわ大田</option>
+        </select>
+        <input class="form-input" placeholder="🔍 氏名・メール検索" style="width:240px;">
+      </div>
+    </div>
+
+    <div class="card no-pad">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ユーザー</th>
+            <th>役割</th>
+            <th>所属事業所</th>
+            <th>SSO連携</th>
+            <th>最終ログイン</th>
+            <th>担当児童</th>
+            <th>状態</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar">坂</div>
+                <div class="info"><div class="name">坂梨 仁哉</div><div class="meta">admin@baas-inc.co.jp</div></div>
+              </div>
+            </td>
+            <td><span class="badge" style="background:var(--navy);color:#fff;border:none;">FC本部 管理者</span></td>
+            <td>—（本部）</td>
+            <td><span class="badge badge-success">✓ Entra ID</span></td>
+            <td>2026-05-21 09:14</td>
+            <td>—</td>
+            <td><span class="badge badge-success">●  有効</span></td>
+            <td><button class="btn btn-ghost btn-sm">編集</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar warm">田</div>
+                <div class="info"><div class="name">田中 美咲</div><div class="meta">tanaka@michiruwa-group.jp</div></div>
+              </div>
+            </td>
+            <td><span class="badge" style="background:var(--text-3);color:#fff;border:none;">FCオーナー</span></td>
+            <td>サンライト株式会社（品川担当）</td>
+            <td><span class="badge badge-success">✓ Entra ID</span></td>
+            <td>2026-05-21 07:42</td>
+            <td>—</td>
+            <td><span class="badge badge-success">● 有効</span></td>
+            <td><button class="btn btn-ghost btn-sm">編集</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar" style="background:var(--teal);">鈴</div>
+                <div class="info"><div class="name">鈴木 美穂</div><div class="meta">suzuki@michiruwa-shibuya.jp</div></div>
+              </div>
+            </td>
+            <td><span class="badge badge-teal">児発管</span></td>
+            <td>みちるわ渋谷</td>
+            <td><span class="badge badge-success">✓ Entra ID</span></td>
+            <td>2026-05-21 08:58</td>
+            <td>48名</td>
+            <td><span class="badge badge-success">● 有効</span></td>
+            <td><button class="btn btn-ghost btn-sm">編集</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar" style="background:var(--teal);">佐</div>
+                <div class="info"><div class="name">佐藤 健</div><div class="meta">sato@michiruwa-ohta.jp</div></div>
+              </div>
+            </td>
+            <td><span class="badge badge-teal">児発管</span></td>
+            <td>みちるわ大田</td>
+            <td><span class="badge badge-success">✓ Entra ID</span></td>
+            <td>2026-05-21 09:12</td>
+            <td>52名</td>
+            <td><span class="badge badge-success">● 有効</span></td>
+            <td><button class="btn btn-ghost btn-sm">編集</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar" style="background:var(--text-3);">石</div>
+                <div class="info"><div class="name">石川 健太</div><div class="meta">ishikawa@michiruwa-shibuya.jp</div></div>
+              </div>
+            </td>
+            <td><span class="badge">一般職員</span></td>
+            <td>みちるわ渋谷</td>
+            <td><span class="badge badge-success">✓ Entra ID</span></td>
+            <td>2026-05-21 14:08</td>
+            <td>8名</td>
+            <td><span class="badge badge-success">● 有効</span></td>
+            <td><button class="btn btn-ghost btn-sm">編集</button></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar" style="background:var(--text-3);">高</div>
+                <div class="info"><div class="name">高橋 あゆみ</div><div class="meta">takahashi@michiruwa-shibuya.jp</div></div>
+              </div>
+            </td>
+            <td><span class="badge">一般職員</span></td>
+            <td>みちるわ渋谷</td>
+            <td><span class="badge badge-success">✓ Entra ID</span></td>
+            <td>2026-05-20 18:34</td>
+            <td>6名</td>
+            <td><span class="badge badge-success">● 有効</span></td>
+            <td><button class="btn btn-ghost btn-sm">編集</button></td>
+          </tr>
+          <tr style="opacity:0.5;">
+            <td>
+              <div class="child-cell">
+                <div class="child-avatar" style="background:var(--text-3);">川</div>
+                <div class="info"><div class="name">川村 さくら</div><div class="meta">kawamura@... (退職)</div></div>
+              </div>
+            </td>
+            <td><span class="badge">一般職員</span></td>
+            <td>みちるわ大田</td>
+            <td><span class="badge">— 同期停止</span></td>
+            <td>2026-03-31 17:22</td>
+            <td>0名（再配分済）</td>
+            <td><span class="badge badge-danger">● 停止中</span></td>
+            <td><button class="btn btn-ghost btn-sm">編集</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex justify-between items-center" style="margin-top:14px;">
+      <span class="text-xs text-muted">7 件表示中（全 74 件中）</span>
+      <div class="flex gap-2">
+        <button class="btn btn-secondary btn-sm">← 前へ</button>
+        <button class="btn btn-secondary btn-sm" style="background:var(--navy);color:#fff;">1</button>
+        <button class="btn btn-secondary btn-sm">2</button>
+        <button class="btn btn-secondary btn-sm">...</button>
+        <button class="btn btn-secondary btn-sm">11</button>
+        <button class="btn btn-secondary btn-sm">次へ →</button>
+      </div>
+    </div>
+
+    <div class="note-callout">
+      <strong>SSO連携 & アカウントライフサイクル運用 (AU-03 / IF-01):</strong><br>
+      ・<strong>Microsoft Entra ID 一括同期</strong>: 新規入社・退職・異動時に Entra ID 側の変更が記録ソフトに即時反映<br>
+      ・<strong>退職者アカウント自動停止</strong>: Entra ID 無効化 → 記録ソフト側アクセス自動遮断（最大同期遅延 5分）<br>
+      ・<strong>担当児童の再配分</strong>: 児発管・一般職員のアカウント停止時、担当児童は事業所内で再配分必要（手動 or ルール）<br>
+      ・<strong>監査ログ</strong>: ロール変更・権限付与の履歴を 5年保管（法定要件）<br>
+      ・他IdP（Google Workspace 等）併用は ⚠ 質問7 確認後にOIDC拡張で対応
+    </div>
+
+  </div>
+</main>
+</body>
+</html>
