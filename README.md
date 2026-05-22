@@ -10,11 +10,25 @@
 
 ビルド・依存パッケージは不要です。以下のいずれかで開いてください。
 
+### A. VS Code の Go Live で開く（推奨・エンジニア向け）
+
+ファイル保存時に自動リロードされ、修正確認が速いのでおすすめ。
+
+1. このフォルダ（`michiruwa/`）を VS Code で開く
+2. 初回オープン時に「**推奨拡張機能 (Live Server) をインストールしますか？**」のポップアップが出るので **Install** を選択（または手動で [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) をインストール）
+3. 画面右下のステータスバーにある **Go Live** ボタンをクリック（または `Cmd+Shift+P` → `Live Server: Open with Live Server`）
+4. 既定ブラウザが自動起動し `http://127.0.0.1:5500/mockups/index.html` が開く
+5. HTML/CSS を編集 → 保存すると自動リロード
+
+> プロジェクト同梱の `.vscode/settings.json` で **ポート 5500 / ホスト 127.0.0.1 / ルート `/mockups/`** に固定済み。Go Live を押すだけで `mockups/index.html` が開きます。
+
+### B. ブラウザで直接ファイルを開く
+
 ```bash
 # Mac
 open michiruwa/mockups/index.html
 
-# 任意のブラウザで index.html を直接開く
+# 任意のブラウザで index.html をドラッグ&ドロップでもOK
 ```
 
 エントリポイントは [`mockups/index.html`](mockups/index.html) です。製品全体のサイトマップ・役割別動線・全画面のサムネイル一覧が並んでいます。

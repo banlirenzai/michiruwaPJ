@@ -1,0 +1,27 @@
+{
+  "_comment": "VS Code Live Server（Go Live ボタン）用の設定。michiruwa/ を VS Code で開いた状態で、画面右下の Go Live ボタンを押すと http://127.0.0.1:5500/mockups/index.html が自動で開きます。",
+
+  "liveServer.settings.root": "/mockups",
+  "liveServer.settings.file": "index.html",
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.host": "127.0.0.1",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.NoBrowser": false,
+  "liveServer.settings.ignoreFiles": [
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts",
+    "**/*.map",
+    ".git/**",
+    "node_modules/**"
+  ],
+
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  "html.format.wrapAttributes": "preserve-aligned"
+}

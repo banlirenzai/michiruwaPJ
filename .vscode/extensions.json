@@ -1,0 +1,6 @@
+{
+  "_comment": "推奨拡張機能。VS Code でこの michiruwa/ フォルダを開いたとき、未インストールなら「推奨拡張機能をインストールしますか？」と尋ねられます。",
+  "recommendations": [
+    "ritwickdey.LiveServer"
+  ]
+}
