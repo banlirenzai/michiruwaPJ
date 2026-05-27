@@ -71,39 +71,66 @@
 </head>
 <body>
 
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="logo-text">記録ソフト</div>
-    <div class="logo-sub">MICHIRUWA GROUP / FC本部</div>
+<nav class="global-tabs">
+  <div class="brand">
+    <div class="brand-mark">記</div>
+    <div><div class="brand-text">記録ソフト</div><div class="brand-sub">MICHIRUWA GROUP</div></div>
   </div>
-  <div class="sidebar-context">
-    <div class="label">本部管理</div>
-    <div class="value">アカウント管理</div>
+  <div class="tab-list">
+    <a href="01_dashboard.html" class="tab-item"><span class="icon">🏠</span>ホーム
+    </a>
+    <a href="06_child_list.html" class="tab-item"><span class="icon">👤</span>利用者管理<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="06_child_list.html"><span class="icon">📋</span><span class="label">児童一覧<span class="desc">検索・フィルタ・事業所スコープ</span></span></a>
+        <a href="02_child_detail.html"><span class="icon">👤</span><span class="label">児童詳細<span class="desc">アセス／計画／記録／モニタリング集約</span></span></a>
+        <a href="05_new_intake.html"><span class="icon">✨</span><span class="label">新規児童 入所時<span class="desc">音声×AI 一気通貫フロー</span></span></a>
+      </div>
+    </a>
+    <a href="04_assessment.html" class="tab-item"><span class="icon">📝</span>個別支援計画<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="04_assessment.html"><span class="icon">📋</span><span class="label">アセスメント<span class="desc">5領域 構造化＋差分更新</span></span></a>
+        <a href="03_support_plan.html"><span class="icon">📝</span><span class="label">個別支援計画<span class="desc">AI下書き起点・5領域目標</span></span></a>
+        <a href="#" class="disabled"><span class="icon">🔔</span><span class="label">モニタリング<span class="desc">（児童詳細タブ内）</span></span></a>
+      </div>
+    </a>
+    <a href="07_daily_record.html" class="tab-item"><span class="icon">📓</span>日々の記録
+    </a>
+    <a href="#" class="tab-item"><span class="icon">📄</span>帳票・出力<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="#" class="disabled"><span class="icon">📄</span><span class="label">アセスメントシート<span class="desc">PDF出力</span></span></a>
+        <a href="#" class="disabled"><span class="icon">📝</span><span class="label">個別支援計画書<span class="desc">3バリエーション PDF</span></span></a>
+        <a href="#" class="disabled"><span class="icon">📓</span><span class="label">支援記録一覧<span class="desc">Excel / CSV / PDF</span></span></a>
+      </div>
+    </a>
+    <a href="08_settings_offices.html" class="tab-item active"><span class="icon">🏢</span>本部管理<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="08_settings_offices.html"><span class="icon">🏢</span><span class="label">事業所管理<span class="desc">12事業所のテナント管理</span></span></a>
+        <a href="09_settings_accounts.html"><span class="icon">👥</span><span class="label">アカウント管理<span class="desc">5階層 RBAC + Entra ID 同期</span></span></a>
+        <a href="10_settings_templates.html"><span class="icon">📐</span><span class="label">テンプレート管理<span class="desc">本部権限・承認制</span></span></a>
+      </div>
+    </a>
+    <a href="#" class="tab-item"><span class="icon">⚙️</span>設定<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="#" class="disabled"><span class="icon">📋</span><span class="label">監査ログ<span class="desc">5年保管・差分付き</span></span></a>
+        <a href="#" class="disabled"><span class="icon">🔔</span><span class="label">通知設定<span class="desc">アラート・メール条件</span></span></a>
+        <a href="#" class="disabled"><span class="icon">⚙️</span><span class="label">環境・連携<span class="desc">SSO・API・バックアップ</span></span></a>
+      </div>
+    </a>
   </div>
-  <nav class="sidebar-nav">
-    <div class="nav-section">日常業務</div>
-    <a href="01_dashboard.html" class="nav-item"><span class="icon">📊</span>ダッシュボード</a>
-    <a href="06_child_list.html" class="nav-item"><span class="icon">👤</span>児童一覧</a>
-    <a href="04_assessment.html" class="nav-item"><span class="icon">📋</span>アセスメント</a>
-    <a href="05_new_intake.html" class="nav-item"><span class="icon">✨</span>新規児童 入所時<span class="nav-badge">1</span></a>
-    <a href="03_support_plan.html" class="nav-item"><span class="icon">📝</span>個別支援計画<span class="nav-badge">8</span></a>
-    <a href="07_daily_record.html" class="nav-item"><span class="icon">📓</span>日々の支援記録<span class="nav-badge">14</span></a>
-    <a href="#" class="nav-item"><span class="icon">🔔</span>モニタリング<span class="nav-badge">3</span></a>
-    <a href="#" class="nav-item"><span class="icon">📄</span>帳票出力</a>
-    <div class="nav-section" style="margin-top:8px;">本部管理</div>
-    <a href="08_settings_offices.html" class="nav-item"><span class="icon">🏢</span>事業所管理</a>
-    <a href="09_settings_accounts.html" class="nav-item active"><span class="icon">👥</span>アカウント管理</a>
-    <a href="10_settings_templates.html" class="nav-item"><span class="icon">📐</span>テンプレート管理</a>
-    <a href="#" class="nav-item"><span class="icon">⚙️</span>設定</a>
-  </nav>
-  <div class="sidebar-user">
-    <div class="user-avatar">坂</div>
-    <div class="user-info">
-      <div class="name">坂梨 仁哉</div>
-      <div class="role">FC本部 管理者</div>
-    </div>
+  <div class="tab-spacer"></div>
+  <div class="tab-user">
+    <div class="avatar">坂</div>
+    <div class="info"><div class="name">坂梨 仁哉</div><div class="role">FC本部 管理者</div></div>
   </div>
-</aside>
+</nav>
+
+<div class="tab-context-bar">
+  <div class="ctx-item"><span class="label">本部管理:</span><span class="value">アカウント管理</span></div>
+  <div class="ctx-spacer"></div>
+  <div class="ctx-item"><span class="label">📅</span><span class="value">2026-05-27（火）</span></div>
+  <a href="#" class="ctx-action">❓ ヘルプ</a>
+  <a href="00_login.html" class="ctx-action">↩ ログアウト</a>
+</div>
 
 <main class="main">
   <header class="topbar">
