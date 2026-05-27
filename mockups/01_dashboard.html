@@ -14,7 +14,11 @@
     <div><div class="brand-text">記録ソフト</div><div class="brand-sub">MICHIRUWA GROUP</div></div>
   </div>
   <div class="tab-list">
-    <a href="01_dashboard.html" class="tab-item active"><span class="icon">🏠</span>ホーム
+    <a href="01_dashboard.html" class="tab-item active"><span class="icon">🏠</span>ホーム<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="01_dashboard.html"><span class="icon">🏢</span><span class="label">FC本部 ダッシュボード<span class="desc">全12事業所 横断ビュー</span></span></a>
+        <a href="11_office_dashboard.html"><span class="icon">📍</span><span class="label">事業所別 ダッシュボード<span class="desc">例: みちるわ渋谷</span></span></a>
+      </div>
     </a>
     <a href="06_child_list.html" class="tab-item"><span class="icon">👤</span>利用者管理<span class="caret">▼</span>
       <div class="tab-dropdown">
@@ -85,6 +89,7 @@
         <option>事業所: みちるわ渋谷</option>
         <option>事業所: みちるわ大田</option>
       </select>
+      <a href="11_office_dashboard.html" class="btn btn-secondary" title="個別事業所ダッシュボードへ">📍 個別ビューへ →</a>
       <select class="form-select" style="width:160px;">
         <option>期間: 今月</option>
         <option>期間: 先月</option>
@@ -94,10 +99,31 @@
     </div>
   </header>
 
-  <div class="content">
+  <div class="dashboard-shell">
+
+    <!-- ─── 縦型クイックメニュー（HUG TOP 風） ─── -->
+    <aside class="quick-menu">
+      <div class="quick-menu-section">本日の業務</div>
+      <a href="#today-children" class="quick-menu-item active"><span class="icon">👥</span><span class="label">本日の利用児童</span><span class="count">68</span></a>
+      <a href="#daily-records" class="quick-menu-item"><span class="icon">📓</span><span class="label">本日 支援記録</span><span class="count">14</span></a>
+      <a href="#today-attendance" class="quick-menu-item"><span class="icon">📅</span><span class="label">本日の出席</span><span class="count">68</span></a>
+      <a href="#today-staff" class="quick-menu-item"><span class="icon">🧑‍⚕️</span><span class="label">職員出勤</span><span class="count">52</span></a>
+
+      <div class="quick-menu-section" style="margin-top:6px;">対応・申込</div>
+      <a href="#alerts" class="quick-menu-item alert"><span class="icon">🔔</span><span class="label">期限アラート</span><span class="count">3</span></a>
+      <a href="#messages" class="quick-menu-item"><span class="icon">💬</span><span class="label">最新メッセージ</span><span class="count">7</span></a>
+      <a href="#new-intake" class="quick-menu-item"><span class="icon">✨</span><span class="label">新規入所申込</span><span class="count">1</span></a>
+
+      <div class="quick-menu-section" style="margin-top:6px;">品質モニタリング</div>
+      <a href="#balance" class="quick-menu-item"><span class="icon">📊</span><span class="label">5領域バランス</span></a>
+      <a href="#offices-compare" class="quick-menu-item"><span class="icon">🏢</span><span class="label">事業所別比較</span></a>
+      <a href="#shortcuts" class="quick-menu-item"><span class="icon">⚡</span><span class="label">クイックアクセス</span></a>
+    </aside>
+
+    <div class="content">
 
     <!-- ─── HUG風 本日のサマリタイル（密集表示） ─── -->
-    <div class="hug-summary">
+    <div class="hug-summary" id="today-children">
       <div class="hug-tile blue">
         <div class="label">本日の利用児童</div>
         <div class="value">68<span class="unit">名</span></div>
@@ -131,7 +157,7 @@
     </div>
 
     <!-- ─── KPI カード4枚 ─── -->
-    <div class="kpi-grid">
+    <div class="kpi-grid" id="daily-records">
       <div class="kpi-card success">
         <div class="label">記録達成率（今月） <span class="req-id">D-08</span></div>
         <div class="value">96.4<span class="unit">%</span></div>
@@ -155,7 +181,7 @@
     </div>
 
     <!-- ─── 期限アラート + 5領域バランス ─── -->
-    <div class="two-col lg">
+    <div class="two-col lg" id="alerts">
       <div class="card">
         <div class="card-header">
           <div class="card-title">期限アラート <span class="req-id">P-10 / 5種</span></div>
@@ -242,7 +268,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" id="balance">
         <div class="card-header">
           <div class="card-title">5領域バランス（FC全体） <span class="req-id">P-05 / FT-09</span></div>
         </div>
@@ -285,7 +311,7 @@
     </div>
 
     <!-- ─── 事業所別比較テーブル ─── -->
-    <div class="card" style="margin-bottom:24px;">
+    <div class="card" id="offices-compare" style="margin-bottom:24px;">
       <div class="card-header">
         <div class="card-title">事業所別 記録状況 <span class="req-id">D-08 / AU-01 / 質問13</span></div>
         <div class="flex gap-2">
@@ -390,7 +416,7 @@
     </div>
 
     <!-- ─── HUG風 クイックアクセス ─── -->
-    <div class="hug-shortcuts">
+    <div class="hug-shortcuts" id="shortcuts">
       <a href="06_child_list.html" class="hug-shortcut">
         <div class="icon">👤</div>
         <div class="name">児童管理</div>
@@ -437,7 +463,8 @@
       ・「権限階層」によって表示範囲を制御（本部=全事業所／FCオーナー=配下のみ／児発管=自事業所のみ）— ⚠ 確認待ち（質問13）
     </div>
 
-  </div>
+    </div><!-- /.content -->
+  </div><!-- /.dashboard-shell -->
 </main>
 </body>
 </html>

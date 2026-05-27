@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>事業所ダッシュボード（みちるわ渋谷）| 記録ソフト UXモック</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* 本日のスケジュール（時間軸タイムライン） */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .sched-time {
+    padding: 12px 8px 12px 0;
+    text-align: right;
+    font-size: 11px;
+    color: var(--text-3);
+    font-weight: 600;
+    border-right: 2px solid var(--border);
+    border-bottom: 1px dashed var(--border);
+    font-family: 'SF Mono', 'Menlo', monospace;
+  }
+  .sched-slot {
+    padding: 10px 14px;
+    border-bottom: 1px dashed var(--border);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sched-activity {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sched-activity.green { background: #ecfdf3; border-left-color: #22c55e; }
+  .sched-activity.orange { background: #fff7ed; border-left-color: #f59e0b; }
+  .sched-activity.purple { background: #f5f3ff; border-left-color: #8b5cf6; }
+  .sched-activity .a-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .sched-activity .a-meta { font-size: 11px; color: var(--text-2); margin-top: 2px; }
+  .sched-activity .a-tag {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    font-weight: 600;
+  }
+
+  /* 出席リスト */
+  .attendance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .att-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--success);
+  }
+  .att-card.absent { border-left-color: var(--danger); opacity: 0.65; background: var(--surface-2); }
+  .att-card.late { border-left-color: var(--warning); }
+  .att-card.makeup { border-left-color: #8b5cf6; }
+  .att-card .info { flex: 1; min-width: 0; }
+  .att-card .name { font-size: 12px; font-weight: 700; color: var(--text); }
+  .att-card .meta { font-size: 10px; color: var(--text-3); margin-top: 1px; }
+  .att-card .status {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background: var(--success);
+    color: #fff;
+    font-weight: 700;
+  }
+  .att-card.absent .status { background: var(--danger); }
+  .att-card.late .status { background: var(--warning); }
+  .att-card.makeup .status { background: #8b5cf6; }
+  .att-card .contacted { font-size: 11px; color: var(--text-3); }
+  .att-card .contacted.ok { color: var(--success); }
+</style>
+</head>
+<body>
+
+<nav class="global-tabs">
+  <div class="brand">
+    <div class="brand-mark">記</div>
+    <div><div class="brand-text">記録ソフト</div><div class="brand-sub">MICHIRUWA GROUP</div></div>
+  </div>
+  <div class="tab-list">
+    <a href="01_dashboard.html" class="tab-item active"><span class="icon">🏠</span>ホーム<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="01_dashboard.html"><span class="icon">🏢</span><span class="label">FC本部 ダッシュボード<span class="desc">全12事業所 横断ビュー</span></span></a>
+        <a href="11_office_dashboard.html"><span class="icon">📍</span><span class="label">事業所別 ダッシュボード<span class="desc">例: みちるわ渋谷</span></span></a>
+      </div>
+    </a>
+    <a href="06_child_list.html" class="tab-item"><span class="icon">👤</span>利用者管理<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="06_child_list.html"><span class="icon">📋</span><span class="label">児童一覧<span class="desc">検索・フィルタ・事業所スコープ</span></span></a>
+        <a href="02_child_detail.html"><span class="icon">👤</span><span class="label">児童詳細<span class="desc">アセス／計画／記録／モニタリング集約</span></span></a>
+        <a href="05_new_intake.html"><span class="icon">✨</span><span class="label">新規児童 入所時<span class="desc">音声×AI 一気通貫フロー</span></span></a>
+      </div>
+    </a>
+    <a href="04_assessment.html" class="tab-item"><span class="icon">📝</span>個別支援計画<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="04_assessment.html"><span class="icon">📋</span><span class="label">アセスメント<span class="desc">5領域 構造化＋差分更新</span></span></a>
+        <a href="03_support_plan.html"><span class="icon">📝</span><span class="label">個別支援計画<span class="desc">AI下書き起点・5領域目標</span></span></a>
+        <a href="#" class="disabled"><span class="icon">🔔</span><span class="label">モニタリング<span class="desc">（児童詳細タブ内）</span></span></a>
+      </div>
+    </a>
+    <a href="07_daily_record.html" class="tab-item"><span class="icon">📓</span>日々の記録</a>
+    <a href="#" class="tab-item"><span class="icon">📄</span>帳票・出力<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="#" class="disabled"><span class="icon">📄</span><span class="label">アセスメントシート<span class="desc">PDF出力</span></span></a>
+        <a href="#" class="disabled"><span class="icon">📝</span><span class="label">個別支援計画書<span class="desc">3バリエーション PDF</span></span></a>
+        <a href="#" class="disabled"><span class="icon">📓</span><span class="label">支援記録一覧<span class="desc">Excel / CSV / PDF</span></span></a>
+      </div>
+    </a>
+    <a href="08_settings_offices.html" class="tab-item"><span class="icon">🏢</span>本部管理<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="08_settings_offices.html"><span class="icon">🏢</span><span class="label">事業所管理<span class="desc">12事業所のテナント管理</span></span></a>
+        <a href="09_settings_accounts.html"><span class="icon">👥</span><span class="label">アカウント管理<span class="desc">5階層 RBAC + Entra ID 同期</span></span></a>
+        <a href="10_settings_templates.html"><span class="icon">📐</span><span class="label">テンプレート管理<span class="desc">本部権限・承認制</span></span></a>
+      </div>
+    </a>
+    <a href="#" class="tab-item"><span class="icon">⚙️</span>設定<span class="caret">▼</span>
+      <div class="tab-dropdown">
+        <a href="#" class="disabled"><span class="icon">📋</span><span class="label">監査ログ<span class="desc">5年保管・差分付き</span></span></a>
+        <a href="#" class="disabled"><span class="icon">🔔</span><span class="label">通知設定<span class="desc">アラート・メール条件</span></span></a>
+        <a href="#" class="disabled"><span class="icon">⚙️</span><span class="label">環境・連携<span class="desc">SSO・API・バックアップ</span></span></a>
+      </div>
+    </a>
+  </div>
+  <div class="tab-spacer"></div>
+  <div class="tab-user">
+    <div class="avatar">鈴</div>
+    <div class="info"><div class="name">鈴木 美穂</div><div class="role">児発管 / みちるわ渋谷</div></div>
+  </div>
+</nav>
+
+<div class="tab-context-bar">
+  <div class="ctx-item"><span class="label">表示中:</span><span class="value">📍 みちるわ渋谷（児発・放デイ併設）</span></div>
+  <div class="ctx-item"><span class="value">利用児童 48名</span></div>
+  <div class="ctx-item"><span class="value">担当: 鈴木 美穂 児発管</span></div>
+  <div class="ctx-spacer"></div>
+  <a href="01_dashboard.html" class="ctx-action">← FC本部ビューに戻る</a>
+  <div class="ctx-item"><span class="label">📅</span><span class="value">2026-05-27（火）</span></div>
+  <a href="#" class="ctx-action">❓ ヘルプ</a>
+  <a href="00_login.html" class="ctx-action">↩ ログアウト</a>
+</div>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">📍 みちるわ渋谷 ダッシュボード</div>
+      <div class="topbar-breadcrumb">
+        <a href="01_dashboard.html">FC本部</a> <span class="sep">›</span> みちるわ渋谷 <span class="sep">›</span> 2026-05-27（火）
+      </div>
+    </div>
+    <div class="topbar-right">
+      <select class="form-select" style="width:200px;">
+        <option>事業所: みちるわ渋谷</option>
+        <option>事業所: みちるわ大田</option>
+        <option>事業所: みちるわ品川</option>
+        <option>事業所: みちるわ蒲田</option>
+      </select>
+      <select class="form-select" style="width:140px;">
+        <option>日付: 本日</option>
+        <option>日付: 明日</option>
+        <option>日付: 今週</option>
+      </select>
+      <button class="btn btn-secondary"><span>🔔</span>通知<span class="badge badge-danger" style="margin-left:2px;">1</span></button>
+    </div>
+  </header>
+
+  <div class="dashboard-shell">
+
+    <!-- ─── 縦型クイックメニュー ─── -->
+    <aside class="quick-menu">
+      <div class="quick-menu-section">本日の業務</div>
+      <a href="#today-summary" class="quick-menu-item active"><span class="icon">📊</span><span class="label">本日のサマリ</span></a>
+      <a href="#schedule" class="quick-menu-item"><span class="icon">📅</span><span class="label">本日のスケジュール</span><span class="count">8</span></a>
+      <a href="#attendance" class="quick-menu-item"><span class="icon">👥</span><span class="label">本日の出席</span><span class="count">21</span></a>
+      <a href="#daily-records" class="quick-menu-item"><span class="icon">📓</span><span class="label">本日 支援記録</span><span class="count">3</span></a>
+
+      <div class="quick-menu-section" style="margin-top:6px;">職員・対応</div>
+      <a href="#staff-shift" class="quick-menu-item"><span class="icon">🧑‍⚕️</span><span class="label">職員シフト</span><span class="count">12</span></a>
+      <a href="#alerts" class="quick-menu-item alert"><span class="icon">🔔</span><span class="label">期限アラート</span><span class="count">1</span></a>
+      <a href="#messages" class="quick-menu-item"><span class="icon">💬</span><span class="label">保護者連絡</span><span class="count">3</span></a>
+
+      <div class="quick-menu-section" style="margin-top:6px;">品質モニタリング</div>
+      <a href="#balance" class="quick-menu-item"><span class="icon">📊</span><span class="label">5領域バランス</span></a>
+      <a href="#progress" class="quick-menu-item"><span class="icon">⭐</span><span class="label">個別進捗 TOP5</span></a>
+    </aside>
+
+    <div class="content">
+
+      <!-- ─── 本日のサマリ（6タイル） ─── -->
+      <div class="hug-summary" id="today-summary">
+        <div class="hug-tile blue">
+          <div class="label">本日の利用児童</div>
+          <div class="value">21<span class="unit">名</span></div>
+          <div class="sub">児発 8 / 放デイ 13</div>
+        </div>
+        <div class="hug-tile green">
+          <div class="label">本日 支援記録 完了</div>
+          <div class="value">18<span class="unit">/21</span></div>
+          <div class="sub">提出率 85.7%</div>
+        </div>
+        <div class="hug-tile orange">
+          <div class="label">本日 出席</div>
+          <div class="value">21<span class="unit">名</span></div>
+          <div class="sub">欠席 0 / 振替 1 / 遅刻 1</div>
+        </div>
+        <div class="hug-tile teal">
+          <div class="label">職員 出勤</div>
+          <div class="value">12<span class="unit">名</span></div>
+          <div class="sub">児発管 1 / 一般 11</div>
+        </div>
+        <div class="hug-tile purple">
+          <div class="label">来月 利用予定</div>
+          <div class="value">49<span class="unit">名</span></div>
+          <div class="sub">新規申込 +2 / 卒業 -1</div>
+        </div>
+        <div class="hug-tile red">
+          <div class="label">本日中 対応必要</div>
+          <div class="value">1<span class="unit">件</span></div>
+          <div class="sub">田中 結菜さん 計画見直し</div>
+        </div>
+      </div>
+
+      <!-- ─── ★ 本日のスケジュール（時間軸タイムライン） ─── -->
+      <div class="card" id="schedule" style="margin-bottom:24px;">
+        <div class="card-header">
+          <div class="card-title">📅 本日のスケジュール — 2026-05-27（火）<span class="req-id">D-01 / 施設運営</span></div>
+          <div class="flex gap-2">
+            <span class="badge badge-info">8 アクティビティ</span>
+            <a href="#" class="btn btn-secondary btn-sm">📥 スケジュール出力</a>
+            <a href="07_daily_record.html" class="btn btn-primary btn-sm">📓 記録入力へ</a>
+          </div>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <div class="schedule-grid">
+            <div class="sched-time">09:00</div>
+            <div class="sched-slot">
+              <div class="sched-activity">
+                <div>
+                  <div class="a-name">🚌 朝の送迎到着・受入れ</div>
+                  <div class="a-meta">児発8名 受入完了 / 担当: 鈴木・高橋・石川</div>
+                </div>
+                <span class="a-tag">児発</span>
+              </div>
+            </div>
+
+            <div class="sched-time">09:30</div>
+            <div class="sched-slot">
+              <div class="sched-activity green">
+                <div>
+                  <div class="a-name">🎨 朝の会＋創作活動「春の絵を描こう」</div>
+                  <div class="a-meta">参加: 山田太郎・佐藤花・他6名 / 主担当: 高橋 / 副: 石川</div>
+                </div>
+                <span class="a-tag">児発 / 集団</span>
+              </div>
+            </div>
+
+            <div class="sched-time">11:00</div>
+            <div class="sched-slot">
+              <div class="sched-activity orange">
+                <div>
+                  <div class="a-name">🗣 個別療育: 言語療法</div>
+                  <div class="a-meta">対象: 山田太郎さん（言語・コミュ重点）/ ST: 加藤先生（外部）</div>
+                </div>
+                <span class="a-tag">個別</span>
+              </div>
+            </div>
+
+            <div class="sched-time">12:00</div>
+            <div class="sched-slot">
+              <div class="sched-activity">
+                <div>
+                  <div class="a-name">🍱 昼食・休憩</div>
+                  <div class="a-meta">給食 18名 / お弁当 3名 / アレルギー対応: 卵1名（山田）</div>
+                </div>
+                <span class="a-tag">全体</span>
+              </div>
+            </div>
+
+            <div class="sched-time">13:30</div>
+            <div class="sched-slot">
+              <div class="sched-activity purple">
+                <div>
+                  <div class="a-name">🎓 放デイ受入れ・学習支援</div>
+                  <div class="a-meta">放デイ13名 / 学校別: 渋谷小5・松濤小4・千駄ヶ谷小4 / 担当: 鈴木・他</div>
+                </div>
+                <span class="a-tag">放デイ</span>
+              </div>
+            </div>
+
+            <div class="sched-time">14:30</div>
+            <div class="sched-slot">
+              <div class="sched-activity green">
+                <div>
+                  <div class="a-name">⚽ 集団活動: カード読みリレー</div>
+                  <div class="a-meta">参加: 小林直樹・他10名 / 主担当: 石川（リーダー役機会あり）</div>
+                </div>
+                <span class="a-tag">放デイ / 集団</span>
+              </div>
+            </div>
+
+            <div class="sched-time">15:30</div>
+            <div class="sched-slot">
+              <div class="sched-activity">
+                <div>
+                  <div class="a-name">🍪 おやつ・休憩</div>
+                  <div class="a-meta">提供: 21名 / 個別配慮: 田中 結菜（小麦アレルギー対応 1名）</div>
+                </div>
+                <span class="a-tag">全体</span>
+              </div>
+            </div>
+
+            <div class="sched-time">16:00</div>
+            <div class="sched-slot">
+              <div class="sched-activity">
+                <div>
+                  <div class="a-name">🚌 送迎開始・帰りの会</div>
+                  <div class="a-meta">送迎ルート 3便 / 担当: 高橋・他 / 完了予定 17:30</div>
+                </div>
+                <span class="a-tag">児発+放デイ</span>
+              </div>
+            </div>
+
+            <div class="sched-time">17:30</div>
+            <div class="sched-slot" style="border-bottom:none;">
+              <div class="sched-activity orange">
+                <div>
+                  <div class="a-name">📝 記録・申し送り作成（職員業務時間）</div>
+                  <div class="a-meta">音声入力対応 → AI整形（将来 D-09）/ 児発管チェック</div>
+                </div>
+                <span class="a-tag">職員</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── ★ 本日の出席児童リスト（21名） ─── -->
+      <div class="card" id="attendance" style="margin-bottom:24px;">
+        <div class="card-header">
+          <div class="card-title">👥 本日の出席児童リスト — 21名<span class="req-id">D-07 / 利用者管理</span></div>
+          <div class="flex gap-2">
+            <span class="badge badge-success">出席 19</span>
+            <span class="badge badge-warning">遅刻 1</span>
+            <span class="badge" style="background:#f5f3ff;color:#7c3aed;border-color:#c4b5fd;">振替 1</span>
+            <span class="badge badge-danger">欠席 0</span>
+            <a href="06_child_list.html" class="btn btn-secondary btn-sm">👤 児童一覧へ</a>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="text-xs text-muted" style="margin-bottom:14px;">児発（〜未就学・8名）→ 放デイ（小学生〜・13名）の順で表示。保護者連絡欄の緑 ✓ は連絡帳/電話で済の意。</p>
+
+          <h4 style="font-size:12px;color:var(--text-2);font-weight:700;margin-bottom:8px;letter-spacing:0.5px;">児発（児童発達支援）— 8名</h4>
+          <div class="attendance-grid" style="margin-bottom:18px;">
+            <div class="att-card">
+              <div class="child-avatar indigo" style="width:32px;height:32px;font-size:12px;">太</div>
+              <div class="info"><div class="name">山田 太郎</div><div class="meta">6歳・年長 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar pink" style="width:32px;height:32px;font-size:12px;">花</div>
+              <div class="info"><div class="name">佐藤 花</div><div class="meta">5歳・年中 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;background:#fb923c;">蓮</div>
+              <div class="info"><div class="name">伊藤 蓮</div><div class="meta">4歳・年少 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card late">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;background:#f59e0b;">陽</div>
+              <div class="info"><div class="name">中村 陽菜</div><div class="meta">6歳・年長 / 通院後</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">遅刻</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar warm" style="width:32px;height:32px;font-size:12px;">朔</div>
+              <div class="info"><div class="name">渡辺 朔</div><div class="meta">5歳・年中 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar pink" style="width:32px;height:32px;font-size:12px;">咲</div>
+              <div class="info"><div class="name">大西 咲</div><div class="meta">4歳・年少 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar indigo" style="width:32px;height:32px;font-size:12px;">凌</div>
+              <div class="info"><div class="name">山下 凌</div><div class="meta">6歳・年長 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;background:#a78bfa;">愛</div>
+              <div class="info"><div class="name">小川 愛</div><div class="meta">5歳・年中 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+          </div>
+
+          <h4 style="font-size:12px;color:var(--text-2);font-weight:700;margin-bottom:8px;letter-spacing:0.5px;">放デイ（放課後等デイサービス）— 13名</h4>
+          <div class="attendance-grid">
+            <div class="att-card">
+              <div class="child-avatar warm" style="width:32px;height:32px;font-size:12px;">結</div>
+              <div class="info"><div class="name">田中 結菜</div><div class="meta">8歳・小3 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;">直</div>
+              <div class="info"><div class="name">小林 直樹</div><div class="meta">11歳・小6 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;background:#10b981;">健</div>
+              <div class="info"><div class="name">伊藤 健一</div><div class="meta">7歳・小1 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar indigo" style="width:32px;height:32px;font-size:12px;">翔</div>
+              <div class="info"><div class="name">山本 翔太</div><div class="meta">10歳・小5 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card makeup">
+              <div class="child-avatar pink" style="width:32px;height:32px;font-size:12px;">楓</div>
+              <div class="info"><div class="name">岡田 楓</div><div class="meta">9歳・小4 / 振替来所</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">振替</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar warm" style="width:32px;height:32px;font-size:12px;">大</div>
+              <div class="info"><div class="name">高橋 大輔</div><div class="meta">8歳・小3 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar pink" style="width:32px;height:32px;font-size:12px;">優</div>
+              <div class="info"><div class="name">森 優奈</div><div class="meta">9歳・小4 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;background:#0e7490;">湊</div>
+              <div class="info"><div class="name">清水 湊</div><div class="meta">10歳・小5 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar indigo" style="width:32px;height:32px;font-size:12px;">蒼</div>
+              <div class="info"><div class="name">藤田 蒼</div><div class="meta">7歳・小2 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar warm" style="width:32px;height:32px;font-size:12px;">瑛</div>
+              <div class="info"><div class="name">岩本 瑛太</div><div class="meta">8歳・小3 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar pink" style="width:32px;height:32px;font-size:12px;">凛</div>
+              <div class="info"><div class="name">谷川 凛</div><div class="meta">11歳・小6 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;background:#ec4899;">茜</div>
+              <div class="info"><div class="name">林 茜</div><div class="meta">9歳・小4 / 主: 高橋</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+            <div class="att-card">
+              <div class="child-avatar" style="width:32px;height:32px;font-size:12px;background:#22c55e;">陸</div>
+              <div class="info"><div class="name">石田 陸</div><div class="meta">7歳・小1 / 主: 石川</div></div>
+              <span class="contacted ok">✓</span>
+              <span class="status">出席</span>
+            </div>
+          </div>
+
+          <div class="note-callout" style="margin-top:18px;">
+            <strong>本日の出席状況:</strong> 全21名（児発8 / 放デイ13）。欠席ゼロ。振替1名（岡田 楓さん：5/24の代替来所）、遅刻1名（中村 陽菜さん：通院後10:00到着、保護者連絡済）。
+            アレルギー対応児童2名（山田太郎: 卵 / 田中結菜: 小麦）への昼食・おやつ提供時の配慮を厨房と共有済み。
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 本日 支援記録 状況（簡易） ─── -->
+      <div class="card" id="daily-records" style="margin-bottom:24px;">
+        <div class="card-header">
+          <div class="card-title">📓 本日 支援記録 状況 <span class="req-id">D-07 / D-08</span></div>
+          <a href="07_daily_record.html" class="btn btn-primary btn-sm">📓 記録入力へ →</a>
+        </div>
+        <div class="card-body">
+          <div class="kpi-grid">
+            <div class="kpi-card success">
+              <div class="label">入力済</div>
+              <div class="value">18<span class="unit">/21</span></div>
+              <div class="delta up">提出率 85.7%</div>
+            </div>
+            <div class="kpi-card warning">
+              <div class="label">入力中（下書き）</div>
+              <div class="value">2<span class="unit">件</span></div>
+              <div class="delta" style="color:var(--text-2);">石川担当の児童</div>
+            </div>
+            <div class="kpi-card danger">
+              <div class="label">未入力（要督促）</div>
+              <div class="value">1<span class="unit">件</span></div>
+              <div class="delta" style="color:var(--danger);">高橋担当 / 17:30以降記入予定</div>
+            </div>
+            <div class="kpi-card info">
+              <div class="label">児発管 確認待ち</div>
+              <div class="value">14<span class="unit">件</span></div>
+              <div class="delta" style="color:var(--text-2);">鈴木 児発管がレビュー</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 2カラム: アラート + 5領域バランス ─── -->
+      <div class="two-col lg" id="alerts">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🔔 期限アラート（みちるわ渋谷分） <span class="req-id">P-10</span></div>
+            <a href="#" class="btn btn-ghost btn-sm">すべて表示 →</a>
+          </div>
+          <div class="alert-list">
+            <div class="alert-item">
+              <div class="alert-icon danger">⏰</div>
+              <div class="alert-body">
+                <div class="alert-title">田中 結菜さん（8歳・小3）の個別支援計画 見直し期限超過</div>
+                <div class="alert-meta">
+                  <span>担当: 鈴木 児発管</span><span class="sep">·</span>
+                  <span style="color:var(--danger);font-weight:600;">5日超過</span><span class="sep">·</span>
+                  <span class="badge badge-info">P-10 (b)</span>
+                </div>
+              </div>
+              <div class="alert-action"><a href="03_support_plan.html" class="btn btn-warm btn-sm">対応する</a></div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-icon warning">📝</div>
+              <div class="alert-body">
+                <div class="alert-title">山田 太郎さんの計画作成期限まで14日</div>
+                <div class="alert-meta">
+                  <span>担当: 鈴木 児発管</span><span class="sep">·</span>
+                  <span style="color:var(--warning);font-weight:600;">余裕あり</span><span class="sep">·</span>
+                  <span class="badge badge-info">P-10 (a)</span>
+                </div>
+              </div>
+              <div class="alert-action"><a href="05_new_intake.html" class="btn btn-secondary btn-sm">作業継続</a></div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-icon info">🔔</div>
+              <div class="alert-body">
+                <div class="alert-title">6ヶ月見直し対象（渋谷分）— 2名</div>
+                <div class="alert-meta">
+                  <span>佐藤花さん 6/15 / 伊藤健一さん 6/22</span>
+                </div>
+              </div>
+              <div class="alert-action"><a href="#" class="btn btn-secondary btn-sm">詳細</a></div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-icon purple">📓</div>
+              <div class="alert-body">
+                <div class="alert-title">日々記録 未入力（昨日まで）— 1件</div>
+                <div class="alert-meta">
+                  <span>担当: 高橋 / 5/26分</span>
+                </div>
+              </div>
+              <div class="alert-action"><a href="07_daily_record.html" class="btn btn-secondary btn-sm">記入へ</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" id="balance">
+          <div class="card-header">
+            <div class="card-title">📊 5領域バランス（渋谷48名） <span class="req-id">P-05 / FT-09</span></div>
+          </div>
+          <div class="card-body">
+            <p class="text-xs text-muted" style="margin-bottom:14px;">渋谷の利用児童48名の計画書に記載された5領域別の目標数バランス。</p>
+            <div class="balance-bar">
+              <div class="label"><span class="dot dot-1" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>健康・生活</div>
+              <div class="bar-container"><div class="bar" style="width:98%;"><span class="pct">98%</span></div></div>
+              <div class="value">98%</div>
+            </div>
+            <div class="balance-bar">
+              <div class="label"><span class="dot dot-2" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>運動・感覚</div>
+              <div class="bar-container"><div class="bar" style="width:92%;"><span class="pct">92%</span></div></div>
+              <div class="value">92%</div>
+            </div>
+            <div class="balance-bar">
+              <div class="label"><span class="dot dot-3" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>認知・行動</div>
+              <div class="bar-container"><div class="bar" style="width:95%;"><span class="pct">95%</span></div></div>
+              <div class="value">95%</div>
+            </div>
+            <div class="balance-bar">
+              <div class="label"><span class="dot dot-4" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>言語・コミュ</div>
+              <div class="bar-container"><div class="bar" style="width:78%;"><span class="pct">78%</span></div></div>
+              <div class="value">78%</div>
+            </div>
+            <div class="balance-bar">
+              <div class="label"><span class="dot dot-5" style="width:8px;height:8px;border-radius:50%;display:inline-block;"></span>人間関係</div>
+              <div class="bar-container"><div class="bar" style="width:84%;"><span class="pct">84%</span></div></div>
+              <div class="value">84%</div>
+            </div>
+            <div class="note-callout" style="margin-top:14px;">
+              <strong>渋谷の傾向:</strong> 5領域とも FC平均より高水準（特に健康・生活が顕著）。
+              「言語・コミュニケーション」領域は FC平均（74%）より高いが、絶対値としては要強化。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 2カラム: 職員シフト + 個別進捗 ─── -->
+      <div class="two-col" style="margin-top:24px;">
+        <div class="card" id="staff-shift">
+          <div class="card-header"><div class="card-title">🧑‍⚕️ 本日の職員シフト — 12名</div></div>
+          <div class="card-body" style="padding:0;">
+            <table class="table" style="font-size:12px;">
+              <thead>
+                <tr><th>職員</th><th>役割</th><th>出勤</th><th>担当</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="user-avatar" style="width:24px;height:24px;font-size:11px;background:var(--accent);">鈴</div>鈴木 美穂</div></td>
+                  <td><span class="badge badge-teal">児発管</span></td>
+                  <td>9:00-18:00</td>
+                  <td>事業所全体</td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="user-avatar" style="width:24px;height:24px;font-size:11px;background:#818cf8;">石</div>石川 健太</div></td>
+                  <td><span class="badge">一般職員</span></td>
+                  <td>9:00-18:00</td>
+                  <td>放デイ主担当</td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="user-avatar" style="width:24px;height:24px;font-size:11px;background:#f472b6;">高</div>高橋 あゆみ</div></td>
+                  <td><span class="badge">一般職員</span></td>
+                  <td>9:00-17:30</td>
+                  <td>児発主担当</td>
+                </tr>
+                <tr>
+                  <td><div class="flex items-center gap-2"><div class="user-avatar" style="width:24px;height:24px;font-size:11px;background:#fb923c;">小</div>小野 健</div></td>
+                  <td><span class="badge">一般職員</span></td>
+                  <td>10:00-19:00</td>
+                  <td>送迎・補助</td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="text-align:center;color:var(--text-3);font-size:11px;padding:8px;">… 他 8 名（清水・林・三浦・吉田・山中・西田・坂口・伊東）</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" id="progress">
+          <div class="card-header"><div class="card-title">⭐ 個別進捗 TOP5（達成度 高い順）</div></div>
+          <div class="card-body" style="padding:0;">
+            <table class="table" style="font-size:12px;">
+              <thead><tr><th>順位</th><th>児童</th><th>5領域 平均達成度</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color:#f59e0b;">🥇 1</strong></td>
+                  <td>清水 湊さん（10歳・小5）</td>
+                  <td><div class="flex items-center gap-2"><div class="progress" style="width:80px;"><div class="progress-bar success" style="width:91%;"></div></div><strong>91%</strong></div></td>
+                  <td><a href="02_child_detail.html" class="btn btn-ghost btn-sm">詳細</a></td>
+                </tr>
+                <tr>
+                  <td><strong style="color:#9ca3af;">🥈 2</strong></td>
+                  <td>森 優奈さん（9歳・小4）</td>
+                  <td><div class="flex items-center gap-2"><div class="progress" style="width:80px;"><div class="progress-bar success" style="width:88%;"></div></div><strong>88%</strong></div></td>
+                  <td><a href="#" class="btn btn-ghost btn-sm">詳細</a></td>
+                </tr>
+                <tr>
+                  <td><strong style="color:#c08457;">🥉 3</strong></td>
+                  <td>小林 直樹さん（11歳・小6）</td>
+                  <td><div class="flex items-center gap-2"><div class="progress" style="width:80px;"><div class="progress-bar success" style="width:82%;"></div></div><strong>82%</strong></div></td>
+                  <td><a href="#" class="btn btn-ghost btn-sm">詳細</a></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>佐藤 花さん（5歳・年中）</td>
+                  <td><div class="flex items-center gap-2"><div class="progress" style="width:80px;"><div class="progress-bar success" style="width:78%;"></div></div><strong>78%</strong></div></td>
+                  <td><a href="#" class="btn btn-ghost btn-sm">詳細</a></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>田中 結菜さん（8歳・小3）</td>
+                  <td><div class="flex items-center gap-2"><div class="progress" style="width:80px;"><div class="progress-bar warning" style="width:66%;"></div></div><strong>66%</strong></div></td>
+                  <td><a href="02_child_detail.html" class="btn btn-ghost btn-sm">詳細</a></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="note-callout" style="margin:14px;">
+              <strong>要支援強化:</strong> 山田太郎さん（新規入所・基準値未設定）/ 田中 結菜さん（言語領域 45% → 重点強化中）
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 保護者連絡（messages） ─── -->
+      <div class="card" id="messages" style="margin-top:24px;">
+        <div class="card-header"><div class="card-title">💬 保護者からの連絡事項 — 3件 <span class="req-id">FT-04（将来）/ マイページ</span></div></div>
+        <div class="card-body">
+          <div class="alert-list" style="border-radius:6px;border:1px solid var(--border);">
+            <div class="alert-item">
+              <div class="alert-icon info">💬</div>
+              <div class="alert-body">
+                <div class="alert-title">田中 結菜さん 保護者から: 「明日の通院で30分遅刻します」</div>
+                <div class="alert-meta">受信 09:14 / 担当: 鈴木 / 未対応</div>
+              </div>
+              <div class="alert-action"><a href="#" class="btn btn-primary btn-sm">返信</a></div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-icon info">💬</div>
+              <div class="alert-body">
+                <div class="alert-title">山田 太郎さん 保護者から: 「家庭で感情カード試しました、嬉しいでした」</div>
+                <div class="alert-meta">受信 08:42 / 担当: 鈴木 / 確認済</div>
+              </div>
+              <div class="alert-action"><a href="#" class="btn btn-secondary btn-sm">詳細</a></div>
+            </div>
+            <div class="alert-item">
+              <div class="alert-icon info">📅</div>
+              <div class="alert-body">
+                <div class="alert-title">伊藤 健一さん 保護者から: 「来月の利用希望日数を変更したいです」</div>
+                <div class="alert-meta">受信 昨日 18:32 / 担当: 鈴木 / 未対応</div>
+              </div>
+              <div class="alert-action"><a href="#" class="btn btn-primary btn-sm">返信</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── 注釈 ─── -->
+      <div class="note-callout" style="margin-top:24px;">
+        <strong>事業所別ダッシュボード（みちるわ渋谷）の UX 価値:</strong><br>
+        ・<strong>FC本部ビュー（01）から事業所セレクタで遷移</strong>すると、その事業所スコープに絞り込まれた業務画面が開く（実運用での主画面想定）<br>
+        ・<strong>本日のスケジュール</strong>（時間軸）と<strong>出席児童リスト</strong>を主役に配置 — 児発管・事業所長が朝1で開く画面<br>
+        ・<strong>権限階層</strong>: 児発管は自事業所のみ閲覧可（AU-01）。FCオーナーは配下事業所、本部管理者は全事業所を切替可能（質問13）<br>
+        ・<strong>HUG TOP 由来のクイックメニュー</strong>（左サイドバー）でセクション間を即座に移動<br>
+        ・各セクションは既存画面（02 児童詳細、03 計画、05 新規入所、07 日々記録）へ深い導線
+      </div>
+
+    </div><!-- /.content -->
+  </div><!-- /.dashboard-shell -->
+</main>
+</body>
+</html>

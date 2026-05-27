@@ -67,7 +67,8 @@ open michiruwa/mockups/index.html
 | # | 画面 | 対象役割 | ファイル | 主な要件ID |
 |---|---|---|---|---|
 | 00 | ログイン | 全役割 | [`00_login.html`](mockups/00_login.html) | IF-01 / AU-02 / SE-01 |
-| 01 | 管理者ダッシュボード | 本部/管理者 | [`01_dashboard.html`](mockups/01_dashboard.html) | D-08 / P-10 / P-11 / FT-10 |
+| 01 | FC本部 ダッシュボード | 本部/管理者 | [`01_dashboard.html`](mockups/01_dashboard.html) | D-08 / P-10 / P-11 / FT-10 |
+| 11 | **事業所別 ダッシュボード（みちるわ渋谷）** | 児発管/FCオーナー | [`11_office_dashboard.html`](mockups/11_office_dashboard.html) | D-01 / D-07 / D-08 / P-05 / P-10 / 施設運営 |
 | 02 | 児童詳細・同一画面集約 | 児発管/職員 | [`02_child_detail.html`](mockups/02_child_detail.html) | UI-03 / A-06 / P-06 / D-05 |
 | 03 | 個別支援計画 改訂 (v3) | 児発管 | [`03_support_plan.html`](mockups/03_support_plan.html) | P-01 / P-02 / P-05 / P-08 / P-12（将来） |
 | 04 | アセスメント実施（再アセス） | 児発管 | [`04_assessment.html`](mockups/04_assessment.html) | A-01 / A-02 / A-03 / A-07 / A-10 |
